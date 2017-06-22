@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Inscription Logos</title>
+</h:head>
+<body>
+	<h1>Inscription</h1>
+	<fieldset>
+		<h:form>
+			<span>NOM : </span>
+			<h:inputText value="#{mbInscription.nom}" />
+			<span>PRENOM : </span>
+			<h:inputText value="#{mbInscription.prenom}" />
+			<span>MAIL : </span>
+			<h:inputText value="#{mbInscription.mail}" /><br/>
+			<span>LOGIN : </span>
+			<h:inputText value="#{mbInscription.login}" />
+			<span>Mot de passe : </span>
+			<h:inputText value="#{mbInscription.password}" />
+			<h:inputText value="#{mbInscription.password2}" /><br/>
+			<h:commandButton action="#{mbInscription.ajouterEleve()}" value="Inscription" id="valider" />
+			<span id="message"></span>
+		</h:form>
+	</fieldset>
+</body>
+</html>
