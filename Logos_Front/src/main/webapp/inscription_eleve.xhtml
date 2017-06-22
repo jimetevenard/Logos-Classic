@@ -10,7 +10,7 @@
 <body>
 	<h1>Inscription</h1>
 	<fieldset>
-		<h:form>
+		<h:form id="formInscription" name="formInscription" alt="form" onsubmit="return false">
 			<span>NOM : </span>
 			<h:inputText value="#{mbInscription.nom}" />
 			<span>PRENOM : </span>
@@ -20,11 +20,13 @@
 			<span>LOGIN : </span>
 			<h:inputText value="#{mbInscription.login}" />
 			<span>Mot de passe : </span>
-			<h:inputText value="#{mbInscription.password}" />
-			<h:inputText value="#{mbInscription.password2}" /><br/>
-			<h:commandButton action="#{mbInscription.ajouterEleve()}" value="Inscription" id="valider" />
-			<span id="message"></span>
+			<h:inputText name="mdp" alt="mdp" value="#{mbInscription.password}" />
+			<h:inputText name="mdp2"  alt="mdp2" value="#{mbInscription.password2}" /><br/>
+			<h:commandButton action="#{mbInscription.ajouterEleve()}" value="Inscription" alt="valider" />
+			<input alt="message"/>
 		</h:form>
 	</fieldset>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/inscriptionEleve.js"></script>
 </body>
 </html>

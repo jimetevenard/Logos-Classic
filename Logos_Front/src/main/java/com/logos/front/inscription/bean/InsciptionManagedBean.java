@@ -10,7 +10,7 @@ import com.logos.entity.user.Eleve;
 @ManagedBean(name="mbInscription")
 @ViewScoped
 public class InsciptionManagedBean {
-	@ManagedProperty(value="businessConnexionPlateforme")
+	@ManagedProperty(value="#{businessConnexionPlateforme}")
 	private IBusinessConnexionPlateforme bu;
 	
 	private String nom;

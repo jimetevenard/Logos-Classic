@@ -1,18 +1,18 @@
 $(function(){
-	$("#valider").on("click", function(){
-	       var mdp = $("#mdp").val();
-	        var mdp2 = $("#mdp2").val();
+	$("button[alt~='valider']").on("click", function(){
+	       var mdp = $("input[alt~='mdp']").val();
+	        var mdp2 = $("input[alt~='mdp2']").val();
 	        var regex = /[a-z]{1,}[A-Z]{1,}[0-9]{1,}/.test(mdp);
 	        if(regex && mdp.length>=8){
 	            console.log("regex");
 	            if(mdp=== mdp2){
-	                $("#formInscription").submit();
+	                $("form[alt~='form']").submit();
 	            }
 	            else{
-	                $("#message").text("erreur dans le mot de passe");
+	                $("span[alt~='message']").text("erreur dans le mot de passe");
 	            }
 	        }else{
-	           $("#message").text("mot de passe invalide");
+	           $("span[alt~='message']").text("mot de passe invalide");
 	        }
 	   });
 });
