@@ -9,7 +9,11 @@
 	<div id="page">
 		<div id="header">
 			<h:form>
-				
+				<label>Login : </label>
+				<h:inputText value="#{loginMB.login}" /><br/>
+				<label>Mot de passe : </label>
+				<h:inputSecret value="#{loginMB.password}" />
+				<h:commandButton action="#{loginMB.SeConnecter()}" value="Se connecter" />
 			</h:form>
 		</div>
 	</div>
