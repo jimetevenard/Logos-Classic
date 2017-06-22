@@ -70,23 +70,25 @@ public class LoginMB implements Serializable {
 		return false;
 	}
 
-	public void verifierConnectedEleve(ComponentSystemEvent event){
-		System.out.println("je vérifie que c'est un éleve");
-		FacesContext fc = FacesContext.getCurrentInstance();
-		
-		if (userConnected == null || !isEleve()){
-			System.out.println("j'ai vérifié, c'est pas un éleve" + userConnected.getLogin());
-			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler)fc.getApplication().getNavigationHandler();
-			nav.performNavigation("login.xhtml?faces-redirect=true");
-		}
-	}
-	public void verifierConnectedProfesseur(ComponentSystemEvent event){
-		FacesContext fc = FacesContext.getCurrentInstance();
-		if (userConnected == null || !isProfesseur()){
-			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler)fc.getApplication().getNavigationHandler();
-			nav.performNavigation("login.xhtml?faces-redirect=true");
-		}
-	}
+//	public void verifierConnectedEleve(ComponentSystemEvent event){
+//		System.out.println("je vérifie que c'est un éleve");
+//		FacesContext fc = FacesContext.getCurrentInstance();
+//		userConnected = bu.checkLoginPassword(login, password);
+//		System.out.println("je me connecte en tant que "+userConnected.getLogin());
+//		if (userConnected == null || !isEleve()){
+//			if(userConnected == null) System.out.println("userConnected est nulll");
+//			System.out.println("j'ai vérifié, c'est pas un éleve");
+//			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler)fc.getApplication().getNavigationHandler();
+//			nav.performNavigation("login.xhtml?faces-redirect=true");
+//		}
+//	}
+//	public void verifierConnectedProfesseur(ComponentSystemEvent event){
+//		FacesContext fc = FacesContext.getCurrentInstance();
+//		if (userConnected == null || !isProfesseur()){
+//			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler)fc.getApplication().getNavigationHandler();
+//			nav.performNavigation("login.xhtml?faces-redirect=true");
+//		}
+//	}
 
 	public String getLogin() {
 		return login;
