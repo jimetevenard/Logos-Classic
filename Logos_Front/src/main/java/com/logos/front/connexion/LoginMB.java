@@ -14,7 +14,7 @@ import com.logos.entity.user.Utilisateur;
 @SessionScoped
 public class LoginMB {
 	
-	@ManagedProperty(value="{BusinessInscriptionPlateforme}")
+	@ManagedProperty(value="#{businessConnexionPlateforme}")
 	private IBusinessConnexionPlateforme bu;
 	@ManagedProperty(value="#{navigationBean}")
 	private NavigationBean navigationBean;
@@ -24,7 +24,7 @@ public class LoginMB {
 	private Utilisateur userConnected;
 	
 	public String SeConnecter(){
-		userConnected= bu.checkLoginPassword(login, password);
+		userConnected = bu.checkLoginPassword(login, password);
 		if(userConnected != null && isEleve()){
 			return navigationBean.redirectToAccueilEleve();
 		}else{

@@ -8,15 +8,15 @@ import javax.faces.bean.SessionScoped;
 public class NavigationBean {
 	
 	public String redirectToAccueilEleve(){
-		return "/accueil_eleve.xhtml";
+		return "/accueil_eleve.xhtml?faces-redirect=true";
 	}
 	
 	public String redirectToAccueilProfesseur(){
-		return "/accueil_professeur.xhtml";
+		return "/accueil_professeur.xhtml?faces-redirect=true";
 	}
 	
 	public String redirectToLogin(){
-		return "/login.xhtml";
+		return "/login.xhtml?faces-redirect=true";
 	}
 
 }
