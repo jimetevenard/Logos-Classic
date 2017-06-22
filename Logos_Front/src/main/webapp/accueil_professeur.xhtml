@@ -5,8 +5,9 @@
 	<head>
 	<title> Connection </title>
 </head>
+<f:event listener="#{loginMB.verifierConnectedProfesseur}" type="preRenderView" />
 <body>
  <h1>Tu es un prof et tu es sur ta page d'accueil</h1><br />
-  <h:commandButton action="#{loginMB.SeDeconnecter()}" value="Se déconnecter" />
+  <h:commandButton action="#{loginMB.seDeconnecter()}" value="Se déconnecter" />
 </body>
 </html>
