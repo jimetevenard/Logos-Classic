@@ -1,5 +1,6 @@
 package com.logos.business.connexion.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.logos.business.connexion.api.IBusinessConnexionPlateforme;
@@ -10,6 +11,8 @@ import com.logos.entity.user.Utilisateur;
 @Service
 public class BusinessConnexionPlateforme implements IBusinessConnexionPlateforme {
 
+	
+	
 	@Override
 	public Eleve inscrireEleve(Eleve eleve) {
 		return null;
@@ -21,7 +24,7 @@ public class BusinessConnexionPlateforme implements IBusinessConnexionPlateforme
 	}
 
 	@Override
-	public Utilisateur checkLoginPassword(String login, String mdp) {
+	public Utilisateur checkLoginPassword(String login, String password) {
 		return null;
 	}
 
