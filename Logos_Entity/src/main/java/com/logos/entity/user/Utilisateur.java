@@ -54,7 +54,7 @@ public class Utilisateur {
     /**
      * 
      */
-	@Column(name = "login_utilisateur", nullable = false, length = 50)
+	@Column(name = "login_utilisateur", nullable = false, length = 50, unique = true)
     private String login;
 
     /**
@@ -66,7 +66,7 @@ public class Utilisateur {
     /**
      * 
      */
-	@Column(name = "mail_utilisateur", nullable = false, length = 150)
+	@Column(name = "mail_utilisateur", nullable = false, length = 150, unique = true)
     private String mail;
 
     /**

@@ -30,7 +30,7 @@ public class DaoEleve implements IDaoEleve {
 	@Transactional
 	public Eleve getEleveById(Integer id) {
 		Session session = sf.getCurrentSession();
-		Query query = session.createQuery("select e from Utilisateur e where e.idUtilisateur like :pid").setParameter(":pid", "%"+id+"%");
+		Query query = session.createQuery("select e from Utilisateur e where e.idUtilisateur = :pid").setParameter("pid", id);
 		Eleve eleve =(Eleve) query.uniqueResult();
 		return eleve;
 	}
@@ -57,8 +57,14 @@ public class DaoEleve implements IDaoEleve {
 	public List<Eleve> getAllEleve() {
 		Session session = sf.getCurrentSession();
 		List<Eleve> eleves = new ArrayList<>();
-		eleves = session.createSQLQuery("select e from utilisateur where DISTINCT(type_utilisateur) like :peleve").setParameter(":peleve", "%eleve%").list();
+		eleves = session.createQuery("select e from Eleve e").list();
 		return eleves;
 	}
+
+	public void setSf(SessionFactory sf) {
+		this.sf = sf;
+	}
+	
+	
 
 }

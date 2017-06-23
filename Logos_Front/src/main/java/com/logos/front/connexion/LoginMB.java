@@ -24,8 +24,10 @@ public class LoginMB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@ManagedProperty(value="#{businessConnexionPlateforme}")
 	private IBusinessConnexionPlateforme bu;
+	
 	@ManagedProperty(value="#{navigationBean}")
 	private NavigationBean navigationBean;
 
