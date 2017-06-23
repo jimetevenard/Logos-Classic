@@ -1,0 +1,51 @@
+*{
+	padding: 0px;
+	margin:0px;
+}
+#aside {
+	height:100vh;
+	background: linear-gradient(rgb(72,191,170), rgb(213,240,235));
+}     
+
+#asideContent *{
+	margin:10px;
+}
+
+#profil{
+	text-align:center;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+#profilMenu{
+	list-style-type: none;
+	margin-top:90px;
+	font-size: 16px;
+}
+@media(max-width: 500px){
+	#profilMenu{
+		list-style-type: none;
+		margin-top:10px;
+	}
+}
+
+#profilMenu li{
+	list-style-type: none;
+	
+}
+
+#profilMenu li span{
+	padding-right: 10px;
+	margin:0px;
+	font-size: 20px;
+}
+
+#profilPicture{
+	width:120px;
+	height:120px;
+	border-radius:60px;
+}
+
+#divLogin span{
+	font-size: 20px;
+}
