@@ -2,6 +2,8 @@ package com.logos.business.inscriptionCours.api;
 
 import java.util.*;
 
+import org.springframework.stereotype.Service;
+
 import com.logos.entity.cours.Categorie;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Langue;
@@ -12,6 +14,7 @@ import com.logos.entity.user.Eleve;
 /**
  * 
  */
+@Service
 public interface IInscriptionCours {
 
     /**
