@@ -10,23 +10,25 @@
 <body>
 	<h1>Inscription</h1>
 	<fieldset>
-		<h:form id="formInscription" name="formInscription" alt="form" onsubmit="return false">
+		<h:form styleClass="form" >
 			<span>NOM : </span>
-			<h:inputText value="#{mbInscription.nom}" />
+			<h:inputText value="#{mbInscription.nom}" styleClass="nom"/>
 			<span>PRENOM : </span>
-			<h:inputText value="#{mbInscription.prenom}" />
+			<h:inputText value="#{mbInscription.prenom}" styleClass="prenom"/>
 			<span>MAIL : </span>
-			<h:inputText value="#{mbInscription.mail}" /><br/>
+			<h:inputText value="#{mbInscription.mail}" styleClass="mail"/><div class="messageMail" ></div><br/>
 			<span>LOGIN : </span>
-			<h:inputText value="#{mbInscription.login}" />
+			<h:inputText value="#{mbInscription.login}" styleClass="login"/><div class="messageLogin" ></div>
 			<span>Mot de passe : </span>
-			<h:inputText name="mdp" alt="mdp" value="#{mbInscription.password}" />
-			<h:inputText name="mdp2"  alt="mdp2" value="#{mbInscription.password2}" /><br/>
-			<h:commandButton action="#{mbInscription.ajouterEleve()}" value="Inscription" alt="valider" />
-			<input alt="message"/>
+			<h:inputText value="#{mbInscription.password}" styleClass="mdp"/>
+			<h:inputText value="#{mbInscription.password2}" styleClass="mdp2"/><br/>
+			<input type="button" value="Inscription" class="valider" />
+			<h:commandButton action="#{mbInscription.ajouterEleve()}" style="display: none;" value="Inscription" styleClass="submit-jsf" />
+			<div class="messageMdp" ></div>
+			<h:outputText value="#{mbInscription.violationMailLogin}" />
 		</h:form>
 	</fieldset>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script type="text/javascript" src="js/inscriptionEleve.js"></script>
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/inscriptionEleve.js"></script>
 </body>
 </html>
