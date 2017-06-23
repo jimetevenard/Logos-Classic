@@ -4,13 +4,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 import com.logos.business.connexion.api.IBusinessConnexionPlateforme;
 import com.logos.entity.user.Eleve;
 
 @ManagedBean(name="mbInscription")
 @ViewScoped
 public class InsciptionManagedBean {
-	@ManagedProperty(value="businessConnexionPlateforme")
+	@ManagedProperty(value="#{businessConnexionPlateforme}")
 	private IBusinessConnexionPlateforme bu;
 	
 	private String nom;
@@ -19,10 +21,21 @@ public class InsciptionManagedBean {
 	private String password;
 	private String password2;
 	private String login;
+	private String violationMailLogin;
 	
-	public void ajouterEleve(){
-		Eleve e = new Eleve(null, nom, prenom, login, password, mail);
-		bu.inscrireEleve(e);
+	public String ajouterEleve(){
+		
+		try{
+			Eleve e = new Eleve(null, nom, prenom, login, password, mail);
+			bu.inscrireEleve(e);
+			return "/accueil_eleve.xhtml?faces-redirect=true";
+
+		} catch (ConstraintViolationException e) {
+			violationMailLogin = "Mail ou login déjà utilisé";
+		} catch (Exception e2) {
+			// TODO: autre erreur
+		}
+		return null;
 	}
 
 	public IBusinessConnexionPlateforme getBu() {
@@ -79,6 +92,14 @@ public class InsciptionManagedBean {
 
 	public void setPassword2(String password2) {
 		this.password2 = password2;
+	}
+
+	public String getViolationMailLogin() {
+		return violationMailLogin;
+	}
+
+	public void setViolationMailLogin(String violationMailLogin) {
+		this.violationMailLogin = violationMailLogin;
 	}
 	
 	
