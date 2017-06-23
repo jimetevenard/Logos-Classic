@@ -2,10 +2,11 @@ package com.logos.front.connexion;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
+
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.HttpSession;
@@ -19,7 +20,7 @@ import com.logos.entity.user.Utilisateur;
 @SessionScoped
 public class LoginMB implements Serializable {
 
-	/**
+	/** 
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -35,7 +36,6 @@ public class LoginMB implements Serializable {
 
 	public String seConnecter(){
 		userConnected = bu.checkLoginPassword(login, password);
-		System.out.println("je me connecte en tant que "+userConnected.getLogin());
 		if(userConnected != null && isEleve()){
 			isLoggedIn=true;
 			return navigationBean.redirectToAccueilEleve();
@@ -70,25 +70,6 @@ public class LoginMB implements Serializable {
 		return false;
 	}
 
-//	public void verifierConnectedEleve(ComponentSystemEvent event){
-//		System.out.println("je vérifie que c'est un éleve");
-//		FacesContext fc = FacesContext.getCurrentInstance();
-//		userConnected = bu.checkLoginPassword(login, password);
-//		System.out.println("je me connecte en tant que "+userConnected.getLogin());
-//		if (userConnected == null || !isEleve()){
-//			if(userConnected == null) System.out.println("userConnected est nulll");
-//			System.out.println("j'ai vérifié, c'est pas un éleve");
-//			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler)fc.getApplication().getNavigationHandler();
-//			nav.performNavigation("login.xhtml?faces-redirect=true");
-//		}
-//	}
-//	public void verifierConnectedProfesseur(ComponentSystemEvent event){
-//		FacesContext fc = FacesContext.getCurrentInstance();
-//		if (userConnected == null || !isProfesseur()){
-//			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler)fc.getApplication().getNavigationHandler();
-//			nav.performNavigation("login.xhtml?faces-redirect=true");
-//		}
-//	}
 
 	public String getLogin() {
 		return login;

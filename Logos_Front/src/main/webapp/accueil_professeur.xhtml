@@ -1,18 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-	<head>
-	<title> Connection </title>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<title>Connection</title>
 </head>
-
+<f:metadata>
+	<f:event listener="#{filtreMB.verifierConnectedProfesseur}"
+		type="preRenderView" />
+</f:metadata>
 <body>
-<f:view>
- <f:metadata>
-<f:event listener="#{filtreMB.verifierConnectedProfesseur}" type="preRenderView" />
- </f:metadata>
- </f:view>
- <h1>Tu es un prof et tu es sur ta page d'accueil</h1><br />
-  <h:commandButton action="#{loginMB.seDeconnecter()}" value="Se déconnecter" />
+
+	<h1>
+		Tu es un prof qui s'apelle
+		<h:outputText value="#{loginMB.userConnected.prenom}" />
+		et tu es sur ta page d'accueil
+	</h1>
+	<br />
+	<h:form>
+		<h:commandButton action="#{loginMB.seDeconnecter()}"
+			value="Se déconnecter" />
+	</h:form>
 </body>
 </html>

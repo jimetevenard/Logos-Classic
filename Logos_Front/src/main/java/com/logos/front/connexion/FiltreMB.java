@@ -1,11 +1,14 @@
 package com.logos.front.connexion;
 
-import javax.enterprise.context.SessionScoped;
+import javax.annotation.PostConstruct;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean
 @SessionScoped
@@ -14,17 +17,15 @@ public class FiltreMB {
 	@ManagedProperty(value="#{loginMB}")
 	private LoginMB logMB;
 	
-	public void verifierConnectedEleve(ComponentSystemEvent event){
-		System.out.println("je vérifie que c'est un éleve");
+	
+	public void verifierConnectedEleve(){
 		FacesContext fc = FacesContext.getCurrentInstance();
-		if (logMB.getUserConnected() == null || !logMB.isEleve()){
-			if(logMB.getUserConnected() == null) System.out.println("userConnected est nulll");
-			System.out.println("j'ai vérifié, c'est pas un éleve");
+		if (logMB == null || logMB.getUserConnected() == null || !logMB.isEleve()){
 			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler)fc.getApplication().getNavigationHandler();
 			nav.performNavigation("login.xhtml?faces-redirect=true");
 		}
 	}
-	public void verifierConnectedProfesseur(ComponentSystemEvent event){
+	public void verifierConnectedProfesseur(){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		if (logMB.getUserConnected() == null || !logMB.isProfesseur()){
 			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler)fc.getApplication().getNavigationHandler();
