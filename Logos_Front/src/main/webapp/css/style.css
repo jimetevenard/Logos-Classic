@@ -4,8 +4,16 @@
 }
 #aside {
 	height:100vh;
+	position: relative;
+}
+
+.eleve {
 	background: linear-gradient(rgb(72,191,170), rgb(213,240,235));
-}     
+}
+
+.prof {
+	background: linear-gradient(rgb(255,166,77), rgb(255,204,153));
+}
 
 #asideContent *{
 	margin:10px;
@@ -48,4 +56,23 @@
 
 #divLogin span{
 	font-size: 20px;
+}
+
+#divPremium {
+	font-size: 16px;
+	position: absolute;
+	bottom: 30px;
+}
+
+#divPremium p,  #divPremium  span {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#newMessages, #newCorrections {
+	background-color: white;
+	border-radius: 20px;
+	margin-left: 10px;
+	padding: 5px;
+	display: inline;
 }
