@@ -37,14 +37,14 @@ public interface IInscriptionCours {
      * @param note 
      * @return
      */
-    public int donnerNote(Eleve eleve, Cours cours, int note);
+    public boolean donnerNote(Eleve eleve, Cours cours, int note);
 
     /**
      * @param cours 
      * @param eleve 
      * @return
      */
-    public int getNoteDonnee(Cours cours, Eleve eleve);
+    public Integer getNoteDonnee(Cours cours, Eleve eleve);
 
     /**
      * @param langue 

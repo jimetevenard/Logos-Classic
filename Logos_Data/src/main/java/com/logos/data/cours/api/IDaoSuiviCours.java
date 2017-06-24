@@ -23,6 +23,8 @@ public interface IDaoSuiviCours {
     
     public List<SuiviCours> getSuiviByEleve(Eleve eleve);
     
+    public List<SuiviCours> getSuiviByEleveEtCours(Eleve eleve, Cours cours);
+    
     public SuiviCours addSuivi(SuiviCours suivi);
     
     public SuiviCours updateSuivi(SuiviCours suivi);
