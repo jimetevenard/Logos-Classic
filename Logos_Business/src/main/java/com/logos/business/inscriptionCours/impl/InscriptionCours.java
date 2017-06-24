@@ -17,7 +17,7 @@ import com.logos.entity.cours.SuiviCours;
 import com.logos.entity.user.Eleve;
 
 @Service
-public class inscriptionCours implements IInscriptionCours{
+public class InscriptionCours implements IInscriptionCours{
 	
 	@Autowired
 	private IDaoCours daoCours;
