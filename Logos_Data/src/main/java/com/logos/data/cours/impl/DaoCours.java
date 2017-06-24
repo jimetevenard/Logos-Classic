@@ -81,9 +81,9 @@ public class DaoCours implements IDaoCours{
 		Session session = sf.getCurrentSession();
 		List<Cours> listeCours = new ArrayList<>();
 		try {
-		Query query = session.createQuery("SELECT c FROM Cours c where c.niveau.langue = :langue")
-					.setParameter("langue", langue);
-		listeCours = (List<Cours>) query.uniqueResult();
+		Query query = session.createQuery("SELECT c FROM Cours c where c.niveau.langue.idLangue = :langue")
+					.setParameter("langue", langue.getIdLangue());
+		listeCours = (List<Cours>) query.list();
 		return listeCours ;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,7 +126,13 @@ public class DaoCours implements IDaoCours{
 	@Transactional
 	@Override
 	public Double getNoteMoyenneByCours(Cours cours) {
-		return null;
+		Double noteMoyenne = null ;
+		Session session = sf.getCurrentSession();
+
+		Query query =   session.createSQLQuery("SELECT AVG note_cours FROM suivi_cours " 
+				+ "WHERE id_cours = :IdCours");
+		noteMoyenne = (double) query.setInteger("idCours",cours.getIdCours()).uniqueResult();
+		return noteMoyenne;
 	}
 
 	public void setSf(SessionFactory sf) {
