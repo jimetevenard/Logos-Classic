@@ -1,4 +1,4 @@
-package com.logos.business.inscriptionCours.test;
+package com.logos.business.inscriptionCours.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;

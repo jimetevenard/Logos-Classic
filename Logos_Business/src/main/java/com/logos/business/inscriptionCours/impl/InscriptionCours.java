@@ -19,10 +19,10 @@ import com.logos.entity.user.Eleve;
 @Service
 public class InscriptionCours implements IInscriptionCours{
 	
-	@Autowired
+	//@Autowired
 	private IDaoCours daoCours;
 	
-	@Autowired
+//	@Autowired
 	private IDaoSuiviCours daoSuiviCours;
 
 	@Override

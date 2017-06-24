@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.logos.business.inscriptionCours.api.IInscriptionCours;
+import com.logos.business.inscriptionCours.impl.InscriptionCoursTest;
 import com.logos.entity.cours.Categorie;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Langue;
@@ -25,8 +26,10 @@ import com.logos.front.connexion.LoginMB;
 @ManagedBean(name="mbInscriptionCours")
 @SessionScoped
 public class InscriptionCoursManagedBean {
-	@ManagedProperty(value="#{inscriptionCours}")
-	private IInscriptionCours bu;
+	
+//	@ManagedProperty(value="#{inscriptionCours}")
+	private IInscriptionCours bu = new InscriptionCoursTest();
+	
 	@ManagedProperty(value="#{loginMB}")
 	private LoginMB logMb;
 	
@@ -44,11 +47,13 @@ public class InscriptionCoursManagedBean {
 	
 	@PostConstruct
 	public void init(){
-		coursesR= new ArrayList<>();
-		Cours c=new Cours(null, "grammaire", "introduction", new Date(), new Date(), new Professeur(), new TestDeValidation());
-		coursesR.add(c);
-		eleve = (Eleve) logMb.getUserConnected();
-//		coursesR = bu.getCoursRecommandes(eleve);
+//		coursesR= new ArrayList<>();
+//		Cours c=new Cours(null, "grammaire", "introduction", new Date(), new Date(), new Professeur(), new TestDeValidation());
+//		coursesR.add(c);
+		eleve = new Eleve(null, "toto", null, null, null, null);
+		
+//		eleve = (Eleve) logMb.getUserConnected();
+		coursesR = bu.getCoursRecommandes(eleve);
 //		niveaux = eleve.getNiveaux();
 //		for(Niveau n : niveaux){
 //			langues.add(n.getLangue());

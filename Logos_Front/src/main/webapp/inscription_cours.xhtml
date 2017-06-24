@@ -41,13 +41,14 @@
 			</h:selectOneMenu>
 			<h:commandButton action="#{mbInscriptionCours.getCoursByLangue()}"
 				value="Rechercher" />
-		</h:form>
+		
 		<ui:repeat var="c" value="#{mbInscriptionCours.coursesL}">
 			<h:outputLabel value="#{c.titre}" />
 			<h:outputLabel value="#{mbInscriptionCours.noteCours(c)}" />
 			<h:commandButton action="#{mbInscriptionCours.inscrireACours(c)}"
 				value="S'inscrire" />
 		</ui:repeat>
+		</h:form>
 	</div>
 	<div id="cours_categorie">
 		<h2>Cours par Catégorie</h2>
@@ -61,13 +62,14 @@
 			</select>
 			<h:commandButton action="#{mbInscriptionCours.getCoursByCategorie()}"
 				value="Rechercher" />
-		</h:form>
+		
 		<ui:repeat var="c" value="#{mbInscriptionCours.coursesC}">
 			<h:outputLabel value="#{c.titre}" />
 			<h:outputLabel value="#{mbInscriptionCours.noteCours(c)}" />
 			<h:commandButton action="#{mbInscriptionCours.inscrireACours(c)}"
 				value="S'inscrire" />
 		</ui:repeat>
+		</h:form>
 	</div>
 </body>
 </html>
