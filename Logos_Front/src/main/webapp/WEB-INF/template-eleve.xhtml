@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title><ui:insert name="titre" /></title>
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, shrink-to-fit=no"></meta>
+	<ui:insert name="scriptsEtCss" />
+	<f:metadata>
+		<f:event listener="#{filtreMB.verifierConnectedEleve}"
+			type="preRenderView" />
+	</f:metadata>
+</h:head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div id="aside" class="col-sm-2 eleve">
+				<h:form>
+					<div id="asideContent">
+						<div id="divLogin">
+							<h:commandLink action="#{loginMB.seDeconnecter}">
+								<span class="glyphicon glyphicon-off" />
+							</h:commandLink>
+						</div>
+						<div id="profil">
+							<img id="profilPicture"
+								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREGFIu103swa_lNxgruLW21Mzkdp7W7hSVqP9mqZTRWb_imuC_"
+								alt="image_profil" />
+							<p>#{loginMB.userConnected.prenom}
+								#{loginMB.userConnected.nom}</p>
+							<div id="niveaux_eleve">
+								<ul>
+									<li>Français B2</li>
+									<li>Anglais C1</li>
+								</ul>
+							</div>
+						</div>
+						<div id="nav">
+							<ul id="profilMenu">
+								<li><span class="glyphicon glyphicon-copy"></span>Suivi</li>
+								<li><span class="glyphicon glyphicon-book"></span>Cours</li>
+								<li><span class="glyphicon glyphicon-envelope"></span>Messages
+									<p id="newMessages">55</p></li>
+							</ul>
+						</div>
+						<div id="divPremium">
+							<span class="glyphicon glyphicon-star-empty" />
+							<p>Devenez premium</p>
+						</div>
+					</div>
+				</h:form>
+			</div>
+			<div class="col-sm-10">
+				<ui:insert name="contenu" />
+			</div>
+		</div>
+	</div>
+</body>
+</html>
