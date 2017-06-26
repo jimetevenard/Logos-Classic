@@ -132,3 +132,61 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
+#mesCours tr,td{
+	border : 1px solid black;
+	border-collapse: collapse;
+	text-align: center;
+	padding: 4px;
+	font-size: medium;
+}
+
+#mesCours {
+	text-align: center;
+	padding: 2px;
+	margin:auto;
+	margin-top: 5px;
+	
+	
+}
+
+#mesCours div {
+	display: inline-block;
+	
+}
+
+#myCours {
+	border-right: 1px solid black;
+	border-collapse: collapse;
+	padding: 4px;
+}
+
+#inscription_cours h1{
+	margin:auto;
+	text-align: center;
+	margin-top: 10px;
+}
+
+#cours_recommandes h2{
+	text-decoration: underline;
+	color: #17827d;
+}
+
+#cours_recommandes {
+	margin-left: 4px;
+}
+
+#cour_langue {
+	margin-left: 4px;
+	margin-top:10px;
+}
+
+#cour_langue .nav nav-tabs a {
+	font-weight: bold;
+	
+}
+
+#cour_langue {
+	text-decoration: underline;
+	color: #17827d;
+}
