@@ -7,23 +7,25 @@
 <h:head>
 	<title>Inscription A Cours</title>
 	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../css/style.css" type="text/css" />
 	<script src="../js/jquery.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<ui:composition template="/WEB-INF/template-eleve.xhtml">
 		<ui:define name="titre">Bienvenue</ui:define>
 		<ui:define name="contenu">
-			<h:form>
-				<table>
-					<tr>
-						<td><h:outputLabel value="Mes Cours" /></td>
-						<td><h:outputLabel value="Avancement" /></td>
-					</tr>
-					<ui:repeat var="c" value="#{mbInscriptionCours.coursEleve}">
-						<tr>
-							<td><h:outputLabel value="#{c.titre}" /></td>
-						</tr>
-					</ui:repeat>
-				</table>
+			<h:form id="inscription_cours" name="inscription_cours">
+				<div id="mesCours">
+					<div id="myCours">
+						<h3>Mes Cours</h3>
+						<ui:repeat var="c" value="#{mbInscriptionCours.coursEleve}">
+							<h:outputLabel value="#{c.titre}" />
+						</ui:repeat>
+					</div>
+					<div>
+						<h3>Avancement</h3>
+					</div>
+				</div>
+
 
 				<h1>Liste des Cours</h1>
 				<div id="cours_recommandes">
@@ -39,7 +41,9 @@
 					</ui:repeat>
 				</div>
 
-				<div>
+
+				<div id="cour_langue">
+					<h2>Sélection de cours</h2>
 					<ul class="nav nav-tabs" role="tablist">
 						<ui:repeat var="l" value="#{mbInscriptionCours.langues}">
 
