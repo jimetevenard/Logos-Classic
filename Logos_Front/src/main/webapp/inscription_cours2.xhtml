@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+<title>Inscription A Cours</title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+	<script src="../js/jquery.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+</h:head> 
+<body> 
+<table>
+		<tr>
+			<td><h:outputLabel value="Mes Cours" /></td>
+			<td><h:outputLabel value="Avancement" /></td>
+		</tr>
+		<ui:repeat var="c" value="#{mbInscriptionCours.coursEleve}">
+			<tr>
+				<td><h:outputLabel value="#{c.titre}" /></td>
+			</tr>
+		</ui:repeat>
+	</table>
+	
+	<h1>Liste des Cours</h1>
+	<div id="cours_recommandes">
+		<h2>Cours recommandés</h2>
+		<ui:repeat var="c" value="#{mbInscriptionCours.coursesR}">
+			<h:form>
+				<h:outputLabel value="#{c.titre}" />
+				<h:outputLabel value="#{mbInscriptionCours.noteCours(c)}" />
+				<h:commandButton action="#{mbInscriptionCours.inscrireACours(c)}"
+					value="S'inscrire" />
+				<br />
+			</h:form>
+		</ui:repeat>
+	</div>
+	
+<div>
+	<ul class="nav nav-tabs" role="tablist">
+		<li class="active" role="presentation"><a href="#anglais" aria-controls="anglais" role="tab" data-toggle="tab">Anglais</a></li>
+		<li class="" role="presentation"><a href="#espagnol" aria-controls="espagnol" role="tab" data-toggle="tab">Espagnol</a></li>
+		<li class="" role="presentation"><a href="#chinois" aria-controls="chinois" role="tab" data-toggle="tab">Chinois</a></li>
+	</ul>
+	
+	<div class="tab-content cours" >
+		<div  role="tabpanel" class="tab-pane active" id="anglais">TEst anglais</div>
+		<div  role="tabpanel" class="tab-pane" id="espagnol">TEst espagnol</div>
+		<div  role="tabpanel" class="tab-pane" id="chinois">TEst chinois</div>
+	</div>
+</div>
+	
+</body> 
+</html>

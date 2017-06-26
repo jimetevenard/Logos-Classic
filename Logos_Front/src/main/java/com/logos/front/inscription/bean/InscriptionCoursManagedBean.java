@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -44,20 +45,14 @@ public class InscriptionCoursManagedBean {
 	private List<Cours> coursesR;
 	private List<Cours> coursesL;
 	private List<Cours> coursesC;
+	private Map<Categorie, List<Cours>> coursCategorie;
 	
 	@PostConstruct
 	public void init(){
-//		coursesR= new ArrayList<>();
-//		Cours c=new Cours(null, "grammaire", "introduction", new Date(), new Date(), new Professeur(), new TestDeValidation());
-//		coursesR.add(c);
 		eleve = new Eleve(null, "toto", null, null, null, null);
 		
 //		eleve = (Eleve) logMb.getUserConnected();
 		coursesR = bu.getCoursRecommandes(eleve);
-//		niveaux = eleve.getNiveaux();
-//		for(Niveau n : niveaux){
-//			langues.add(n.getLangue());
-//		}
 		
 	}
 	
@@ -76,9 +71,10 @@ public class InscriptionCoursManagedBean {
 		coursesL = bu.getCoursByLangue(langue, eleve);
 	}
 	
-	public void getCoursByCategorie(){
-		coursesC = bu.getCoursByCategory(categorie, eleve);
+	public void getCoursByCategorie(Categorie cat){
+		coursesC = bu.getCoursByCategory(cat, eleve);
 	}
+	
 
 	
 	public void getCoursByEleve(){
@@ -193,6 +189,14 @@ public class InscriptionCoursManagedBean {
 
 	public void setCoursEleve(List<Cours> coursEleve) {
 		this.coursEleve = coursEleve;
+	}
+
+	public Map<Categorie, List<Cours>> getCoursCategorie() {
+		return coursCategorie;
+	}
+
+	public void setCoursCategorie(Map<Categorie, List<Cours>> coursCategorie) {
+		this.coursCategorie = coursCategorie;
 	}
 	
 	
