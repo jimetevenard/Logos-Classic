@@ -12,7 +12,7 @@ public interface IDaoCorrection {
 	Correction getCorrectionById(Integer id);
 	Correction addCorrection(Correction correction);
 	Correction updateCorrection(Correction correction);
-	Correction deleteCorrection(Correction correction);
+	boolean deleteCorrection(Correction correction);
 	Correction getCorrectionByReponse(ReponseEleve reponse);
 	List<Correction> getCorrectionByProfesseur(Professeur professeur);
 	List<Correction> getCorrectionByEleve(Eleve eleve);
