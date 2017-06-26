@@ -31,81 +31,86 @@ public class TestCreationBDD {
 		IDaoNiveau daoNiveau = bf.getBean(IDaoNiveau.class);
 		IDaoLangues daoLangue = bf.getBean(IDaoLangues.class);
 		IDaoCategorie daoCategorie = bf.getBean(IDaoCategorie.class);
-		
-		
+
+
 		Langue langue = daoLangue.getLangueById(2);
-		Niveau niv = daoNiveau.getNiveauById(5);
-//		
-		Cours cours = new Cours(null, "cours cours", "petit cours mytho", new Date(), new Date(), null, null);
-//		Set<Cours> courses = new HashSet();
-//		courses.add(cours);
-		Set<Categorie> listcat = new HashSet();
-//		cours.setNiveau(niv);
-//		niv.setLangue(langue);
-//		
-//		cours.setCategories(listcat);
-//		
-//		cat.setCourses(courses);
-		List<Cours> lcours = new ArrayList<>();
-		for (Cours c : lcours) {
-		log.info(c.getIntroduction());
-	}
-	
+		Niveau niv = daoNiveau.getNiveauById(4);
+		//		
+		Cours cours = dao.getCoursByid(5);
 		
-		Categorie cat = new Categorie(null, "syntaxe japonaise antique");
-		listcat.add(cat);
-		cours.setCategories(listcat);
-		dao.addCours(cours);
+		Cours c = new Cours(null, "nouv cours", "cours de ouf malade", new Date(), new Date(), null, null);
+		Niveau nivbrr = new Niveau(null, "a1000", Niveau.C2, langue);
+		c.setNiveau(nivbrr);
 		
+		dao.addCours(c);
+		dao.addCours(c);
+		dao.addCours(c);
+		dao.addCours(c);
 		
-//		Categorie cat2 = new Categorie(null, "vocabulaire aquatique swahili");
-//		daoCategorie.addCategory(cat);
-//		daoCategorie.addCategory(cat2);
-//		List<Categorie> listeCate = new ArrayList<>();
-//		
-//		listeCate = daoCategorie.getAllCategories();
-//		
-//		for (Categorie cat : listeCate) {
-//			log.info(cat.getTitre());
-//		}
-//		
-		
-		
-//		List<Niveau> listeNiveau = new ArrayList<>();
-//		List<Langue> listeLangue = new ArrayList<>();
-//		listeNiveau = daoNiveau.getAllNiveaux();
-//		listeLangue = daoLangue.getAllLangues();
-//		
-//		for (Langue langue : listeLangue) {
-//			log.info(langue.getIdLangue());
-//		}
-//		
-//		for (Niveau niveau : listeNiveau) {
-//			log.info(niveau.getIdNiveau());
-//		}
+		//		Set<Cours> courses = new HashSet();
+		//		courses.add(cours);
+		//		cours.setNiveau(niv);
+		//		niv.setLangue(langue);
+		//		
+		//		cours.setCategories(listcat);
+		//		
+		//		cat.setCourses(courses);
 
-		
-//		Langue l1 = new Langue(null, "Allemand", "DEU");
-//		Langue l2 = new Langue(null, "Espagnol", "ESP");
-//		daoLangue.addLangue(l1);
-//		daoLangue.addLangue(l2);
-//		
-//		Niveau niveau  = new Niveau(null, "C1", Niveau.C1, l1);
-//		Niveau niveau2  = new Niveau(null, "A2", Niveau.A2, l2);
-//		daoNiveau.addNiveau(niveau);
-//		daoNiveau.addNiveau(niveau2);
+		List<Cours> lcours = dao.getCoursByNiveauSuperieur(niv);
+		for (Cours c2 : lcours) {
+			log.info(c2.getIdCours());
+			
+		}
 
-		
 
-		
-		
-		
-		
-		
-		
-	
-		
-		
+		//		Categorie cat2 = new Categorie(null, "vocabulaire aquatique swahili");
+		//		daoCategorie.addCategory(cat);
+		//		daoCategorie.addCategory(cat2);
+		//		List<Categorie> listeCate = new ArrayList<>();
+		//		
+		//		listeCate = daoCategorie.getAllCategories();
+		//		
+		//		for (Categorie cat : listeCate) {
+		//			log.info(cat.getTitre());
+		//		}
+		//		
+
+
+		//		List<Niveau> listeNiveau = new ArrayList<>();
+		//		List<Langue> listeLangue = new ArrayList<>();
+		//		listeNiveau = daoNiveau.getAllNiveaux();
+		//		listeLangue = daoLangue.getAllLangues();
+		//		
+		//		for (Langue langue : listeLangue) {
+		//			log.info(langue.getIdLangue());
+		//		}
+		//		
+		//		for (Niveau niveau : listeNiveau) {
+		//			log.info(niveau.getIdNiveau());
+		//		}
+
+
+		//		Langue l1 = new Langue(null, "Allemand", "DEU");
+		//		Langue l2 = new Langue(null, "Espagnol", "ESP");
+		//		daoLangue.addLangue(l1);
+		//		daoLangue.addLangue(l2);
+		//		
+		//		Niveau niveau  = new Niveau(null, "C1", Niveau.C1, l1);
+		//		Niveau niveau2  = new Niveau(null, "A2", Niveau.A2, l2);
+		//		daoNiveau.addNiveau(niveau);
+		//		daoNiveau.addNiveau(niveau2);
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 
 }

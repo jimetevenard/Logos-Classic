@@ -1,6 +1,7 @@
 package com.logos.data.cours.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -29,7 +30,25 @@ public class DaoCours implements IDaoCours{
 	public Cours addCours(Cours cours) {
 
 		Session session = sf.getCurrentSession();
-		session.persist(cours);
+		session.save(cours);
+
+		if (cours.getNiveau() != null){
+			if (cours.getNiveau().getLangue() != null){
+				session.save(cours.getNiveau().getLangue());
+			}
+			session.save(cours.getNiveau());
+		}
+
+		if (cours.getCategories() != null){
+			for (Categorie c : cours.getCategories()) {
+				session.save(c);
+				if(c.getCourses() == null)
+					c.setCourses(new HashSet<>());
+				c.getCourses().add(cours);
+			}
+		}
+
+
 		return cours;
 	}
 
@@ -65,10 +84,10 @@ public class DaoCours implements IDaoCours{
 		Session session = sf.getCurrentSession();
 		Cours cours = null;
 		try {
-		Query query = session.createQuery("SELECT c FROM Cours c where c.idCours = :id")
+			Query query = session.createQuery("SELECT c FROM Cours c where c.idCours = :id")
 					.setParameter("id", id);
-		cours = (Cours) query.uniqueResult();
-		return cours ;
+			cours = (Cours) query.uniqueResult();
+			return cours ;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -81,10 +100,10 @@ public class DaoCours implements IDaoCours{
 		Session session = sf.getCurrentSession();
 		List<Cours> listeCours = new ArrayList<>();
 		try {
-		Query query = session.createQuery("SELECT c FROM Cours c where c.niveau.langue.idLangue = :langue")
+			Query query = session.createQuery("SELECT c FROM Cours c where c.niveau.langue.idLangue = :langue")
 					.setParameter("langue", langue.getIdLangue());
-		listeCours = (List<Cours>) query.list();
-		return listeCours ;
+			listeCours = (List<Cours>) query.list();
+			return listeCours ;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -97,8 +116,7 @@ public class DaoCours implements IDaoCours{
 		List<Cours> listeCours = new ArrayList<>();
 		Session session = sf.getCurrentSession();
 		try {
-			Query query = session.createQuery("SELECT c FROM Cours c where c.categories = :categorie")
-					.setParameter("categorie", categorie);
+			Query query = session.createQuery("SELECT c FROM Cours c inner join c.categories ");
 			listeCours = query.list();
 			return listeCours ;
 		} catch (Exception e) {
@@ -125,20 +143,38 @@ public class DaoCours implements IDaoCours{
 
 	@Transactional
 	@Override
+	public List<Cours> getCoursByNiveauSuperieur(Niveau niveau) {
+		List<Cours> listeCours = new ArrayList<>();
+		Session session = sf.getCurrentSession();
+		try {
+			Query query = session.createQuery("SELECT c FROM Cours c where c.niveau >= :niveau")
+					.setParameter("niveau", niveau);
+			listeCours = query.list();
+			return listeCours ;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;	
+	}
+
+	@Transactional
+	@Override
 	public Double getNoteMoyenneByCours(Cours cours) {
 		Double noteMoyenne = null ;
 		Session session = sf.getCurrentSession();
 
-		Query query =   session.createSQLQuery("SELECT AVG note_cours FROM suivi_cours " 
-				+ "WHERE id_cours = :IdCours");
-		noteMoyenne = (double) query.setInteger("idCours",cours.getIdCours()).uniqueResult();
+		Query query =   session.createQuery("SELECT AVG(sc.noteCours) FROM SuiviCours sc " 
+				+ "WHERE sc.cours.idCours = :IdCours");
+		noteMoyenne = (double) query.setInteger("IdCours",cours.getIdCours()).uniqueResult();
 		return noteMoyenne;
 	}
 
 	public void setSf(SessionFactory sf) {
 		this.sf = sf;
 	}
-	
-	
+
+
+
+
 
 }

@@ -55,6 +55,8 @@ public class DaoNiveau implements IDaoNiveau {
 	public Niveau addNiveau(Niveau niveau) {
 		Session session = sf.getCurrentSession();
 		session.persist(niveau);
+		
+		
 		return niveau;
 	}
 
