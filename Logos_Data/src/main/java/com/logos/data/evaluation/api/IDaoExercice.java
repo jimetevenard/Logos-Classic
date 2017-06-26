@@ -1,4 +1,4 @@
-package com.logos.data.exercice.api;
+package com.logos.data.evaluation.api;
 
 import java.util.List;
 
