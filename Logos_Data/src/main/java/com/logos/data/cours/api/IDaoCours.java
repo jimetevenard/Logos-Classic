@@ -16,6 +16,7 @@ public interface IDaoCours {
 	List<Cours> getCoursByLangue(Langue langue);
 	List<Cours> getCoursByCategorie(Categorie categorie);
 	List<Cours> getCoursByNiveau(Niveau niveau);
+	List<Cours> getCoursByNiveauSuperieur(Niveau niveau);
 	Double getNoteMoyenneByCours(Cours cours);
 	
 }
