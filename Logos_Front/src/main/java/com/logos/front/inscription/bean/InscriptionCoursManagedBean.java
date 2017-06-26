@@ -29,8 +29,8 @@ import com.logos.front.connexion.LoginMB;
 @SessionScoped
 public class InscriptionCoursManagedBean {
 	
-//	@ManagedProperty(value="#{inscriptionCours}")
-	private IInscriptionCours bu = new InscriptionCoursTest();
+	@ManagedProperty(value="#{inscriptionCours}")
+	private IInscriptionCours bu ;
 	
 	@ManagedProperty(value="#{loginMB}")
 	private LoginMB logMb;

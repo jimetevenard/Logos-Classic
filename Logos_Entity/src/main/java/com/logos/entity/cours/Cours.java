@@ -61,7 +61,7 @@ public class Cours {
     @ManyToMany(mappedBy = "courses")
     private Set<Categorie> categories;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="id_cours", foreignKey = @ForeignKey(name="fk_cours_chapitre"))
     private List<Chapitre> chapitres;
 
