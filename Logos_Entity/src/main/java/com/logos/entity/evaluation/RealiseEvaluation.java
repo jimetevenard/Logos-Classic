@@ -10,11 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import com.logos.entity.reponse.ReponseEleve;
 import com.logos.entity.user.Eleve;
 
 /**
@@ -51,6 +53,9 @@ public class RealiseEvaluation {
 	@ManyToOne
     @JoinColumn(name = "id_evaluation", foreignKey = @ForeignKey(name = "fk_realise_evaluation_evaluation"))
     private Evaluation evaluation;
+	
+	 @OneToMany(mappedBy = "realiseEvaluation")
+	    private Set<ReponseEleve> reponsesEleve;
     
     /**
      * Default constructor
@@ -97,6 +102,15 @@ public class RealiseEvaluation {
 	public void setEvaluation(Evaluation evaluation) {
 		this.evaluation = evaluation;
 	}
+
+	public Set<ReponseEleve> getReponsesEleve() {
+		return reponsesEleve;
+	}
+
+	public void setReponsesEleve(Set<ReponseEleve> reponsesEleve) {
+		this.reponsesEleve = reponsesEleve;
+	}
+	
     
     
     

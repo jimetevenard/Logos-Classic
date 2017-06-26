@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.logos.entity.evaluation.Evaluation;
+import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.question.Question;
 
 /**
@@ -39,8 +40,8 @@ public class ReponseEleve {
 	 * 
 	 */
 	@ManyToOne
-    @JoinColumn(name = "id_evaluation", foreignKey = @ForeignKey(name = "fk_evaluation_reponse_eleve"))
-	private Evaluation evaluation;
+    @JoinColumn(name = "id_realise_evaluation", foreignKey = @ForeignKey(name = "fk_realise_sevaluation_reponse_eleve"))
+	private RealiseEvaluation realiseEvaluation;
 
 	/**
 	 * 
@@ -55,12 +56,16 @@ public class ReponseEleve {
 	public ReponseEleve() {
 	}
 
-	public ReponseEleve(Integer idReponse, Evaluation evaluation, Question question) {
+	
+
+	public ReponseEleve(Integer idReponse, RealiseEvaluation realiseEvaluation, Question question) {
 		super();
 		this.idReponse = idReponse;
-		this.evaluation = evaluation;
+		this.realiseEvaluation = realiseEvaluation;
 		this.question = question;
 	}
+
+
 
 	public Integer getIdReponse() {
 		return idReponse;
@@ -70,13 +75,19 @@ public class ReponseEleve {
 		this.idReponse = idReponse;
 	}
 
-	public Evaluation getEvaluation() {
-		return evaluation;
+	
+
+	public RealiseEvaluation getRealiseEvaluation() {
+		return realiseEvaluation;
 	}
 
-	public void setEvaluation(Evaluation evaluation) {
-		this.evaluation = evaluation;
+
+
+	public void setRealiseEvaluation(RealiseEvaluation realiseEvaluation) {
+		this.realiseEvaluation = realiseEvaluation;
 	}
+
+
 
 	public Question getQuestion() {
 		return question;

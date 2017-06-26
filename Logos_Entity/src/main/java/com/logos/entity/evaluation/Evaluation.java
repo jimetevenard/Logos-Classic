@@ -45,8 +45,7 @@ public class Evaluation {
     /**
      * 
      */
-	 @OneToMany(mappedBy = "evaluation")
-    private Set<ReponseEleve> reponsesEleve;
+	
 
     /**
      * 
@@ -88,13 +87,7 @@ public class Evaluation {
 		this.titre = titre;
 	}
 
-	public Set<ReponseEleve> getReponsesEleve() {
-		return reponsesEleve;
-	}
-
-	public void setReponsesEleve(Set<ReponseEleve> reponsesEleve) {
-		this.reponsesEleve = reponsesEleve;
-	}
+	
 
 	public Set<Question> getQuestions() {
 		return questions;

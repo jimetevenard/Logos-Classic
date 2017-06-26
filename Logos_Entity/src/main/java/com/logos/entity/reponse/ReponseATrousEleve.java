@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 
 import com.logos.entity.evaluation.Evaluation;
+import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.question.Question;
 
 /**
@@ -35,8 +36,8 @@ public class ReponseATrousEleve extends ReponseFermeeEleve {
     public ReponseATrousEleve() {
     }
 
-	public ReponseATrousEleve(Integer idReponse, Evaluation evaluation, Question question, List<String> reponseATrou) {
-		super(idReponse, evaluation, question);
+	public ReponseATrousEleve(Integer idReponse, RealiseEvaluation realiseEvaluation, Question question, List<String> reponseATrou) {
+		super(idReponse, realiseEvaluation, question);
 		this.reponseATrou = reponseATrou;
 	}
 

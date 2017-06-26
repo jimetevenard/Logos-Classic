@@ -6,6 +6,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import com.logos.entity.evaluation.Evaluation;
+import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.question.Question;
 
 /**
@@ -21,10 +22,12 @@ public class ReponseFermeeEleve extends ReponseEleve {
     public ReponseFermeeEleve() {
     }
 
-	public ReponseFermeeEleve(Integer idReponse, Evaluation evaluation, Question question) {
-		super(idReponse, evaluation, question);
+	public ReponseFermeeEleve(Integer idReponse, RealiseEvaluation realiseEvaluation, Question question) {
+		super(idReponse, realiseEvaluation, question);
 		// TODO Auto-generated constructor stub
 	}
+
+	
     
     
 

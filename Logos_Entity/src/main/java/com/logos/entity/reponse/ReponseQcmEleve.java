@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 
 import com.logos.entity.evaluation.Evaluation;
+import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.question.Question;
 
 /**
@@ -35,8 +36,8 @@ public class ReponseQcmEleve extends ReponseFermeeEleve {
 	public ReponseQcmEleve() {
 	}
 
-	public ReponseQcmEleve(Integer idReponse, Evaluation evaluation, Question question, List<Integer> reponseQcm) {
-		super(idReponse, evaluation, question);
+	public ReponseQcmEleve(Integer idReponse, RealiseEvaluation realiseEvaluation, Question question, List<Integer> reponseQcm) {
+		super(idReponse, realiseEvaluation, question);
 		this.reponseQcm = reponseQcm;
 	}
 

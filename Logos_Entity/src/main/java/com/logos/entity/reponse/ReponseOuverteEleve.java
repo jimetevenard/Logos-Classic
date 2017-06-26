@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 
 import com.logos.entity.evaluation.Correction;
 import com.logos.entity.evaluation.Evaluation;
+import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.question.Question;
 
 /**
@@ -41,12 +42,19 @@ public class ReponseOuverteEleve extends ReponseEleve {
     public ReponseOuverteEleve() {
     }
 
-	public ReponseOuverteEleve(Integer idReponse, Evaluation evaluation, Question question, String reponse,
-			Correction correction) {
-		super(idReponse, evaluation, question);
+	
+
+	public ReponseOuverteEleve(Integer idReponse, RealiseEvaluation realiseEvaluation, Question question, String reponse, Correction correction) {
+		super(idReponse, realiseEvaluation, question);
 		this.reponse = reponse;
 		this.correction = correction;
 	}
+
+
+
+	
+
+
 
 	public String getReponse() {
 		return reponse;

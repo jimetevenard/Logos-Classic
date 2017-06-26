@@ -6,6 +6,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import com.logos.entity.evaluation.Evaluation;
+import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.question.Question;
 
 /**
@@ -21,9 +22,9 @@ public class ReponseDragAndDropEleve extends ReponseATrousEleve {
     public ReponseDragAndDropEleve() {
     }
 
-	public ReponseDragAndDropEleve(Integer idReponse, Evaluation evaluation, Question question,
+	public ReponseDragAndDropEleve(Integer idReponse, RealiseEvaluation realiseEvaluation, Question question,
 			List<String> reponseATrou) {
-		super(idReponse, evaluation, question, reponseATrou);
+		super(idReponse, realiseEvaluation, question, reponseATrou);
 		// TODO Auto-generated constructor stub
 	}
     
