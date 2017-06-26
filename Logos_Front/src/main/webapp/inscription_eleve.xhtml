@@ -6,31 +6,83 @@
 
 <h:head>
 	<title>Inscription Logos</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, shrink-to-fit=no"></meta>
 </h:head>
-<body>
+<body id="inscription" class="window">
 	<!--  
 		Réveil du loginMB
 		<h:outputText value="#{loginMB.loggedIn}" />
 	-->
-	<h1>Inscription</h1>
-	
-	
+	<h1>Inscription à Logos</h1>
+
 	<fieldset>
-		<h:form styleClass="form" >
-			<span>NOM : </span>
-			<h:inputText value="#{mbInscription.nom}" styleClass="nom"/>
-			<span>PRENOM : </span>
-			<h:inputText value="#{mbInscription.prenom}" styleClass="prenom"/>
-			<span>MAIL : </span>
-			<h:inputText value="#{mbInscription.mail}" styleClass="mail"/><div class="messageMail" ></div><br/>
-			<span>LOGIN : </span>
-			<h:inputText value="#{mbInscription.login}" styleClass="login"/><div class="messageLogin" ></div>
-			<span>Mot de passe : </span>
-			<h:inputText value="#{mbInscription.password}" styleClass="mdp"/>
-			<h:inputText value="#{mbInscription.password2}" styleClass="mdp2"/><br/>
-			<input type="button" value="Inscription" class="valider" />
-			<h:commandButton action="#{mbInscription.ajouterEleve()}" style="display: none;" value="Inscription" styleClass="submit-jsf" />
-			<div class="messageMdp" ></div>
+		<h:form styleClass="form">
+			<div class="form-group row">
+				<label for="nom" class="col-sm-3 col-form-label">Nom</label>
+				<div class="col-sm-8">
+					<h:inputText value="#{mbInscription.nom}" styleClass="form-control"
+						id="nom" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="prenom" class="col-sm-3 col-form-label">Prenom</label>
+				<div class="col-sm-8">
+					<h:inputText value="#{mbInscription.prenom}"
+						styleClass="form-control" id="prenom" />
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="mail" class="col-sm-3 col-form-label">Mail</label>
+				<div class="col-sm-8">
+					<h:inputText value="#{mbInscription.mail}"
+						styleClass="form-control mail" id="mail" />
+					<span class="messageMail"></span>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="login" class="col-sm-3 col-form-label">Login</label>
+				<div class="col-sm-8">
+					<h:inputText value="#{mbInscription.login}"
+						styleClass="form-control login" id="login" />
+					<span class="messageLogin"></span>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="mdp" class="col-sm-3 col-form-label">Mot de
+					passe</label>
+				<div class="col-sm-8">
+					<h:inputText value="#{mbInscription.password}"
+						styleClass="form-control mdp" id="mdp" />
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label for="mdp2" class="col-sm-3 col-form-label">Confirmer mot de
+					passe</label>
+				<div class="col-sm-8">
+					<h:inputText value="#{mbInscription.password2}"
+						styleClass="form-control mdp2" id="mdp2" />
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="">
+					<input type="button" value="S'inscrire" class="btn btn-default valider" />
+					<h:commandButton action="#{mbInscription.ajouterEleve()}"
+						style="display: none;" value="S'inscrire" styleClass="submit-jsf" />
+				</div>
+			</div>
+
+
+
+			<div class="messageMdp"></div>
 			<h:outputText value="#{mbInscription.violationMailLogin}" />
 		</h:form>
 	</fieldset>

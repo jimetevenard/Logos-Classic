@@ -1,60 +1,62 @@
-*{
+* {
 	padding: 0px;
-	margin:0px;
+	margin: 0px;
+	font-family:
 }
+
 #aside {
-	height:100vh;
+	height: 100vh;
 	position: relative;
 }
 
 .eleve {
-	background: linear-gradient(rgb(72,191,170), rgb(213,240,235));
+	background: linear-gradient(rgb(72, 191, 170), rgb(153, 255, 230));
 }
 
 .prof {
-	background: linear-gradient(rgb(255,166,77), rgb(255,204,153));
+	background: linear-gradient(#9966FF, #CCCCFF);
 }
 
-#asideContent *{
-	margin:10px;
+#asideContent * {
+	margin: 10px;
 }
 
-#profil{
-	text-align:center;
+#profil {
+	text-align: center;
 	font-weight: bold;
 	font-size: 18px;
 }
 
-#profilMenu{
+#profilMenu {
 	list-style-type: none;
-	margin-top:90px;
+	margin-top: 90px;
 	font-size: 16px;
 }
-@media(max-width: 500px){
-	#profilMenu{
+
+@media ( max-width : 500px) {
+	#profilMenu {
 		list-style-type: none;
-		margin-top:10px;
+		margin-top: 10px;
 	}
 }
 
-#profilMenu li{
+#profilMenu li {
 	list-style-type: none;
-	
 }
 
-#profilMenu li span{
+#profilMenu li span {
 	padding-right: 10px;
-	margin:0px;
+	margin: 0px;
 	font-size: 20px;
 }
 
-#profilPicture{
-	width:120px;
-	height:120px;
-	border-radius:60px;
+#profilPicture {
+	width: 120px;
+	height: 120px;
+	border-radius: 60px;
 }
 
-#divLogin span{
+#divLogin span {
 	font-size: 20px;
 }
 
@@ -64,31 +66,69 @@
 	bottom: 30px;
 }
 
-#divPremium p,  #divPremium  span {
+#divPremium p, #divPremium  span {
 	display: inline-block;
 	vertical-align: middle;
 }
 
-#newMessages, #newCorrections {
-	background-color: white;
-	border-radius: 20px;
-	margin-left: 10px;
-	padding: 5px;
-	display: inline;
-}
-
 #login_header {
-	border: 5px solid red;
-	height:100vh;
+	height: 100vh;
 	width: 100%;
+	display: flex;
 	align-items: center;
-    display: flex;
+	justify-content: center;
 }
 
-form {
-	border: 5px solid blue;
+.loginform {
 	text-align: center;
-    vertical-align: middle;
-    padding : 15px;
+	padding: 50px;
+	background-color: rgba(220, 220, 220, 0.9);
+	border-radius: 15px;
 }
 
+input[type="submit"], input[type="button"], button, input[type="submit"]:active,
+	input[type="button"]:active, button:active, input[type="submit"]:visited,
+	input[type="button"]:visited, button:visited {
+	background-color: royalblue;
+	color: white;
+	margin-top: 20px;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover, button:hover {
+	background-color: midnightblue;
+	color: white;
+}
+
+#loginWindow {
+	background-image: url("../images/wallpaper.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#inscription {
+	text-align: center;
+	margin: 30px;
+}
+
+#inscription fieldset {
+	height: 100vh;
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+	margin-top: 80px;
+}
+
+#inscription form {
+	text-align: center;
+	padding: 50px;
+	background-color: rgba(220, 220, 220, 0.5);
+	border-radius: 15px;
+}
+
+.window {
+	background-image: url("../images/bluewallpaper.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
