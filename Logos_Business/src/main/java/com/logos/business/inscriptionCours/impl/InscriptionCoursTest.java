@@ -44,6 +44,11 @@ public class InscriptionCoursTest implements IInscriptionCours{
 	private Categorie cat2 = new Categorie(25, "Conjugaision");
 	private Categorie cat3 = new Categorie(230, "Grammaire");
 	
+	private Langue en = new Langue(123, "Anglais", "en");
+	private Langue fr = new Langue(133, "Français", "fr");
+	private Langue es = new Langue(23, "Espagnol", "es");
+	private Langue ge = new Langue(1213, "Allemand", "ge");
+	
 	private Set<Categorie> cats = new HashSet<>( Arrays.asList(cat1, cat2, cat3) );
 	
 	private SuiviCours sc1 = new SuiviCours(32, new Date(), elv, c1);
@@ -115,6 +120,16 @@ public class InscriptionCoursTest implements IInscriptionCours{
 	@Override
 	public List<SuiviCours> getSuiviCourByEleve(Eleve eleve) {
 		return Arrays.asList(sc1, sc2, sc3, sc4, sc5);
+	}
+
+	@Override
+	public List<Categorie> getAllCategorie() {
+		return Arrays.asList(cat1, cat2, cat3);
+	}
+
+	@Override
+	public List<Langue> getAllLangue( ) {
+		return Arrays.asList(en, fr, es, ge);
 	}
 
 	

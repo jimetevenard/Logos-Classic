@@ -84,5 +84,10 @@ public interface IInscriptionCours {
      * @return
      */
     public List<SuiviCours> getSuiviCourByEleve(Eleve eleve);
+    
+    
+    public List<Categorie> getAllCategorie();
+    
+    public List<Langue> getAllLangue();
 
 }

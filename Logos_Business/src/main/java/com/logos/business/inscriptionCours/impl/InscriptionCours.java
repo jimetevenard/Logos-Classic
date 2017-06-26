@@ -19,6 +19,8 @@ import com.logos.entity.user.Eleve;
 @Service
 public class InscriptionCours implements IInscriptionCours{
 	
+	public static final int NB_COURS_MAX_NON_PREMIUM = 3;
+	
 	//@Autowired
 	private IDaoCours daoCours;
 	
@@ -38,8 +40,7 @@ public class InscriptionCours implements IInscriptionCours{
 
 	@Override
 	public boolean isAutriseASinscrire(Eleve eleve, Cours cours) {
-		// TODO completer
-		return true;
+		return daoSuiviCours.getSuiviByEleve(eleve).size() < NB_COURS_MAX_NON_PREMIUM;
 	}
 	
 	@Override
@@ -82,32 +83,34 @@ public class InscriptionCours implements IInscriptionCours{
 
 	@Override
 	public List<Cours> getCoursByLangue(Langue langue, Eleve eleve) {
-		// TODO Auto-generated method stub
-		// sans les niveaux inférieurs
-		// sans les cours interdits
-		return null;
+		return daoCours.getCoursByLangue(langue);
 	}
 
 	@Override
 	public List<Cours> getCoursByCategory(Categorie category, Eleve eleve) {
+		List<Cours> cours = daoCours.getCoursByCategorie(category);
 		// TODO Auto-generated method stub
 		// sans les niveaux inférieurs
 		// sans les cours interdits
-		return null;
+		return cours;
 	}
 
 	@Override
 	public List<Cours> getCoursByNiveau(Niveau niveau, Eleve eleve) {
-		// TODO Auto-generated method stub
+		// TODO SUPÉRIEURS ?
 		// sans les niveaux inférieurs
-		return null;
+		return daoCours.getCoursByNiveau(niveau);
+		
 	}
 
 	@Override
 	public List<Cours> getCoursRecommandes(Eleve eleve) {
 		// TODO Auto-generated method stub
-		// langues de l'évève 
-		// niveau supérieur
+		
+		// Cours dans les langues de l'évève,
+		// de niveau supérieur supérieur
+		// ( les mieux noté en premier ?)
+		// 
 		return null;
 	}
 
@@ -135,6 +138,18 @@ public class InscriptionCours implements IInscriptionCours{
 
 	public void setDaoSuiviCours(IDaoSuiviCours daoSuiviCours) {
 		this.daoSuiviCours = daoSuiviCours;
+	}
+
+	@Override
+	public List<Categorie> getAllCategorie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Langue> getAllLangue() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
