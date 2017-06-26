@@ -1,5 +1,6 @@
 package com.logos.business.inscriptionCours.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.logos.business.inscriptionCours.api.IInscriptionCours;
+import com.logos.data.cours.api.IDaoCategorie;
 import com.logos.data.cours.api.IDaoCours;
 import com.logos.data.cours.api.IDaoSuiviCours;
+import com.logos.data.niveauLangue.api.IDaoLangues;
 import com.logos.entity.cours.Categorie;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Langue;
@@ -21,11 +24,17 @@ public class InscriptionCours implements IInscriptionCours{
 	
 	public static final int NB_COURS_MAX_NON_PREMIUM = 3;
 	
-	//@Autowired
+	@Autowired
 	private IDaoCours daoCours;
 	
-//	@Autowired
+	@Autowired
 	private IDaoSuiviCours daoSuiviCours;
+	
+	@Autowired
+	private IDaoLangues daoLangue;
+	
+	@Autowired
+	private IDaoCategorie daoCategorie;
 
 	@Override
 	public SuiviCours inscrireEleveACours(Eleve eleve, Cours cours) {
@@ -142,20 +151,27 @@ public class InscriptionCours implements IInscriptionCours{
 
 	@Override
 	public List<Categorie> getAllCategorie() {
-		// TODO Auto-generated method stub
-		return null;
+		return daoCategorie.getAllCategories();
 	}
 
 	@Override
 	public List<Langue> getAllLangue() {
-		// TODO Auto-generated method stub
-		return null;
+		return daoLangue.getAllLangues();
+
 	}
 
 	@Override
 	public List<Cours> getCoursByCategory(Categorie category, Eleve eleve, Langue langue) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Cours> cours = new ArrayList<>(getCoursByCategory(category, eleve)) ;
+		List<Cours>coursLangue=new ArrayList<>();
+		for (Cours cours2 : cours) {
+			if(cours2.getNiveau().getLangue()==langue){
+				coursLangue.add(cours2);
+			}
+			
+		}
+		
+		return coursLangue;
 	}
 	
 	
