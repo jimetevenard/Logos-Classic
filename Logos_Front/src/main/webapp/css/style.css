@@ -79,15 +79,16 @@
 
 #login_header {
 	border: 5px solid red;
-	display: table;
 	height:100vh;
 	width: 100%;
+	align-items: center;
+    display: flex;
 }
 
 form {
 	border: 5px solid blue;
-	display: table-cell;
-	vertical-align: middle;
+	text-align: center;
+    vertical-align: middle;
+    padding : 15px;
 }
-
 

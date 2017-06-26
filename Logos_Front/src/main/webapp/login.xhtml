@@ -14,36 +14,29 @@
 	<div id="login_page" class="container-fluid">
 		<div id="login_header">
 
-			<h:form class="form-horizontal">
+			<h:form class="form-horizontal col-sm-offset-4 col-sm-4">
 				<div class="form-group">
-					<label for="login" class="col-sm-offset-2 col-sm-2 control-label">Login</label>
-					<div class="col-sm-4">
+					<label for="login" class="col-sm-offset-2 col-sm-2">Login</label>
+					<div class="col-sm-6">
 						<h:inputText styleClass="form-control" id="login"
 							placeholder="Login" value="#{loginMB.login}" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="inputPassword3" class="col-sm-offset-2 col-sm-2 control-label">Password</label>
-					<div class="col-sm-4">
+					<label for="inputPassword3" class="col-sm-offset-2 col-sm-2">Password</label>
+					<div class="col-sm-6">
 						<h:inputSecret styleClass="form-control" id="inputPassword3"
 							placeholder="Mot de passe" value="#{loginMB.password}" />
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-5 col-sm-4">
+					<div class="col-sm-offset-5 col-sm-3">
 						<h:commandButton styleClass="btn btn-default"
 							action="#{loginMB.seConnecter()}" value="Se connecter" />
 					</div>
 				</div>
 			</h:form>
-
 		</div>
 	</div>
-
-
-
-
-
-
 </body>
 </html>
