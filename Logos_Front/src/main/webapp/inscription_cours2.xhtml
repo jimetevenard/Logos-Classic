@@ -9,68 +9,78 @@
 	<link rel="stylesheet" href="../css/bootstrap.min.css" />
 	<script src="../js/jquery.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
+	<ui:composition template="/WEB-INF/template-eleve.xhtml">
+		<ui:define name="titre">Bienvenue</ui:define>
+		<ui:define name="contenu">
+			<h:form>
+				<table>
+					<tr>
+						<td><h:outputLabel value="Mes Cours" /></td>
+						<td><h:outputLabel value="Avancement" /></td>
+					</tr>
+					<ui:repeat var="c" value="#{mbInscriptionCours.coursEleve}">
+						<tr>
+							<td><h:outputLabel value="#{c.titre}" /></td>
+						</tr>
+					</ui:repeat>
+				</table>
+
+				<h1>Liste des Cours</h1>
+				<div id="cours_recommandes">
+					<h2>Cours recommandés</h2>
+					<ui:repeat var="c" value="#{mbInscriptionCours.coursesR}">
+						<h:form>
+							<h:outputLabel value="#{c.titre}" />
+							<h:outputLabel value="#{mbInscriptionCours.noteCours(c)}" />
+							<h:commandButton action="#{mbInscriptionCours.inscrireACours(c)}"
+								value="S'inscrire" />
+							<br />
+						</h:form>
+					</ui:repeat>
+				</div>
+
+				<div>
+					<ul class="nav nav-tabs" role="tablist">
+						<ui:repeat var="l" value="#{mbInscriptionCours.langues}">
+
+							<li
+								class='#{l eq mbInscriptionCours.langueCourante ? "active" : ""}'
+								role="presentation"><h:commandLink
+									action="#{mbInscriptionCours.changerLangue(l)}"
+									value="#{l.libelle}" /></li>
+
+						</ui:repeat>
+					</ul>
+
+					<div class="tab-content cours">
+						<div role="tabpanel" class="tab-pane active">
+
+							<ui:repeat var="c"
+								value="#{mbInscriptionCours.coursCategorie.entrySet().toArray()}">
+								<div>
+									<h:outputLabel value="#{c.key.titre}" />
+									<br />
+									<ui:repeat var="cc" value="#{c.value}">
+										<h:form>
+											<h:outputLabel value="#{cc.titre}" />
+											<h:outputLabel value="#{mbInscriptionCours.noteCours(cc)}" />
+											<h:commandButton
+												action="#{mbInscriptionCours.inscrireACours(cc)}"
+												value="S'inscrire" />
+										</h:form>
+									</ui:repeat>
+								</div>
+							</ui:repeat>
+						</div>
+
+					</div>
+
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
 </h:head>
 <body>
-<h:form>
-	<table>
-		<tr>
-			<td><h:outputLabel value="Mes Cours" /></td>
-			<td><h:outputLabel value="Avancement" /></td>
-		</tr>
-		<ui:repeat var="c" value="#{mbInscriptionCours.coursEleve}">
-			<tr>
-				<td><h:outputLabel value="#{c.titre}" /></td>
-			</tr>
-		</ui:repeat>
-	</table>
 
-	<h1>Liste des Cours</h1>
-	<div id="cours_recommandes">
-		<h2>Cours recommandés</h2>
-		<ui:repeat var="c" value="#{mbInscriptionCours.coursesR}">
-			<h:form>
-				<h:outputLabel value="#{c.titre}" />
-				<h:outputLabel value="#{mbInscriptionCours.noteCours(c)}" />
-				<h:commandButton action="#{mbInscriptionCours.inscrireACours(c)}"
-					value="S'inscrire" />
-				<br />
-			</h:form>
-		</ui:repeat>
-	</div>
-
-	<div>
-		<ul class="nav nav-tabs" role="tablist">
-			<ui:repeat var="l" value="#{mbInscriptionCours.langues}">
-			
-				<li class='#{l eq mbInscriptionCours.langueCourante ? "active" : ""}' role="presentation"><h:commandLink action="#{mbInscriptionCours.changerLangue(l)}" value="#{l.libelle}" /></li>
-				
-			</ui:repeat>
-		</ul>
-
-		<div class="tab-content cours">
-			<div role="tabpanel" class="tab-pane active" >
-
-				<ui:repeat var="c"
-					value="#{mbInscriptionCours.coursCategorie.entrySet().toArray()}">
-					<div>
-						<h:outputLabel value="#{c.key.titre}" />
-						<br />
-						<ui:repeat var="cc" value="#{c.value}">
-							<h:form>
-								<h:outputLabel value="#{cc.titre}" />
-								<h:outputLabel value="#{mbInscriptionCours.noteCours(cc)}" />
-								<h:commandButton
-									action="#{mbInscriptionCours.inscrireACours(cc)}"
-									value="S'inscrire" />
-							</h:form>
-						</ui:repeat>
-					</div>
-				</ui:repeat>
-			</div>
-
-		</div>
-
-	</div>
-</h:form>
 </body>
 </html>
