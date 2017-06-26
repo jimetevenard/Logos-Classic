@@ -59,6 +59,8 @@ public interface IInscriptionCours {
      * @return
      */
     public List<Cours> getCoursByCategory(Categorie category, Eleve eleve);
+    
+    public List<Cours> getCoursByCategory(Categorie category, Eleve eleve, Langue langue);
 
     /**
      * @param niveau 
@@ -84,5 +86,10 @@ public interface IInscriptionCours {
      * @return
      */
     public List<SuiviCours> getSuiviCourByEleve(Eleve eleve);
+    
+    
+    public List<Categorie> getAllCategorie();
+    
+    public List<Langue> getAllLangue();
 
 }
