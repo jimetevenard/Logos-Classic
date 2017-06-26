@@ -2,6 +2,7 @@ package com.logos.front.inscription.bean;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -46,14 +47,17 @@ public class InscriptionCoursManagedBean {
 	private List<Cours> coursesL;
 	private List<Cours> coursesC;
 	private Map<Categorie, List<Cours>> coursCategorie;
+	private List<Categorie> categories;
+	private Langue langueCourante;
 	
 	@PostConstruct
 	public void init(){
 		eleve = new Eleve(null, "toto", null, null, null, null);
-		
 //		eleve = (Eleve) logMb.getUserConnected();
+		categories =bu.getAllCategorie();
 		coursesR = bu.getCoursRecommandes(eleve);
-		
+		langues = bu.getAllLangue();
+		changerLangue(langues.get(0));
 	}
 	
 	public String inscrireACours(Cours c){
@@ -71,11 +75,26 @@ public class InscriptionCoursManagedBean {
 		coursesL = bu.getCoursByLangue(langue, eleve);
 	}
 	
-	public void getCoursByCategorie(Categorie cat){
-		coursesC = bu.getCoursByCategory(cat, eleve);
+	public Map<Categorie, List<Cours>> getCoursByCategorie(){
+		Map<Categorie, List<Cours>> cats = new HashMap<>();
+		for(Categorie c : categories){
+			cats.put(c, bu.getCoursByCategory(c, eleve));
+		}
+		return cats;
 	}
 	
-
+	public void changerLangue(Langue langue){
+		
+		Map<Categorie, List<Cours>> cats = new HashMap<>();
+		for(Categorie c : categories){
+			cats.put(c, bu.getCoursByCategory(c, eleve,langue));
+		}
+		coursCategorie = cats;
+		langueCourante = langue;
+	}
+	
+	
+	
 	
 	public void getCoursByEleve(){
 		Set<SuiviCours> suivis = new HashSet<>();
@@ -198,6 +217,23 @@ public class InscriptionCoursManagedBean {
 	public void setCoursCategorie(Map<Categorie, List<Cours>> coursCategorie) {
 		this.coursCategorie = coursCategorie;
 	}
+
+	public List<Categorie> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Categorie> categories) {
+		this.categories = categories;
+	}
+
+	public Langue getLangueCourante() {
+		return langueCourante;
+	}
+
+	public void setLangueCourante(Langue langueCourante) {
+		this.langueCourante = langueCourante;
+	}
+	
 	
 	
 	

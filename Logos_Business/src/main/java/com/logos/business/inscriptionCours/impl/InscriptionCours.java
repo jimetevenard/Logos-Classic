@@ -151,6 +151,12 @@ public class InscriptionCours implements IInscriptionCours{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Cours> getCoursByCategory(Categorie category, Eleve eleve, Langue langue) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 
