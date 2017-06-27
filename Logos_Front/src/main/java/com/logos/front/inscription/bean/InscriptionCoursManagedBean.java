@@ -52,12 +52,13 @@ public class InscriptionCoursManagedBean {
 	
 	@PostConstruct
 	public void init(){
-		eleve = new Eleve(null, "toto", null, null, null, null);
-//		eleve = (Eleve) logMb.getUserConnected();
+//		eleve = new Eleve(null, "toto", null, null, null, null);
+		eleve = (Eleve) logMb.getUserConnected();
 		categories =bu.getAllCategorie();
 		coursesR = bu.getCoursRecommandes(eleve);
 		langues = bu.getAllLangue();
 		changerLangue(langues.get(0));
+		coursEleve = getCoursByEleve();
 	}
 	
 	public String inscrireACours(Cours c){
@@ -96,12 +97,14 @@ public class InscriptionCoursManagedBean {
 	
 	
 	
-	public void getCoursByEleve(){
-		Set<SuiviCours> suivis = new HashSet<>();
-		suivis = eleve.getSuiviCours();
-		for(SuiviCours s : suivis){
+	public List<Cours> getCoursByEleve(){
+		List<SuiviCours> suivis = new ArrayList<>();
+		suivis = bu.getSuiviCourByEleve(eleve);
+		List<Cours> coursEleve =new ArrayList<>();
+		for (SuiviCours s : suivis){
 			coursEleve.add(s.getCours());
 		}
+		return coursEleve;
 	}
 	
 	public IInscriptionCours getBu() {

@@ -22,11 +22,12 @@ public class DaoSuiviCours implements IDaoSuiviCours {
 	private SessionFactory sf;
 
 	@Override
+	@Transactional
 	public List<Cours> getCoursInscritsByEleve(Eleve eleve) {
 		Session session = sf.getCurrentSession();
 		List<Cours> cours = new ArrayList<>();
 		try{
-			Query query = session.createQuery("SELECT c FROM Cours c inner join SuiviCours s where s.eleve = :peleve").setParameter("peleve", eleve);
+			Query query = session.createQuery("SELECT s.cours FROM SuiviCours s where s.eleve = :peleve").setParameter("peleve", eleve);
 			cours = query.list();
 			return cours;
 		}catch (Exception e) {
@@ -52,6 +53,7 @@ public class DaoSuiviCours implements IDaoSuiviCours {
 	}
 
 	@Override
+	@Transactional
 	public List<SuiviCours> getSuiviByEleveEtCours(Eleve eleve, Cours cours) {
 		Session session = sf.getCurrentSession();
 		List<SuiviCours> suivis = new ArrayList<>();
@@ -67,6 +69,7 @@ public class DaoSuiviCours implements IDaoSuiviCours {
 	}
 
 	@Override
+	@Transactional
 	public SuiviCours addSuivi(SuiviCours suivi) {
 		Session session = sf.getCurrentSession();
 		session.save(suivi);
@@ -74,6 +77,7 @@ public class DaoSuiviCours implements IDaoSuiviCours {
 	}
 
 	@Override
+	@Transactional
 	public SuiviCours updateSuivi(SuiviCours suivi) {
 		try{
 			Session session = sf.getCurrentSession();
@@ -86,6 +90,7 @@ public class DaoSuiviCours implements IDaoSuiviCours {
 	}
 
 	@Override
+	@Transactional
 	public boolean deleteSuivi(SuiviCours suivi) {
 		try{
 			Session session = sf.getCurrentSession();
