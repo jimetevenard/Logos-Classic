@@ -24,6 +24,7 @@ import com.logos.entity.evaluation.TestDeValidation;
 import com.logos.entity.user.Eleve;
 import com.logos.entity.user.Professeur;
 import com.logos.front.connexion.LoginMB;
+import com.logos.front.consulterCours.bean.ConsulteCoursManagedBean;
 
 @ManagedBean(name="mbInscriptionCours")
 @SessionScoped
@@ -34,6 +35,9 @@ public class InscriptionCoursManagedBean {
 	
 	@ManagedProperty(value="#{loginMB}")
 	private LoginMB logMb;
+	
+	@ManagedProperty(value="#{mbConsulteCours}")
+	private ConsulteCoursManagedBean buConsulter;
 	
 	private Eleve eleve;
 	private String message;
@@ -62,7 +66,8 @@ public class InscriptionCoursManagedBean {
 	
 	public String inscrireACours(Cours c){
 			bu.inscrireEleveACours(eleve, c);
-			return "/cours.xhtml?faces-redirect=true";
+			System.out.println(buConsulter.consulterCours(c));
+			return buConsulter.consulterCours(c);
 		
 	}
 	
@@ -235,6 +240,14 @@ public class InscriptionCoursManagedBean {
 
 	public void setLangueCourante(Langue langueCourante) {
 		this.langueCourante = langueCourante;
+	}
+
+	public ConsulteCoursManagedBean getBuConsulter() {
+		return buConsulter;
+	}
+
+	public void setBuConsulter(ConsulteCoursManagedBean buConsulter) {
+		this.buConsulter = buConsulter;
 	}
 	
 	
