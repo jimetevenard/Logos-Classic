@@ -18,6 +18,7 @@ import com.logos.data.evaluation.api.IDaoTestDeNiveau;
 import com.logos.data.evaluation.api.IDaoTestDeValidation;
 import com.logos.data.question.api.IDaoQuestion;
 import com.logos.data.reponseeleve.api.IDaoReponseEleve;
+import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Niveau;
 import com.logos.entity.evaluation.Correction;
@@ -37,6 +38,7 @@ import com.logos.entity.user.Eleve;
 
 @Service
 public class FaireEvaluation implements IFaireEvaluation{
+
 	
 	@Autowired
 	private IDaoCorrection daoCorrection;
@@ -70,7 +72,8 @@ public class FaireEvaluation implements IFaireEvaluation{
 
 	@Override
 	public List<Evaluation> getEvaluationByNiveau(Niveau niveau) {
-		return null;
+		List<Evaluation> liste = daoEvaluation.getEvaluationByNiveau(niveau);
+		return liste;
 	}
 
 	@Override
@@ -81,31 +84,36 @@ public class FaireEvaluation implements IFaireEvaluation{
 
 	@Override
 	public List<ReponseEleve> getReponseEleveByEvaluation(Evaluation evaluation) {
-		return null;
+		List<ReponseEleve> reponses = daoReponseEleve.getReponseByEvaluation(evaluation);
+		return reponses;
 	}
 
 	@Override
 	public Correction getCorrectionByReponseOuverte(ReponseOuverteEleve reponse) {
-		// TODO Auto-generated method stub
-		return null;
+		Correction correction = daoCorrection.getCorrectionByReponse(reponse);
+		return correction;
 	}
 
 	@Override
-	public List<Evaluation> getEvaluationByCours(Cours cours) {
-		
-		return null;
+	public List<Evaluation> getEvaluationByChapitre(Chapitre chapitre) {
+		List<Evaluation> liste= daoEvaluation.getEvaluationsByChapitre(chapitre);
+		return liste;
 	}
 	
 	@Override
-	public List<Boolean> corrigerReponseFermeeEleve(List<ReponseFermeeEleve> reponses, Evaluation evaluation) {
+	public List<Boolean> corrigerReponseFermeeEleve(List<ReponseFermeeEleve> reponses) {
 		List<Boolean> correction=new ArrayList<>();
 		for(ReponseFermeeEleve reponse : reponses){
-System.out.println(reponse.getQuestion().getClass().getSimpleName());
 			switch (reponse.getQuestion().getClass().getSimpleName()) {
 			case "QuestionQcm":
 				QuestionQcm questionQcm= (QuestionQcm) reponse.getQuestion();
 				ReponseQcmEleve reponseQcm = (ReponseQcmEleve) reponse;
 				correction.add(corrigerReponseQcm(reponseQcm, questionQcm));
+				break;
+			case "QuestionDragAndDrop":
+				QuestionATrous questionDragAndDrop = (QuestionATrous)reponse.getQuestion();
+				ReponseATrousEleve reponseDragAndDrop = (ReponseATrousEleve) reponse;
+				correction.add(corrigerReponseATrous(reponseDragAndDrop, questionDragAndDrop));
 				break;
 			case "QuestionATrous":
 				QuestionATrous questionATrou = (QuestionATrous)reponse.getQuestion();
@@ -117,10 +125,10 @@ System.out.println(reponse.getQuestion().getClass().getSimpleName());
 		return correction;
 	}
 	
-
 	@Override
 	public Boolean corrigerReponseQcm(ReponseQcmEleve reponseQcm, QuestionQcm questionQcm) {
-		List<Integer> solutionsQcm = questionQcm.getSolutions();
+//		List<Integer> solutionsQcm = questionQcm.getSolutions(); // à enlever après le test bidon
+		List<Integer> solutionsQcm = daoQuestion.getSolutionsByQuestionQcm(questionQcm);
 		if(reponseQcm.getReponseQcm().equals(solutionsQcm)){
 			return true;
 		}
@@ -129,17 +137,63 @@ System.out.println(reponse.getQuestion().getClass().getSimpleName());
 
 	@Override
 	public Boolean corrigerReponseATrous(ReponseATrousEleve reponseATrou, QuestionATrous questionATrou) {
-		List<String> solutions = questionATrou.getSolutions();
+//		List<String> solutions = questionATrou.getSolutions(); // à enlever après le test bidon
+		List<String> solutions = daoQuestion.getSolutionsByQuestionATrous(questionATrou);
 		if(reponseATrou.getReponseATrou().equals(solutions)){
 			return true;
 		}
 		return false;
 	}
 
+	
+	
 	@Override
 	public double calculerNoteEvaluation(List<ReponseEleve> reponses) {
-		// TODO Auto-generated method stub
-		return 0;
+		double noteEvaluation = 0;
+		List<ReponseFermeeEleve> reponsesFermmeesEleve = new ArrayList<>();
+		List<ReponseOuverteEleve> reponsesOuvertesEleve = new ArrayList<>();
+		for(ReponseEleve r : reponses){
+			if(r.getClass().getSimpleName().equals("ReponseOuverteEleve")){
+				reponsesOuvertesEleve.add((ReponseOuverteEleve) r);
+			}else{
+				reponsesFermmeesEleve.add((ReponseFermeeEleve) r);
+			}
+		}
+		double noteMoyenneQuestionsFermees = calculNoteMoyenneQuestionsFermees(reponsesFermmeesEleve);
+		double noteMoyenneQuestionsOuvertes = calculNoteMoyenneQuestionsOuvertes(reponsesOuvertesEleve);
+		return (noteMoyenneQuestionsFermees+noteMoyenneQuestionsOuvertes)/2;
+	}
+	
+	public double calculNoteMoyenneQuestionsFermees(List<ReponseFermeeEleve> reponsesFermmeesEleve){
+		List<Boolean> reponsesFermmeesEleveCorrige = corrigerReponseFermeeEleve(reponsesFermmeesEleve);
+		int nbrReponsesFermeesJustes = 0;
+		for(Boolean b : reponsesFermmeesEleveCorrige){
+			if(b){
+				nbrReponsesFermeesJustes++;
+			}
+		}
+		double nbrReponsesFermees = reponsesFermmeesEleveCorrige.size();
+		double noteMoyenneSur20QuestionsFermees =  (20*nbrReponsesFermeesJustes)/nbrReponsesFermees;
+		return noteMoyenneSur20QuestionsFermees;
+	}
+	
+	public double calculNoteMoyenneQuestionsOuvertes(List<ReponseOuverteEleve> reponsesOuvertesEleve){
+		double noteMoyenneQuestionsOuvertes=0;
+		List<Integer> notes = new ArrayList<>();
+		for(ReponseOuverteEleve r: reponsesOuvertesEleve){
+//			Integer note = r.getCorrection().getNote(); // à enlever après le test bidon
+			Integer note = daoCorrection.getCorrectionByReponse(r).getNote();
+			notes.add(note);
+		}
+		for(Integer note: notes){
+			noteMoyenneQuestionsOuvertes+=note;
+		}
+		noteMoyenneQuestionsOuvertes=noteMoyenneQuestionsOuvertes/notes.size();
+		return noteMoyenneQuestionsOuvertes;
 	}
 
+	
+	
+	
+	
 }
