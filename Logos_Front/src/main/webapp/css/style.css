@@ -163,7 +163,7 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 
 .cours .truc {
 	display:inline-block;
-	border: 2px solid red;
+	border: 1px solid black;
 }
 
 #inscription_cours h1{
