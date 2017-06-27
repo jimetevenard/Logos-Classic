@@ -1,10 +1,11 @@
 package com.logos.business.inscriptionCours.api;
 
-import java.util.*;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.logos.entity.cours.Categorie;
+import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Langue;
 import com.logos.entity.cours.Niveau;
@@ -91,5 +92,7 @@ public interface IInscriptionCours {
     public List<Categorie> getAllCategorie();
     
     public List<Langue> getAllLangue();
+    
+    public List<Chapitre> getChapitresByCours (Cours c);
 
 }

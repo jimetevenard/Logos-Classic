@@ -19,4 +19,5 @@ public interface IDaoCours {
 	List<Cours> getCoursByNiveauSuperieur(Niveau niveau);
 	Double getNoteMoyenneByCours(Cours cours);
 	
+	
 }

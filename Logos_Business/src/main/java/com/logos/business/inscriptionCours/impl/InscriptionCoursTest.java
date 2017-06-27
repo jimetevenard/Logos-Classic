@@ -16,6 +16,7 @@ import com.logos.business.inscriptionCours.api.IInscriptionCours;
 import com.logos.data.cours.api.IDaoCours;
 import com.logos.data.cours.api.IDaoSuiviCours;
 import com.logos.entity.cours.Categorie;
+import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Langue;
 import com.logos.entity.cours.Niveau;
@@ -140,6 +141,12 @@ public class InscriptionCoursTest implements IInscriptionCours{
 		}
 		
 		return cours;
+	}
+
+	@Override
+	public List<Chapitre> getChapitresByCours(Cours c) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

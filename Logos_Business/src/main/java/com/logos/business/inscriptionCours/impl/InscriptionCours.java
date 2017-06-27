@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.logos.business.inscriptionCours.api.IInscriptionCours;
 import com.logos.data.cours.api.IDaoCategorie;
+import com.logos.data.cours.api.IDaoChapitre;
 import com.logos.data.cours.api.IDaoCours;
 import com.logos.data.cours.api.IDaoSuiviCours;
 import com.logos.data.niveauLangue.api.IDaoLangues;
 import com.logos.entity.cours.Categorie;
+import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Langue;
 import com.logos.entity.cours.Niveau;
@@ -35,6 +37,9 @@ public class InscriptionCours implements IInscriptionCours{
 	
 	@Autowired
 	private IDaoCategorie daoCategorie;
+	
+	@Autowired
+	private IDaoChapitre daoChapitre;
 
 	@Override
 	public SuiviCours inscrireEleveACours(Eleve eleve, Cours cours) {
@@ -173,6 +178,11 @@ public class InscriptionCours implements IInscriptionCours{
 		}
 		
 		return coursLangue;
+	}
+
+	@Override
+	public List<Chapitre> getChapitresByCours(Cours c) {
+		return daoChapitre.getAllChapitresByCours(c);
 	}
 	
 	

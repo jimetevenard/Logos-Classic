@@ -8,7 +8,10 @@
 	<title>Cours Grammaire</title>
 </h:head> 
 <body> 
-	<h1>Tu es dans un cours</h1>
+	<h1 >#{mbConsulteCours.coursEnCours.titre}</h1>
 
+	<div>#{mbConsulteCours.chapitreEnCours.titre}</div>
+	
+	<div><p>#{mbConsulteCours.chapitreEnCours.contenu}</p></div>
 </body> 
 </html>

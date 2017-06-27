@@ -1,8 +1,6 @@
 package com.logos.front.listeCours;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -14,7 +12,6 @@ import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.SuiviCours;
 import com.logos.entity.user.Eleve;
 import com.logos.front.connexion.LoginMB;
-import com.logos.front.inscription.bean.InscriptionCoursManagedBean;
 
 @ManagedBean(name="mbListeCoursEleve")
 @SessionScoped
