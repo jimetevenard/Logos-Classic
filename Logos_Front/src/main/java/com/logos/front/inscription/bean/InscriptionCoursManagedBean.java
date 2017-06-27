@@ -52,7 +52,6 @@ public class InscriptionCoursManagedBean {
 	
 	@PostConstruct
 	public void init(){
-//		eleve = new Eleve(null, "toto", null, null, null, null);
 		eleve = (Eleve) logMb.getUserConnected();
 		categories =bu.getAllCategorie();
 		coursesR = bu.getCoursRecommandes(eleve);
@@ -85,7 +84,7 @@ public class InscriptionCoursManagedBean {
 	}
 	
 	public void changerLangue(Langue langue){
-		
+		System.out.println(langue);
 		Map<Categorie, List<Cours>> cats = new HashMap<>();
 		for(Categorie c : categories){
 			cats.put(c, bu.getCoursByCategory(c, eleve,langue));

@@ -161,6 +161,11 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 	padding: 4px;
 }
 
+.cours .truc {
+	display:inline-block;
+	border: 2px solid red;
+}
+
 #inscription_cours h1{
 	margin:auto;
 	text-align: center;
