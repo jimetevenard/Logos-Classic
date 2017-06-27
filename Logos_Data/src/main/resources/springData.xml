@@ -14,7 +14,7 @@
 	<!-- Pour la dataSource poolable -->
 	<bean id="monDataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
-		<property name="url" value="jdbc:mysql://127.0.0.1:8889/logos_ogma?tinyInt1isBit=false"></property>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/logos_ogma?tinyInt1isBit=false"></property>
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="root"></property>
