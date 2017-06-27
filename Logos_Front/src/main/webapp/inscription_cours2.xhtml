@@ -19,6 +19,7 @@
 						<h3>Mes Cours</h3>
 						<ui:repeat var="c" value="#{mbInscriptionCours.coursEleve}">
 							<h:outputLabel value="#{c.titre}" />
+							<br />
 						</ui:repeat>
 					</div>
 
@@ -57,13 +58,13 @@
 					</ul>
 
 					<div class="tab-content cours">
-						<div role="tabpanel" class="tab-pane active">
-
-							<ui:repeat var="c"
-								value="#{mbInscriptionCours.coursCategorie.entrySet().toArray()}">
+						<ui:repeat var="c"
+							value="#{mbInscriptionCours.coursCategorie.entrySet().toArray()}">
+							<div role="tabpanel" class="tab-pane active truc" >
 								<div>
 									<h:outputLabel value="#{c.key.titre}" />
-									<br />
+								</div>
+								<div>
 									<ui:repeat var="cc" value="#{c.value}">
 										<h:form>
 											<h:outputLabel value="#{cc.titre}" />
@@ -74,9 +75,8 @@
 										</h:form>
 									</ui:repeat>
 								</div>
-							</ui:repeat>
-						</div>
-
+							</div>
+						</ui:repeat>
 					</div>
 
 				</div>

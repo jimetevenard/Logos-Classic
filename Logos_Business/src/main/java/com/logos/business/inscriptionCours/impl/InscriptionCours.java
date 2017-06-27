@@ -120,7 +120,8 @@ public class InscriptionCours implements IInscriptionCours{
 		// de niveau supérieur supérieur
 		// ( les mieux noté en premier ?)
 		// 
-		return null;
+		
+		return daoSuiviCours.getCoursInscritsByEleve(eleve);
 	}
 
 	@Override
