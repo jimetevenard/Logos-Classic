@@ -1,10 +1,12 @@
 package com.logos.business.evaluation.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.logos.business.evaluation.api.IFaireEvaluation;
@@ -33,6 +35,7 @@ import com.logos.entity.reponse.ReponseOuverteEleve;
 import com.logos.entity.reponse.ReponseQcmEleve;
 import com.logos.entity.user.Eleve;
 
+@Service
 public class FaireEvaluation implements IFaireEvaluation{
 	
 	@Autowired
@@ -93,61 +96,44 @@ public class FaireEvaluation implements IFaireEvaluation{
 		return null;
 	}
 	
-	@SuppressWarnings({ "unchecked", "null" })
 	@Override
 	public List<Boolean> corrigerReponseFermeeEleve(List<ReponseFermeeEleve> reponses, Evaluation evaluation) {
-		List<Question> questionsEvaluation = (List<Question>) evaluation.getQuestions();
-		List<Boolean> correction=null;
-		int numeroQuestion =1;
-		for(Question question : questionsEvaluation){
-			switch (question.getClass().getSimpleName()) {
+		List<Boolean> correction=new ArrayList<>();
+		for(ReponseFermeeEleve reponse : reponses){
+System.out.println(reponse.getQuestion().getClass().getSimpleName());
+			switch (reponse.getQuestion().getClass().getSimpleName()) {
 			case "QuestionQcm":
-				QuestionQcm questionQcm= (QuestionQcm) question;
-				ReponseQcmEleve reponseQcm = (ReponseQcmEleve) reponses.get(numeroQuestion);
+				QuestionQcm questionQcm= (QuestionQcm) reponse.getQuestion();
+				ReponseQcmEleve reponseQcm = (ReponseQcmEleve) reponse;
 				correction.add(corrigerReponseQcm(reponseQcm, questionQcm));
-				numeroQuestion++;
-				break;
-			case "QuestionDragAndDrop":
-				QuestionDragAndDrop questionDragDrop = (QuestionDragAndDrop) question;
-				ReponseDragAndDropEleve reponseDragDrop = (ReponseDragAndDropEleve) reponses.get(numeroQuestion);
-				correction.add(corrigerReponseDragAndDrop(reponseDragDrop, questionDragDrop));
-				numeroQuestion++;
 				break;
 			case "QuestionATrous":
-				QuestionATrous questionATrou = (QuestionATrous) question;
-				ReponseATrousEleve reponseATrou = (ReponseATrousEleve) reponses.get(numeroQuestion);
+				QuestionATrous questionATrou = (QuestionATrous)reponse.getQuestion();
+				ReponseATrousEleve reponseATrou = (ReponseATrousEleve) reponse;
 				correction.add(corrigerReponseATrous(reponseATrou, questionATrou));
-				numeroQuestion++;
 				break;
 			}
-		}		
+		}
 		return correction;
 	}
 	
 
 	@Override
 	public Boolean corrigerReponseQcm(ReponseQcmEleve reponseQcm, QuestionQcm questionQcm) {
-
-//		List<Integer> solutionsQcm = questionQcm.getSolutions();
-//		if(repQcm.equals(solutionsQcm)){
-//			correction.add(true);
-//		}else{
-//			correction.add(false);
-//		}
-		return null;
-	}
-
-	@Override
-	public Boolean corrigerReponseDragAndDrop(ReponseDragAndDropEleve reponseDragDrop,
-			QuestionDragAndDrop questionDragDrop) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Integer> solutionsQcm = questionQcm.getSolutions();
+		if(reponseQcm.getReponseQcm().equals(solutionsQcm)){
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public Boolean corrigerReponseATrous(ReponseATrousEleve reponseATrou, QuestionATrous questionATrou) {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> solutions = questionATrou.getSolutions();
+		if(reponseATrou.getReponseATrou().equals(solutions)){
+			return true;
+		}
+		return false;
 	}
 
 	@Override
