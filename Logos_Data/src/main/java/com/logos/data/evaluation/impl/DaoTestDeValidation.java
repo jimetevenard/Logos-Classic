@@ -10,50 +10,51 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.logos.data.evaluation.api.IDaoExercice;
+import com.logos.data.evaluation.api.IDaoTestDeValidation;
 import com.logos.entity.cours.Cours;
-import com.logos.entity.evaluation.Exercice;
+import com.logos.entity.evaluation.TestDeNiveau;
+import com.logos.entity.evaluation.TestDeValidation;
 
 @Service
-public class DaoExercice implements IDaoExercice{
+public class DaoTestDeValidation implements IDaoTestDeValidation {
 	@Autowired
 	private SessionFactory sf;
 
 	@Override
 	@Transactional
-	public Exercice addExercice(Exercice exercice) {
+	public TestDeValidation addTestValidation(TestDeValidation test) {
 		Session session = sf.getCurrentSession();
-		session.persist(exercice);
-		return exercice;
+		session.persist(test);
+		return test;
 	}
 
 	@Override
 	@Transactional
-	public Exercice updateExercice(Exercice exercice) {
+	public TestDeValidation updateTestValidation(TestDeValidation test) {
 		Session session = sf.getCurrentSession();
-		session.update(exercice);
-		return exercice;
+		session.update(test);
+		return test;
 	}
 
 	@Override
 	@Transactional
-	public boolean deleteExercice(Exercice exercice) {
+	public boolean deleteTestValidation(TestDeValidation test) {
 		Session session = sf.getCurrentSession();
-		session.delete(exercice);
-		return sf.getCurrentSession().get(Exercice.class, exercice.getIdEvaluation()) == null;
+		session.delete(test);
+		return sf.getCurrentSession().get(TestDeValidation.class, test.getIdEvaluation()) == null;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public List<Exercice> getExerciceByCours(Cours cours) {
+	public List<TestDeValidation> getTestValidationByCours(Cours cours) {
+		List<TestDeValidation> listeTests = new ArrayList<>();
 		Session session = sf.getCurrentSession();
-		List<Exercice> listeExercices = new ArrayList<>();
 		try {
-			Query query = session.createQuery("SELECT r.exercices FROM Chapitre r where r.cours.idCours = :cours")
+			Query query = session.createQuery("SELECT c FROM TestDeValidation c where c.cours.idCors = :cours")
 					.setParameter("cours", cours.getIdCours());
-			listeExercices = (List<Exercice>) query.list();
-			return listeExercices ;
+			listeTests = query.list();
+			return listeTests ;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,5 +64,7 @@ public class DaoExercice implements IDaoExercice{
 	public void setSf(SessionFactory sf) {
 		this.sf = sf;
 	}
+	
+	
 
 }

@@ -126,6 +126,7 @@ public class DaoCours implements IDaoCours{
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
 	public List<Cours> getCoursByNiveau(Niveau niveau) {

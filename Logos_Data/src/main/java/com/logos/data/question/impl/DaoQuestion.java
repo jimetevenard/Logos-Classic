@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.logos.data.question.api.IDaoQuestion;
+import com.logos.entity.cours.Cours;
 import com.logos.entity.evaluation.Evaluation;
 import com.logos.entity.question.Question;
 import com.logos.entity.question.QuestionATrous;
@@ -45,12 +46,13 @@ public class DaoQuestion implements IDaoQuestion{
 	@Transactional
 	@Override
 	public List<Question> getQuestionByEvaluation(Evaluation evaluation) {
-		Session session = sf.getCurrentSession();
 		List<Question> listeQuestions = new ArrayList<>();
+		Session session = sf.getCurrentSession();
 		try {
-			Query query = session.createQuery("SELECT q FROM Question q inner join q.evaluations");
+			Query query = session.createQuery("SELECT q FROM Question q "
+					+ "inner join q.evaluations qeval where :peval = qeval.idEvaluation").setParameter("peval", evaluation.getIdEvaluation());
 			listeQuestions = query.list();
-			return listeQuestions;
+			return listeQuestions ;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

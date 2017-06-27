@@ -27,7 +27,7 @@ public class DaoRealiseEvaluation implements IDaoRealiseEvaluation {
 		Session session = sf.getCurrentSession();
 		List<RealiseEvaluation> listeREvals = new ArrayList<>();
 		try {
-			Query query = session.createQuery("SELECT c FROM RealiseEvaluation c where c.eleve = :eleve")
+			Query query = session.createQuery("SELECT c FROM RealiseEvaluation c where c.eleve.idUtilisateur = :eleve")
 					.setParameter("eleve", eleve.getIdUtilisateur());
 			listeREvals = (List<RealiseEvaluation>) query.list();
 			return listeREvals ;

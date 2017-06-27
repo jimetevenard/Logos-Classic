@@ -84,7 +84,7 @@ public class DaoCorrection implements IDaoCorrection {
 		Correction correction = null;
 		try {
 			Query query = session.createQuery("SELECT c FROM Correction c where c.reponseOuverteEleve.idReponse = :reponse ")
-					.setParameter("reponse", reponse);
+					.setParameter("reponse", reponse.getIdReponse());
 			correction = (Correction) query.uniqueResult();
 			return correction;
 		} catch (Exception e) {
