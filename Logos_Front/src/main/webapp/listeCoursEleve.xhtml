@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+<h1>Ta liste de cours</h1>
+	<ui:repeat var="c" value="#{mbListeCoursEleve.coursEleve}">
+		<div>
+			<h:outputLabel value="#{c.titre}" />
+			<br />
+			<h:commandLink action="mbConsulteCours.consulterCours(cours)" 	value="" />
+		</div>
+	</ui:repeat>
+</body>
+</html>
