@@ -33,13 +33,11 @@
 				<div id="cours_recommandes">
 					<h2>Cours recommandés</h2>
 					<ui:repeat var="c" value="#{mbInscriptionCours.coursesR}">
-						<h:form>
 							<h:outputLabel value="#{c.titre}" />
 							<h:outputLabel value="#{mbInscriptionCours.noteCours(c)}" />
 							<h:commandButton action="#{mbInscriptionCours.inscrireACours(c)}"
 								value="S'inscrire" />
 							<br />
-						</h:form>
 					</ui:repeat>
 				</div>
 
@@ -67,13 +65,12 @@
 								</div>
 								<div>
 									<ui:repeat var="cc" value="#{c.value}">
-										<h:form>
+										
 											<h:outputLabel value="#{cc.titre}" />
 											<h:outputLabel value="#{mbInscriptionCours.noteCours(cc)}" />
 											<h:commandButton
 												action="#{mbInscriptionCours.inscrireACours(cc)}"
 												value="S'inscrire" />
-										</h:form>
 									</ui:repeat>
 								</div>
 							</div>

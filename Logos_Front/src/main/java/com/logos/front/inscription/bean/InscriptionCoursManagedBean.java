@@ -66,6 +66,7 @@ public class InscriptionCoursManagedBean {
 	
 	public String inscrireACours(Cours c){
 			bu.inscrireEleveACours(eleve, c);
+			init(); // hé oui, il faut mettre à jour les données du Bean
 			System.out.println(buConsulter.consulterCours(c));
 			return buConsulter.consulterCours(c);
 		

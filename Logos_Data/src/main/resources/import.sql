@@ -91,7 +91,7 @@ INSERT INTO `niveau` (`id_niveau`, `libelle_niveau`, `valeur_niveau`, `id_langue
 -- Contenu de la table `cours`
 --
 
-INSERT INTO `cours` (`id_cours`, `dateCreation_cours`, `dateMiseAJour_cours`, `introduction_cours`, `titre_cours`, `id_auteur`, `id_niveau`) VALUES(1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'introduction vocabulaire maritime anglais ', 'Vocabulaire maritime anglais', 2, 2);
+INSERT INTO `cours` (`id_cours`, `dateCreation_cours`, `dateMiseAJour_cours`, `introduction_cours`, `titre_cours`, `id_auteur`, `id_niveau`) VALUES(1, '2017-06-01 00:00:00', '2017-06-01 00:00:00', 'introduction vocabulaire maritime anglais ', 'Vocabulaire maritime anglais', 2, 2);
 INSERT INTO `cours` (`id_cours`, `dateCreation_cours`, `dateMiseAJour_cours`, `introduction_cours`, `titre_cours`, `id_auteur`, `id_niveau`) VALUES(2, '2017-06-01 00:00:00', '2017-06-02 00:00:00', 'Un cours pas fait pour les poules mouillées...', 'Vocabulaire marin Anglais', 2, 1);
 INSERT INTO `cours` (`id_cours`, `dateCreation_cours`, `dateMiseAJour_cours`, `introduction_cours`, `titre_cours`, `id_auteur`, `id_niveau`) VALUES(3, '2017-06-03 00:00:00', '2017-06-03 00:00:00', 'Devenez maitre de la conjugaison espagnole', 'Verbes irréguliers espagnols', 2, 4);
 INSERT INTO `cours` (`id_cours`, `dateCreation_cours`, `dateMiseAJour_cours`, `introduction_cours`, `titre_cours`, `id_auteur`, `id_niveau`) VALUES(4, '2017-06-13 00:00:00', '2017-06-13 00:00:00', 'Dinez avec la reine', 'Parlez politique en UK', 2, 1);
@@ -253,8 +253,8 @@ INSERT INTO `niveau_eleve` (`fk_niveau`, `fk_eleve`) VALUES(3, 1);
 -- Contenu de la table `suivi_cours`
 --
 
-INSERT INTO `suivi_cours` (`id_suivi_cours`, `acquis`, `commentaire`, `date_fin_suivi`, `date_inscription`, `note_cours`, `id_cours`, `id_eleve`) VALUES(1, 0, 'Super cours !', '2017-06-09 00:00:00', '2017-06-08 00:00:00', NULL, 1, 1);
-INSERT INTO `suivi_cours` (`id_suivi_cours`, `acquis`, `commentaire`, `date_fin_suivi`, `date_inscription`, `note_cours`, `id_cours`, `id_eleve`) VALUES(2, NULL, NULL, '2017-06-14 00:00:00', '2017-06-21 00:00:00', 4, 3, 1);
+INSERT INTO `suivi_cours` (`id_suivi_cours`, `acquis`, `commentaire`, `date_fin_suivi`, `date_inscription`, `note_cours`, `id_cours`, `id_eleve`) VALUES(1, 0, 'Super cours !', NULL, '2017-06-08 00:00:00', NULL, 1, 1);
+INSERT INTO `suivi_cours` (`id_suivi_cours`, `acquis`, `commentaire`, `date_fin_suivi`, `date_inscription`, `note_cours`, `id_cours`, `id_eleve`) VALUES(2, NULL, NULL, NULL, '2017-06-21 00:00:00', 4, 3, 1);
 
 --
 -- Contenu de la table `suivi_cours_chapitre`

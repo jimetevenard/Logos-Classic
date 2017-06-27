@@ -40,7 +40,7 @@ public class SuiviCours {
     /**
      * 
      */
-	@Column(name="date_inscription", nullable=false)
+	@Column(name="date_inscription", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
     private Date dateInscription;
 
@@ -59,7 +59,7 @@ public class SuiviCours {
     /**
      * 
      */
-	@Column(name="date_fin_suivi", nullable=true)
+	@Column(name="date_fin_suivi")
 	@Temporal(TemporalType.TIMESTAMP)
     private Date dateFinSuivi;
 

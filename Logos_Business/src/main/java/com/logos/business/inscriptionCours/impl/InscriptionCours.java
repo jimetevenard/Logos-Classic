@@ -45,6 +45,7 @@ public class InscriptionCours implements IInscriptionCours{
 	public SuiviCours inscrireEleveACours(Eleve eleve, Cours cours) {
 		if(isAutriseASinscrire(eleve, cours)){
 			SuiviCours nouveauSuiviCours = new SuiviCours(null, new Date(), eleve, cours);
+			daoSuiviCours.addSuivi(nouveauSuiviCours);
 			return nouveauSuiviCours;
 		} else {
 			return null;
