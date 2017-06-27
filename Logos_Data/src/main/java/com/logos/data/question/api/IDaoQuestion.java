@@ -19,4 +19,6 @@ public interface IDaoQuestion {
 	QuestionATrous getQuestionATrousById(Integer id);
 	QuestionQcm getQuestionQcmById(Integer id);
 	QuestionDragAndDrop getQuestionDragAndDropById(Integer id);
+	List<Integer> getSolutionsByQuestionQcm(QuestionQcm question);
+	List<String> getSolutionsByQuestionATrous(QuestionATrous question);
 }

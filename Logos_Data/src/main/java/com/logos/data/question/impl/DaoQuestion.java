@@ -32,10 +32,10 @@ public class DaoQuestion implements IDaoQuestion{
 		Session session = sf.getCurrentSession();
 		Question question = null;
 		try {
-		Query query = session.createQuery("SELECT q FROM Question q where q.idQuestion = :id")
+			Query query = session.createQuery("SELECT q FROM Question q where q.idQuestion = :id")
 					.setParameter("id", id);
-		question = (Question) query.uniqueResult();
-		return question;
+			question = (Question) query.uniqueResult();
+			return question;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -89,10 +89,10 @@ public class DaoQuestion implements IDaoQuestion{
 		Session session = sf.getCurrentSession();
 		QuestionOuverte question = null;
 		try {
-		Query query = session.createQuery("SELECT q FROM QuestionOuverte q where q.idQuestion = :id")
+			Query query = session.createQuery("SELECT q FROM QuestionOuverte q where q.idQuestion = :id")
 					.setParameter("id", id);
-		question = (QuestionOuverte) query.uniqueResult();
-		return question;
+			question = (QuestionOuverte) query.uniqueResult();
+			return question;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -105,10 +105,10 @@ public class DaoQuestion implements IDaoQuestion{
 		Session session = sf.getCurrentSession();
 		QuestionATrous question = null;
 		try {
-		Query query = session.createQuery("SELECT q FROM QuestionATrous q where q.idQuestion = :id")
+			Query query = session.createQuery("SELECT q FROM QuestionATrous q where q.idQuestion = :id")
 					.setParameter("id", id);
-		question = (QuestionATrous) query.uniqueResult();
-		return question;
+			question = (QuestionATrous) query.uniqueResult();
+			return question;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -121,10 +121,10 @@ public class DaoQuestion implements IDaoQuestion{
 		Session session = sf.getCurrentSession();
 		QuestionQcm question = null;
 		try {
-		Query query = session.createQuery("SELECT q FROM QuestionQcm q where q.idQuestion = :id")
+			Query query = session.createQuery("SELECT q FROM QuestionQcm q where q.idQuestion = :id")
 					.setParameter("id", id);
-		question = (QuestionQcm) query.uniqueResult();
-		return question;
+			question = (QuestionQcm) query.uniqueResult();
+			return question;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -136,10 +136,42 @@ public class DaoQuestion implements IDaoQuestion{
 		Session session = sf.getCurrentSession();
 		QuestionDragAndDrop question = null;
 		try {
-		Query query = session.createQuery("SELECT q FROM QuestionDragAndDrop q where q.idQuestion = :id")
+			Query query = session.createQuery("SELECT q FROM QuestionDragAndDrop q where q.idQuestion = :id")
 					.setParameter("id", id);
-		question = (QuestionDragAndDrop) query.uniqueResult();
-		return question;
+			question = (QuestionDragAndDrop) query.uniqueResult();
+			return question;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Integer> getSolutionsByQuestionQcm(QuestionQcm question) {
+		List<Integer> solutions = new ArrayList<>();
+		Session session = sf.getCurrentSession();
+		try {
+			Query query = session.createQuery("SELECT q.solutions FROM QuestionQcm q where q.idQuestion = :pquestion").setParameter("pquestion", question.getIdQuestion());
+			solutions = query.list();
+			return solutions;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<String> getSolutionsByQuestionATrous(QuestionATrous question) {
+		List<String> solutions = new ArrayList<>();
+		Session session = sf.getCurrentSession();
+		try {
+			Query query = session.createQuery("SELECT q.solutions FROM QuestionATrous q where q.idQuestion = :pquestion").setParameter("pquestion", question.getIdQuestion());
+			solutions = query.list();
+			return solutions;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -149,7 +181,5 @@ public class DaoQuestion implements IDaoQuestion{
 	public void setSf(SessionFactory sf) {
 		this.sf = sf;
 	}
-	
-	
 
 }

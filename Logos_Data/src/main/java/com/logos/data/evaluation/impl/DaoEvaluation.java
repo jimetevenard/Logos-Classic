@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.logos.data.evaluation.api.IDaoEvaluation;
+import com.logos.entity.cours.Chapitre;
 import com.logos.entity.evaluation.Evaluation;
+import com.logos.entity.evaluation.TestDeNiveau;
 import com.logos.entity.user.Eleve;
 
 @Service
@@ -60,10 +62,25 @@ public class DaoEvaluation implements IDaoEvaluation{
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Evaluation> getEvaluationsByChapitre(Chapitre chapitre) {
+		Session session = sf.getCurrentSession();
+		List<Evaluation> listeEvaluations = new ArrayList<>();
+		try {
+			Query query = session.createQuery("SELECT c FROM Chapitre c where t.niveau.idNiveau = :chapitre")
+					.setParameter("chapitre", chapitre.getIdChapitre());
+			listeEvaluations = (List<Evaluation>) query.list();
+			return listeEvaluations ;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public void setSf(SessionFactory sf) {
 		this.sf = sf;
 	}
-	
-	
 
 }

@@ -51,11 +51,11 @@ public class TestCorrection {
 		IDaoReponseEleve daoResp = bf.getBean(IDaoReponseEleve.class);
 		
 		Professeur prof = new Professeur(null, "Pericard", "Sebastien", "usuario", "contrasena", "mailio77");
-		daoProf.ajouterProf(prof);
-		
-
-		
-		
+		//daoProf.ajouterProf(prof);
+		Eleve ele = new Eleve(null, "Prehaud", "Priscillia", "judo", "kata", "huehue878");
+		//daoElev.ajouterEleve(ele);
+		Question q = new Question(null, "ola k ase?");
+		//daoQuest.addQuestion(q);
 		
 
 
