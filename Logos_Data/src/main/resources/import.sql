@@ -31,6 +31,14 @@
 -- Version du serveur :  5.5.38
 -- Version de PHP :  5.6.2
 
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -254,6 +262,16 @@ INSERT INTO `suivi_cours` (`id_suivi_cours`, `acquis`, `commentaire`, `date_fin_
 
 INSERT INTO `suivi_cours_chapitre` (`fk_suivi_cours`, `fk_chapitre`) VALUES(1, 1);
 INSERT INTO `suivi_cours_chapitre` (`fk_suivi_cours`, `fk_chapitre`) VALUES(1, 2);
+
+
+--
+-- Contenu de la table `question_evaluation`
+--
+
+INSERT INTO `question_evaluation` (`fk_question`, `fk_evaluation`) VALUES(1, 1);
+INSERT INTO `question_evaluation` (`fk_question`, `fk_evaluation`) VALUES(2, 1);
+INSERT INTO `question_evaluation` (`fk_question`, `fk_evaluation`) VALUES(3, 1);
+INSERT INTO `question_evaluation` (`fk_question`, `fk_evaluation`) VALUES(4, 1);
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
