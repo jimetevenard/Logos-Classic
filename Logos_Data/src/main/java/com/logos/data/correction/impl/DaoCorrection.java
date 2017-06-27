@@ -54,6 +54,7 @@ public class DaoCorrection implements IDaoCorrection {
 	}
 
 	@Override
+	@Transactional
 	public Correction addCorrection(Correction correction) {
 		Session session = sf.getCurrentSession();
 		session.persist(correction);
@@ -61,6 +62,7 @@ public class DaoCorrection implements IDaoCorrection {
 	}
 
 	@Override
+	@Transactional
 	public Correction updateCorrection(Correction correction) {
 		Session session = sf.getCurrentSession();
 		session.update(correction);
@@ -68,6 +70,7 @@ public class DaoCorrection implements IDaoCorrection {
 	}
 
 	@Override
+	@Transactional
 	public boolean deleteCorrection(Correction correction) {
 		Session session = sf.getCurrentSession();
 		session.delete(correction);
@@ -75,6 +78,7 @@ public class DaoCorrection implements IDaoCorrection {
 	}
 
 	@Override
+	@Transactional
 	public Correction getCorrectionByReponse(ReponseEleve reponse) {
 		Session session = sf.getCurrentSession();
 		Correction correction = null;
@@ -90,6 +94,7 @@ public class DaoCorrection implements IDaoCorrection {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	@Override
 	public List<Correction> getCorrectionByProfesseur(Professeur professeur) {
 		Session session = sf.getCurrentSession();
@@ -106,6 +111,7 @@ public class DaoCorrection implements IDaoCorrection {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	@Override
 	public List<Correction> getCorrectionByEleve(Eleve eleve) {
 		Session session = sf.getCurrentSession();
@@ -120,5 +126,11 @@ public class DaoCorrection implements IDaoCorrection {
 		}
 		return null;
 	}
+
+	public void setSf(SessionFactory sf) {
+		this.sf = sf;
+	}
+	
+	
 
 }
