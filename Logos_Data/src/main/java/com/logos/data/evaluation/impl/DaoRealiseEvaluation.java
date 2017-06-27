@@ -1,7 +1,9 @@
 package com.logos.data.evaluation.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -23,13 +25,13 @@ public class DaoRealiseEvaluation implements IDaoRealiseEvaluation {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public List<RealiseEvaluation> getRealiseEvaluationByEleve(Eleve eleve) {
+	public Set<RealiseEvaluation> getRealiseEvaluationByEleve(Eleve eleve) {
 		Session session = sf.getCurrentSession();
-		List<RealiseEvaluation> listeREvals = new ArrayList<>();
+		Set<RealiseEvaluation> listeREvals = new HashSet<>();
 		try {
 			Query query = session.createQuery("SELECT c FROM RealiseEvaluation c where c.eleve.idUtilisateur = :eleve")
 					.setParameter("eleve", eleve.getIdUtilisateur());
-			listeREvals = (List<RealiseEvaluation>) query.list();
+			listeREvals = (Set<RealiseEvaluation>) query.list();
 			return listeREvals ;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -69,13 +69,6 @@ public class FaireEvaluation implements IFaireEvaluation{
 	}
 
 
-
-	@Override
-	public List<Evaluation> getEvaluationByNiveau(Niveau niveau) {
-		List<Evaluation> liste = daoEvaluation.getEvaluationByNiveau(niveau);
-		return liste;
-	}
-
 	@Override
 	public List<Question> getQuestionByEvaluation(Evaluation evaluation) {
 		List<Question> questions = daoQuestion.getQuestionByEvaluation(evaluation);
@@ -192,8 +185,10 @@ public class FaireEvaluation implements IFaireEvaluation{
 		return noteMoyenneQuestionsOuvertes;
 	}
 
-	
-	
-	
-	
+
+	@Override
+	public Set<RealiseEvaluation> getRealiseEvaluationByEleve(Eleve eleve) {
+		Set<RealiseEvaluation> listeRE = daoRealiseEvaluation.getRealiseEvaluationByEleve(eleve);
+		return listeRE;
+	}
 }
