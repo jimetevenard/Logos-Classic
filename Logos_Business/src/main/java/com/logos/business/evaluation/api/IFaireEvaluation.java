@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
+import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Niveau;
 import com.logos.entity.evaluation.Correction;
@@ -24,14 +25,14 @@ import com.logos.entity.user.Eleve;
 
 @Service
 public interface IFaireEvaluation {
-	List<Evaluation> getEvaluationByCours(Cours cours); 
+	List<Evaluation> getEvaluationByChapitre(Chapitre chapitre);
 	RealiseEvaluation realiserEvaluation(Evaluation evaluation, Eleve eleve, Set<ReponseEleve> reponses);
 	double calculerNoteEvaluation(List<ReponseEleve> reponses);
 	List<Evaluation> getEvaluationByNiveau(Niveau niveau);
 	List<Question> getQuestionByEvaluation(Evaluation evaluation);
 	List<ReponseEleve> getReponseEleveByEvaluation(Evaluation evaluation);
 	Correction getCorrectionByReponseOuverte(ReponseOuverteEleve reponse);
-	List<Boolean> corrigerReponseFermeeEleve(List<ReponseFermeeEleve> reponses, Evaluation evaluation);
+	List<Boolean> corrigerReponseFermeeEleve(List<ReponseFermeeEleve> reponses);
 	Boolean corrigerReponseQcm(ReponseQcmEleve reponseQcm, QuestionQcm questionQcm);
 	Boolean corrigerReponseATrous(ReponseATrousEleve reponseATrou, QuestionATrous questionATrou);
 	
