@@ -87,7 +87,8 @@ public class InscriptionCoursManagedBean {
 		System.out.println(langue);
 		Map<Categorie, List<Cours>> cats = new HashMap<>();
 		for(Categorie c : categories){
-			cats.put(c, bu.getCoursByCategory(c, eleve,langue));
+			System.out.println("catégories : "+c);
+			cats.put(c, bu.getCoursByCategoryLangue(c, eleve,langue));
 		}
 		coursCategorie = cats;
 		langueCourante = langue;

@@ -37,7 +37,7 @@ public class InsciptionManagedBean {
 		} catch (ConstraintViolationException e) {
 			violationMailLogin = "Mail ou login déjà utilisé";
 		} catch (Exception e2) {
-			// TODO: autre erreur
+			e2.printStackTrace();
 		} finally {
 			System.out.println(logMb == null);
 			logMb.setUserConnected(eleve);

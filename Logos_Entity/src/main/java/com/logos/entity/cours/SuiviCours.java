@@ -59,7 +59,7 @@ public class SuiviCours {
     /**
      * 
      */
-	@Column(name="date_fin_suivi", nullable=false)
+	@Column(name="date_fin_suivi", nullable=true)
 	@Temporal(TemporalType.TIMESTAMP)
     private Date dateFinSuivi;
 
@@ -67,7 +67,7 @@ public class SuiviCours {
      * 
      */
 	@Column(name="acquis", columnDefinition="TINYINT(1)")
-    private boolean acquis;
+    private Boolean acquis;
 
     /**
      * 
@@ -142,11 +142,11 @@ public class SuiviCours {
 		this.dateFinSuivi = dateFinSuivi;
 	}
 
-	public boolean isAcquis() {
+	public Boolean isAcquis() {
 		return acquis;
 	}
 
-	public void setAcquis(boolean acquis) {
+	public void setAcquis(Boolean acquis) {
 		this.acquis = acquis;
 	}
 
