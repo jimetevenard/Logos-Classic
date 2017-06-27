@@ -61,7 +61,7 @@ public interface IInscriptionCours {
      */
     public List<Cours> getCoursByCategory(Categorie category, Eleve eleve);
     
-    public List<Cours> getCoursByCategory(Categorie category, Eleve eleve, Langue langue);
+    public List<Cours>  getCoursByCategoryLangue(Categorie category, Eleve eleve, Langue langue);
 
     /**
      * @param niveau 

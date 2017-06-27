@@ -167,17 +167,32 @@ public class InscriptionCours implements IInscriptionCours{
 	}
 
 	@Override
-	public List<Cours> getCoursByCategory(Categorie category, Eleve eleve, Langue langue) {
-		List<Cours> cours = new ArrayList<>(getCoursByCategory(category, eleve)) ;
-		List<Cours>coursLangue=new ArrayList<>();
-		for (Cours cours2 : cours) {
-			if(cours2.getNiveau().getLangue()==langue){
-				coursLangue.add(cours2);
-			}
-			
-		}
+	public List<Cours> getCoursByCategoryLangue(Categorie category, Eleve eleve, Langue langue) {
+		List<Cours> listeLangue = daoCours.getCoursByLangue(langue);
+		List<Cours> listeCoursCat = daoCours.getCoursByCategorie(category);
+		List<Cours> listeFinale = new ArrayList<>();
 		
-		return coursLangue;
+		for (int i = 0; i < listeLangue.size() ; i++) {
+			for (int j = 0; j < listeCoursCat.size() ; j++) {
+				if(listeLangue.get(i).getIdCours() == listeCoursCat.get(j).getIdCours()){
+					listeFinale.add(listeCoursCat.get(j));
+				}
+			}
+		}
+		System.out.println(listeFinale.size());
+		
+				return listeFinale;
+//		List<Cours> listeCoursNiveau;
+//		List<Cours> cours = new ArrayList<>(getCoursByCategory(category, eleve)) ;
+//		List<Cours>coursLangue=new ArrayList<>();
+//		for (Cours cours2 : cours) {
+//			if(cours2.getNiveau().getLangue()==langue){
+//				coursLangue.add(cours2);
+//			}
+//			
+//		}
+		
+
 	}
 
 	@Override

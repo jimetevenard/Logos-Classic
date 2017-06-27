@@ -18,7 +18,7 @@
 					<div id="myCours">
 						<h3>Mes Cours</h3>
 						<ui:repeat var="c" value="#{mbInscriptionCours.coursEleve}">
-							<h:commandLink action="#{mbConsulteCours.consulterCours(c	)}" value="#{c.titre}" />
+							<h:commandLink action="#{mbConsulteCours.consulterCours(c)}" value="#{c.titre}" />
 							<br />
 						</ui:repeat>
 					</div>
