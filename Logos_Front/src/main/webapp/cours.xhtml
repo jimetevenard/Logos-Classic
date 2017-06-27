@@ -1,19 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-	<title>Cours Grammaire</title>
-</h:head> 
-<body> 
-	<h1 >#{mbConsulteCours.coursEnCours.titre}</h1>
 
-	<div>#{mbConsulteCours.chapitreEnCours.titre}</div>
+	<ui:composition template="/WEB-INF/template-eleve.xhtml">
+		<ui:define name="titre">#{mbConsulteCours.coursEnCours.titre}</ui:define>
+		<ui:define name="contenu">
+			<h1><h:outputText value="#{mbConsulteCours.coursEnCours.titre}" /></h1>
+
+			<h2><h:outputText value="#{mbConsulteCours.chapitreEnCours.titre}" /></h2>
 	
-	<div><p>#{mbConsulteCours.chapitreEnCours.contenu}</p></div>
-	
-	
-</body> 
+			<div>
+				<h:outputText value="#{mbConsulteCours.chapitreEnCours.contenu}"
+				escape="false" />
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:head>
+<body>
+
+</body>
 </html>

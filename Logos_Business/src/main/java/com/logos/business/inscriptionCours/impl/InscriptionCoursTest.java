@@ -133,18 +133,16 @@ public class InscriptionCoursTest implements IInscriptionCours{
 		return Arrays.asList(en, fr, es, ge);
 	}
 
-	@Override
-	public List<Cours> getCoursByCategory(Categorie category, Eleve eleve, Langue langue) {
-		List<Cours> cours = new ArrayList<>(getCoursByCategory(category, eleve)) ;
-		for (Cours cours2 : cours) {
-			cours2.setTitre(cours2.getTitre()+" en "+langue.getLibelle());
-		}
-		
-		return cours;
-	}
+	
 
 	@Override
 	public List<Chapitre> getChapitresByCours(Cours c) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Cours> getCoursByCategoryLangue(Categorie category, Eleve eleve, Langue langue) {
 		// TODO Auto-generated method stub
 		return null;
 	}
