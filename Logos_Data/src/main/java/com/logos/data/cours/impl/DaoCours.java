@@ -116,7 +116,8 @@ public class DaoCours implements IDaoCours{
 		List<Cours> listeCours = new ArrayList<>();
 		Session session = sf.getCurrentSession();
 		try {
-			Query query = session.createQuery("SELECT c FROM Cours c inner join c.categories ");
+			Query query = session.createQuery("SELECT c FROM Cours c "
+					+ "inner join c.categories ccatego where :pcategorie = ccatego.idCategorie").setParameter("pcategorie", categorie.getIdCategorie());
 			listeCours = query.list();
 			return listeCours ;
 		} catch (Exception e) {

@@ -3,6 +3,7 @@ package com.logos.test;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -38,14 +39,17 @@ public class TestCreationBDD {
 		//		
 		Cours cours = dao.getCoursByid(5);
 		
-		Cours c = new Cours(null, "nouv cours", "cours de ouf malade", new Date(), new Date(), null, null);
-		Niveau nivbrr = new Niveau(null, "a1000", Niveau.C2, langue);
-		c.setNiveau(nivbrr);
+		Cours c1 = new Cours(null, "nouv cours", "cours de ouf malade", new Date(), new Date(), null, null);
+		Cours c2 = new Cours(null, "nouv cours", "courgreeeeehde ouf malade", new Date(), new Date(), null, null);
+		Cours c3 = new Cours(null, "nouv cours", "coursdssgrg malade", new Date(), new Date(), null, null);
 		
-		dao.addCours(c);
-		dao.addCours(c);
-		dao.addCours(c);
-		dao.addCours(c);
+//		Niveau nivbrr = new Niveau(null, "a1000", Niveau.C2, langue);
+//		c.setNiveau(nivbrr);
+		
+//		dao.addCours(c);
+//		dao.addCours(c);
+//		dao.addCours(c);
+//		dao.addCours(c);
 		
 		//		Set<Cours> courses = new HashSet();
 		//		courses.add(cours);
@@ -56,14 +60,38 @@ public class TestCreationBDD {
 		//		
 		//		cat.setCourses(courses);
 
-		List<Cours> lcours = dao.getCoursByNiveauSuperieur(niv);
-		for (Cours c2 : lcours) {
-			log.info(c2.getIdCours());
-			
-		}
+//		List<Cours> lcours = dao.getCoursByNiveauSuperieur(niv);
+//		for (Cours c2 : lcours) {
+//			log.info(c2.getIdCours());
+//			
+//		}
 
 
-		//		Categorie cat2 = new Categorie(null, "vocabulaire aquatique swahili");
+				Categorie cat2 = new Categorie(null, "vocabulaire aquatique swahili");
+				Categorie cat3 = new Categorie(null, "vocabulaire aquatiquevhjoiu ");
+				Categorie cat4 = new Categorie(null, "vocabulaire aquatique popopok");
+				Set<Categorie> categories = new HashSet<>();
+				categories.add(cat4);
+				Set<Categorie> categories1 = new HashSet<>();
+				categories1.add(cat3);
+				c1.setCategories(categories);
+				c2.setCategories(categories);
+				c3.setCategories(categories1);
+				
+//				daoCategorie.addCategory(cat2);
+//				daoCategorie.addCategory(cat3);
+//				daoCategorie.addCategory(cat4);
+				
+				dao.addCours(c1);
+				dao.addCours(c3);
+				dao.addCours(c2);
+
+				List<Cours> listecourscat = dao.getCoursByCategorie(cat4);
+				
+				for (Cours cours2 : listecourscat) {
+					log.info(cours2.getIdCours());
+					
+				}
 		//		daoCategorie.addCategory(cat);
 		//		daoCategorie.addCategory(cat2);
 		//		List<Categorie> listeCate = new ArrayList<>();

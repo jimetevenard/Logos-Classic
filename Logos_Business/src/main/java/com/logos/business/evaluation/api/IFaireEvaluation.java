@@ -33,7 +33,6 @@ public interface IFaireEvaluation {
 	Correction getCorrectionByReponseOuverte(ReponseOuverteEleve reponse);
 	List<Boolean> corrigerReponseFermeeEleve(List<ReponseFermeeEleve> reponses, Evaluation evaluation);
 	Boolean corrigerReponseQcm(ReponseQcmEleve reponseQcm, QuestionQcm questionQcm);
-	Boolean corrigerReponseDragAndDrop(ReponseDragAndDropEleve reponseDragDrop, QuestionDragAndDrop questionDragDrop);
 	Boolean corrigerReponseATrous(ReponseATrousEleve reponseATrou, QuestionATrous questionATrou);
 	
 }
