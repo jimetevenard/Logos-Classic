@@ -127,8 +127,8 @@ public class FaireEvaluation implements IFaireEvaluation{
 	
 	@Override
 	public Boolean corrigerReponseQcm(ReponseQcmEleve reponseQcm, QuestionQcm questionQcm) {
-		List<Integer> solutionsQcm = questionQcm.getSolutions(); // à enlever après le test bidon
-//		List<Integer> solutionsQcm = daoQuestion.getSolutionsByQuestionQcm(questionQcm);
+//		List<Integer> solutionsQcm = questionQcm.getSolutions(); // à enlever après le test bidon
+		List<Integer> solutionsQcm = daoQuestion.getSolutionsByQuestionQcm(questionQcm);
 		if(reponseQcm.getReponseQcm().equals(solutionsQcm)){
 			return true;
 		}
@@ -137,8 +137,8 @@ public class FaireEvaluation implements IFaireEvaluation{
 
 	@Override
 	public Boolean corrigerReponseATrous(ReponseATrousEleve reponseATrou, QuestionATrous questionATrou) {
-		List<String> solutions = questionATrou.getSolutions(); // à enlever après le test bidon
-//		List<String> solutions = daoQuestion.getSolutionsByQuestionATrous(questionATrou);
+//		List<String> solutions = questionATrou.getSolutions(); // à enlever après le test bidon
+		List<String> solutions = daoQuestion.getSolutionsByQuestionATrous(questionATrou);
 		if(reponseATrou.getReponseATrou().equals(solutions)){
 			return true;
 		}
@@ -181,8 +181,8 @@ public class FaireEvaluation implements IFaireEvaluation{
 		double noteMoyenneQuestionsOuvertes=0;
 		List<Integer> notes = new ArrayList<>();
 		for(ReponseOuverteEleve r: reponsesOuvertesEleve){
-			Integer note = r.getCorrection().getNote(); // à enlever après le test bidon
-//			Integer note = daoCorrection.getCorrectionByReponse(r).getNote();
+//			Integer note = r.getCorrection().getNote(); // à enlever après le test bidon
+			Integer note = daoCorrection.getCorrectionByReponse(r).getNote();
 			notes.add(note);
 		}
 		for(Integer note: notes){
