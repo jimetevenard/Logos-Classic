@@ -33,7 +33,7 @@ public class ReponseOuverteEleve extends ReponseEleve {
      * 
      */
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_reponse_ouverte")
+    @JoinColumn(name = "id_correction_reponse_ouverte")
     private Correction correction;
     
     /**
