@@ -13,11 +13,16 @@ import com.logos.business.inscriptionCours.api.IInscriptionCours;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.SuiviCours;
 import com.logos.entity.user.Eleve;
+import com.logos.front.connexion.LoginMB;
+import com.logos.front.inscription.bean.InscriptionCoursManagedBean;
 
 @ManagedBean(name="mbListeCoursEleve")
 @SessionScoped
 public class ListeCoursEleves {
 
+	@ManagedProperty(value="#{loginMB}")
+	private LoginMB loginMb ;
+	
 	@ManagedProperty(value="#{inscriptionCours}")
 	private IInscriptionCours bu ;
 	private Eleve eleve;
@@ -26,11 +31,12 @@ public class ListeCoursEleves {
 	
 	@PostConstruct
 	public void getCoursByEleve(){
-		eleve = new Eleve(null, "toto", null, null, null, null);
-		Set<SuiviCours> suivis = new HashSet<>();
-		suivis = eleve.getSuiviCours();
-		for(SuiviCours s : suivis){
-			coursEleve.add(s.getCours());
+		eleve = (Eleve) loginMb.getUserConnected();
+		List<SuiviCours> listeSuivi = bu.getSuiviCourByEleve(eleve);
+		System.out.println( eleve.getNom() );
+		System.out.println( listeSuivi.size() );
+		for (SuiviCours suiviCours : listeSuivi) {
+			coursEleve.add(suiviCours.getCours());
 		}
 	}
 
@@ -62,6 +68,16 @@ public class ListeCoursEleves {
 
 	public void setCoursEleve(List<Cours> coursEleve) {
 		this.coursEleve = coursEleve;
+	}
+
+
+	public LoginMB getLoginMb() {
+		return loginMb;
+	}
+
+
+	public void setLoginMb(LoginMB loginMb) {
+		this.loginMb = loginMb;
 	}
 
 	
