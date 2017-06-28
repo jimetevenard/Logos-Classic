@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 
@@ -24,8 +25,32 @@
 				</div>
 				<div id="evaluation">
 					<h:outputText value="#{mbConsulteCours.evaluationsChapitre.get(0).titre}" />
+					<div id="questions">
+						<ui:repeat var="q" value="#{mbConsulteCours.questionsExercice}">
+						
+							<h:panelGroup rendered="#{q['class'].simpleName == 'QuestionOuverte'}">
+								<h5>#{q.enonce}</h5>
+								<h:inputTextarea  valueChangeListener="#{mbConsulteCours.addReponseOuverte}"  />		
+							</h:panelGroup>
+							<h:panelGroup rendered="#{q['class'].simpleName == 'QuestionQcm'}">
+								<h5>#{q.enonce}</h5>
+								<ui:repeat var="p" value="#{mbConsulteCours.getPropositionQcm(q)}">
+									<input type="checkbox"/>
+									<h:outputText value="p" />
+								</ui:repeat>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{q['class'].simpleName == 'QuestionATrous'}">
+								<h5>#{q.enonce}</h5>
+								<p>question a trous</p>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{q['class'].simpleName == 'QuestionDragAndDrop'}">
+								<h5>#{q.enonce}</h5>
+							</h:panelGroup>
+										
+						</ui:repeat>
+					</div>
 				</div>
-				
+				<h:commandButton action="submit" value="ENVOI FRERE" />
 				<nav aria-label="...">
 				<ul class="pager">
 

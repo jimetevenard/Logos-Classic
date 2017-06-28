@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 
 /**
@@ -21,7 +22,7 @@ public class QuestionQcm extends QuestionFermee {
     /**
      * 
      */
-    @ElementCollection
+    @ElementCollection(fetch=FetchType.EAGER)
     @CollectionTable(name = "proposition_question_qcm", joinColumns = @JoinColumn(name = "id_question"))
     @Column(name = "proposition_question_qcm")
     private List<String> propositions;
