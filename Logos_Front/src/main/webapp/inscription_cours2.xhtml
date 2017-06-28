@@ -9,37 +9,55 @@
 	<ui:composition template="/WEB-INF/template-eleve.xhtml">
 		<ui:define name="titre">Inscription à un cours</ui:define>
 		<ui:define name="contenu">
-<!-- 		<h:outputLabel value="#{mbConsulteCours.chapitreEnCours}" /> -->
+			<!-- 		<h:outputLabel value="#{mbConsulteCours.chapitreEnCours}" /> -->
 			<h:form id="inscription_cours" name="inscription_cours">
+
 				<div id="mesCours">
 					<div id="myCours">
-						<h3>Mes Cours</h3>
+						<h2>Vos Cours</h2>
 						<ui:repeat var="c" value="#{mbInscriptionCours.coursEleve}">
-							<h:commandLink action="#{mbConsulteCours.consulterCours(c)}" value="#{c.titre}" />
+							<h:commandLink action="#{mbConsulteCours.consulterCours(c)}"
+								value="#{c.titre}" />
 							<br />
 						</ui:repeat>
 					</div>
 
-					<div>
-						<h3>Avancement</h3>
-					</div>
+
 				</div>
 
-				<h1>Liste des Cours</h1>
-				<div id="cours_recommandes">
-					<h2>Cours recommandés</h2>
-					<ui:repeat var="c" value="#{mbInscriptionCours.coursesR}">
-							<h:outputLabel value="#{c.titre}" />
-							<h:outputLabel value="#{mbInscriptionCours.noteCours(c)}" />
-							<h:commandButton action="#{mbInscriptionCours.inscrireACours(c)}"
-								value="S'inscrire" />
-							<br />
-					</ui:repeat>
+
+				<h2>Découvrez nos cours</h2>
+
+				<div class="alert alert-info" role="alert">
+					<p>
+						<b>Vous avez atteint votre quota de cours</b><br /> Ce message ne
+						s'affichera que si l'userConnected n'est pas premium et qu'il est
+						inscrit à plus de trois cours...
+					</p>
 				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Recommandés pour vous</div>
+					<div class="panel-body">
+						<p>Progressez avec Logos ! Voici une selection de cours qui
+							pourraient vous intéresser</p>
+					</div>
+					<!-- List group -->
+					<ul class="list-group">
+						<ui:repeat var="c" value="#{mbInscriptionCours.coursesR}">
+							<li class="list-group-item cours inscription"><h:outputLabel
+									value="#{c.titre}" /> <h:outputLabel
+									value="#{mbInscriptionCours.noteCours(c)}" /> <h:commandButton
+									action="#{mbInscriptionCours.inscrireACours(c)}"
+									disabled="#{not mbInscriptionCours.checkAutorisation(c)}"
+									value="S'inscrire" styleClass="btn btn-sm btn-primary" /></li>
+						</ui:repeat>
+					</ul>
+				</div>
+
 
 
 				<div id="cour_langue">
-					<h2>Sélection de cours</h2>
+					<h3>Tous nos cours</h3>
 					<ul class="nav nav-tabs" role="tablist">
 						<ui:repeat var="l" value="#{mbInscriptionCours.langues}">
 
@@ -51,28 +69,39 @@
 
 						</ui:repeat>
 					</ul>
-
+					
+					
 					<div class="tab-content cours">
 						<ui:repeat var="c"
 							value="#{mbInscriptionCours.coursCategorie.entrySet().toArray()}">
-							<div role="tabpanel" class="tab-pane active truc" >
-								<div>
-									<h:outputLabel value="#{c.key.titre}" />
+							<div role="tabpanel" class="tab-pane active truc">
+							
+							
+								<div class="bloc-langue-cat col-sm-6">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h:outputText value="#{c.key.titre}" />
+									</div>
+									<ul class="list-group">
+										<ui:repeat var="cc" value="#{c.value}">
+											<li class="list-group-item cours inscription">
+												<h:outputLabel value="#{cc.titre}" />
+												<h:outputLabel value="#{mbInscriptionCours.noteCours(cc)}" />
+												<h:commandButton
+													action="#{mbInscriptionCours.inscrireACours(cc)}"
+													disabled="#{not mbInscriptionCours.checkAutorisation(cc)}"
+													value="S'inscrire" styleClass="btn btn-sm btn-primary" />
+											</li>
+										</ui:repeat>
+									</ul>
 								</div>
-								<div>
-									<ui:repeat var="cc" value="#{c.value}">
-										
-											<h:outputLabel value="#{cc.titre}" />
-											<h:outputLabel value="#{mbInscriptionCours.noteCours(cc)}" />
-											<h:commandButton
-												action="#{mbInscriptionCours.inscrireACours(cc)}"
-												value="S'inscrire" />
-									</ui:repeat>
 								</div>
 							</div>
 						</ui:repeat>
+						
+						<div style="clear: both;">&nbsp;</div>
 					</div>
-
+					
 				</div>
 			</h:form>
 		</ui:define>

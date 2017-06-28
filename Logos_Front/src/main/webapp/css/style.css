@@ -1,11 +1,6 @@
-* {
-	padding: 0px;
-	margin: 0px;
-	font-family:
-}
 
 #aside {
-	height: 100vh;
+	height: 100vmax;
 	position: relative;
 }
 
@@ -86,13 +81,7 @@
 	border-radius: 15px;
 }
 
-input[type="submit"], input[type="button"], button, input[type="submit"]:active,
-	input[type="button"]:active, button:active, input[type="submit"]:visited,
-	input[type="button"]:visited, button:visited {
-	background-color: royalblue;
-	color: white;
-	margin-top: 20px;
-}
+
 
 input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 	background-color: midnightblue;
@@ -133,65 +122,21 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 	background-size: cover;
 }
 
-#mesCours tr,td{
-	border : 1px solid black;
-	border-collapse: collapse;
-	text-align: center;
-	padding: 4px;
-	font-size: medium;
+/* INSCRIPTION COURS */
+.cours.inscription button,
+.cours.inscription input[type="button"],
+.cours.inscription input[type="submit"] {
+	margin-left: 45px;
 }
 
-#mesCours {
-	text-align: center;
-	padding: 2px;
-	margin:auto;
-	margin-top: 5px;
-	
-	
+.tab-content.cours {
+	background-color: rgba(255,255,255,0.7);
+	padding: 14px 0;
 }
 
-#mesCours div {
-	display: inline-block;
-	
-}
 
-#myCours {
-	border-right: 1px solid black;
-	border-collapse: collapse;
-	padding: 4px;
-}
 
-.cours .truc {
-	display:inline-block;
-	border: 1px solid black;
-}
 
-#inscription_cours h1{
-	margin:auto;
-	text-align: center;
-	margin-top: 10px;
-}
 
-#cours_recommandes h2{
-	text-decoration: underline;
-	color: #17827d;
-}
 
-#cours_recommandes {
-	margin-left: 4px;
-}
 
-#cour_langue {
-	margin-left: 4px;
-	margin-top:10px;
-}
-
-#cour_langue .nav nav-tabs a {
-	font-weight: bold;
-	
-}
-
-#cour_langue {
-	text-decoration: underline;
-	color: #17827d;
-}
