@@ -2,6 +2,7 @@ package com.logos.front.consulterCours.bean;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -16,19 +17,32 @@ public class ConsulteCoursManagedBean {
 	private List<Chapitre> listeChapitre ;
 	private int indiceChapitreEnCours ;
 	private Cours coursEnCours;
-	private Chapitre chapitreEnCours ;
+	private Chapitre chapitreEnCours;
+	private int indexCourant = 0;
 	
 	@ManagedProperty(value="#{inscriptionCours}")
 	private IInscriptionCours buInscription ;
+	
+	@PostConstruct
+	public void init(){
+		
+	}
 
 	public String consulterCours(Cours c){
 		listeChapitre = buInscription.getChapitresByCours(c);
 		coursEnCours = c ;
-		chapitreEnCours = listeChapitre.get(0);
+		chapitreEnCours = listeChapitre.get(indexCourant);
 		indiceChapitreEnCours= listeChapitre.indexOf(chapitreEnCours);
 		System.out.println(listeChapitre.size());
 		return "cours.xhtml?faces-redirect=true";
 
+	}
+	
+	public void changerChapitre(int i){
+	
+			indexCourant += i;
+	
+		consulterCours(coursEnCours);
 	}
 
 	public List<Chapitre> getListeChapitre() {
@@ -71,6 +85,14 @@ public class ConsulteCoursManagedBean {
 
 	public void setCoursEnCours(Cours coursEnCours) {
 		this.coursEnCours = coursEnCours;
+	}
+
+	public int getIndexCourant() {
+		return indexCourant;
+	}
+
+	public void setIndexCourant(int indexCourant) {
+		this.indexCourant = indexCourant;
 	}
 
 	

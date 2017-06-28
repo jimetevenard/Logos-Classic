@@ -9,14 +9,26 @@
 	<ui:composition template="/WEB-INF/template-eleve.xhtml">
 		<ui:define name="titre">#{mbConsulteCours.coursEnCours.titre}</ui:define>
 		<ui:define name="contenu">
-			<h1><h:outputText value="#{mbConsulteCours.coursEnCours.titre}" /></h1>
+			<h1>
+				<h:outputText value="#{mbConsulteCours.coursEnCours.titre}" />
+			</h1>
 
-			<h2><h:outputText value="#{mbConsulteCours.chapitreEnCours.titre}" /></h2>
-	
+			<h2>
+				<h:outputText value="#{mbConsulteCours.chapitreEnCours.titre}" />
+			</h2>
+
 			<div>
 				<h:outputText value="#{mbConsulteCours.chapitreEnCours.contenu}"
-				escape="false" />
+					escape="false" />
 			</div>
+			<nav aria-label="...">
+			<ul class="pager">
+				<h:form >
+					<li id="previous"><h:commandLink action="#{mbConsulteCours.changerChapitre(-1)}" value="Chapitre précédent" rendered="#{mbConsulteCours.chapitreEnCours ne mbConsulteCours.listeChapitre.get(0)}"/></li>
+					<li id="next"><h:commandLink action="#{mbConsulteCours.changerChapitre(1)}" value="Chapitre suivant" rendered="#{mbConsulteCours.indexCourant ne mbConsulteCours.listeChapitre.size()-1}"/></li>
+				</h:form>
+			</ul>
+			</nav>
 		</ui:define>
 	</ui:composition>
 </h:head>
