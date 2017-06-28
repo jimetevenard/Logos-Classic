@@ -55,7 +55,6 @@ public class TestCorrection {
 		IDaoReponseEleve daoRep = bf.getBean(IDaoReponseEleve.class);
 		IDaoEleve daoElev = bf.getBean(IDaoEleve.class);
 		IDaoQuestion daoQuest = bf.getBean(IDaoQuestion.class);
-		IDaoReponseEleve daoResp = bf.getBean(IDaoReponseEleve.class);
 		IDaoEvaluation daoEval = bf.getBean(IDaoEvaluation.class);
 		IDaoRealiseEvaluation daoRE = bf.getBean(IDaoRealiseEvaluation.class);
 		
@@ -65,29 +64,6 @@ public class TestCorrection {
 		RealiseEvaluation real = new RealiseEvaluation(null, new Date(), el, ev);
 		//daoRE.addRealiseEvaluation(real);
 		
-		ArrayList<String> solutionsATrous= new ArrayList<>();
-		Collections.addAll(solutionsATrous, "kitchen","garden");
-		QuestionATrous qTrou = new QuestionATrous(null, "compléter cette phrase", "Bryan is in the *** and wants to go in the ***", solutionsATrous);
-		
-		ArrayList<String> solutionsDragDrop= new ArrayList<>();
-		Collections.addAll(solutionsDragDrop, "white","black");
-		QuestionDragAndDrop qDragDrop = new QuestionDragAndDrop(null,"complétez cette phrase en glissant vos réponses sur les emmplacements indiqués", "the colour of henry's horse is *** and ***", solutionsDragDrop);
-		
-		ArrayList<String> propositionsQcm= new ArrayList<>();
-		Collections.addAll(propositionsQcm, "blue","yellow","purple","orange","green");
-		ArrayList<Integer> solutionsQcm= new ArrayList<>();
-		Collections.addAll(solutionsQcm, 1,5);
-		QuestionQcm qQcm = new QuestionQcm(null, "what are Samantha's favourite colours ?", propositionsQcm, solutionsQcm);
-		
-//		Set<Question> questions = new HashSet<>();
-//		Collections.addAll(questions, qTrou, qDragDrop, qQcm);
-//		
-//		daoQuest.addQuestion(qQcm);
-//		daoQuest.addQuestion(qTrou);
-//		daoQuest.addQuestion(qDragDrop);
-//		
-//		daoEval.addEvaluation(ev);
-//		ev.setQuestions(questions);
 		
 		Eleve ele = new Eleve(1, null, null, null, null, null);
 		Set<RealiseEvaluation>listiti = daoRE.getRealiseEvaluationByEleve(ele);
@@ -95,7 +71,44 @@ public class TestCorrection {
 		System.out.println(listiti.size());
 		
 		for(RealiseEvaluation e : listiti) {
-			log.info(e.getIdRealiseEvaluation());
+			log.info("le résultat est : " +e.getIdRealiseEvaluation());
+		}
+		
+		ev.setIdEvaluation(1);
+		List<Question> lQuestion = daoQuest.getQuestionByEvaluation(ev);
+		for (Question question : lQuestion) {
+			log.info("énoncé : "+question.getEnonce());
+		}
+		
+		Correction correction1 = new Correction(null, "c'est vraiment nul ce que vous avez écrit, ca me donne mal à la tête", 6, new Date(), null, null);
+		Correction correction2 = new Correction(null, "Très bien", 18, new Date(), null, null);
+		Correction correction3 = new Correction(null, "Non, Bryan is in the kitchen", 10, new Date(), null, null);
+		ReponseOuverteEleve repOuverte1 = new ReponseOuverteEleve(null, null, null, "la la la la je m'en fou", correction1);
+		ReponseOuverteEleve repOuverte2 = new ReponseOuverteEleve(null, null, null, "Bryan is in the kitchen", correction2);
+		ReponseOuverteEleve repOuverte3 = new ReponseOuverteEleve(null, null, null, "Bryan is in the garden", correction3);
+		
+//		daoRep.addReponse(repOuverte1);
+//		daoRep.addReponse(repOuverte2);
+//		daoRep.addReponse(repOuverte3);
+		
+		Correction c = daoCorrection.getCorrectionByReponse(daoRep.getReponseById(8));
+		log.info("correction rép ouverte : "+c.getCorrige());
+		
+		
+		List<Integer> listeSolutionsQcm = daoQuest.getSolutionsByQuestionQcm(daoQuest.getQuestionQcmById(2));
+		for (Integer integer : listeSolutionsQcm) {
+			log.info("solutions qcm : "+integer.toString());
+		}
+		List<String> listeSolutionsTrous = daoQuest.getSolutionsByQuestionATrous(daoQuest.getQuestionATrousById(4));
+		for (String str : listeSolutionsTrous) {
+			log.info("solutions a trous : "+str.toString());
+		}
+		
+		Chapitre chap = new Chapitre();
+		chap.setIdChapitre(1);
+		List<Evaluation> lEval = daoEval.getEvaluationsByChapitre(chap);
+		for (Evaluation evaluation : lEval) {
+			log.info(evaluation.getTitre());
 		}
 	}
 }

@@ -31,7 +31,7 @@ public class DaoRealiseEvaluation implements IDaoRealiseEvaluation {
 		try {
 			Query query = session.createQuery("SELECT c FROM RealiseEvaluation c where c.eleve.idUtilisateur = :eleve")
 					.setParameter("eleve", eleve.getIdUtilisateur());
-			listeREvals = (Set<RealiseEvaluation>) query.list();
+			listeREvals.addAll( query.list() );
 			return listeREvals ;
 		} catch (Exception e) {
 			e.printStackTrace();

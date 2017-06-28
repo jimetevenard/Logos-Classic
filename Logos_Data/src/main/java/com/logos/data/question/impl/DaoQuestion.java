@@ -153,7 +153,7 @@ public class DaoQuestion implements IDaoQuestion{
 		List<Integer> solutions = new ArrayList<>();
 		Session session = sf.getCurrentSession();
 		try {
-			Query query = session.createQuery("SELECT q.solutions FROM QuestionQcm q where q.idQuestion = :pquestion").setParameter("pquestion", question.getIdQuestion());
+			Query query = session.createSQLQuery("SELECT s.solution_question_qcm FROM solution_question_qcm s INNER JOIN question q ON s.id_question = q.id_question WHERE s.id_question=?").setParameter(0, question.getIdQuestion());
 			solutions = query.list();
 			return solutions;
 		} catch (Exception e) {
@@ -169,7 +169,7 @@ public class DaoQuestion implements IDaoQuestion{
 		List<String> solutions = new ArrayList<>();
 		Session session = sf.getCurrentSession();
 		try {
-			Query query = session.createQuery("SELECT q.solutions FROM QuestionATrous q where q.idQuestion = :pquestion").setParameter("pquestion", question.getIdQuestion());
+			Query query = session.createSQLQuery("SELECT s.solution_question_trous FROM solution_question_trous s INNER JOIN question q ON s.id_question = q.id_question WHERE s.id_question=?").setParameter(0, question.getIdQuestion());
 			solutions = query.list();
 			return solutions;
 		} catch (Exception e) {

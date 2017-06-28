@@ -25,7 +25,7 @@ import com.logos.entity.user.Eleve;
 
 @Service
 public interface IFaireEvaluation {
-	List<Evaluation> getEvaluationByChapitre(Chapitre chapitre);
+	List<Evaluation> getEvaluationsByChapitre(Chapitre chapitre);
 	RealiseEvaluation realiserEvaluation(Evaluation evaluation, Eleve eleve, Set<ReponseEleve> reponses);
 	double calculerNoteEvaluation(List<ReponseEleve> reponses);
 	List<Question> getQuestionByEvaluation(Evaluation evaluation);
