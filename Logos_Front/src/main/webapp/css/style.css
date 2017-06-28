@@ -12,8 +12,15 @@
 	background: linear-gradient(#9966FF, #CCCCFF);
 }
 
-#asideContent * {
+#asideContent > * {
 	margin: 10px;
+}
+
+#niveaux_eleve ul {
+	list-style: none;
+	padding-left: 0;
+	font-size: 15px;	
+	
 }
 
 #profil {
@@ -24,9 +31,15 @@
 
 #profilMenu {
 	list-style-type: none;
+	padding-left: 0;
 	margin-top: 90px;
 	font-size: 16px;
 }
+#profilMenu li {
+	padding: 6px;
+	cursor: pointer;
+}
+
 
 @media ( max-width : 500px) {
 	#profilMenu {
@@ -35,14 +48,15 @@
 	}
 }
 
-#profilMenu li {
-	list-style-type: none;
+#profilMenu li:hover {
+	background-color: rgba(255,255,255,0.3);
 }
 
-#profilMenu li span {
+#profilMenu li .glyphicon {
 	padding-right: 10px;
 	margin: 0px;
 	font-size: 20px;
+	color: #333333;
 }
 
 #profilPicture {
@@ -132,6 +146,12 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 .tab-content.cours {
 	background-color: rgba(255,255,255,0.7);
 	padding: 14px 0;
+}
+
+#my-cours a {
+	
+	font-size: 1.3em;
+	line-height: 1.7em;
 }
 
 
