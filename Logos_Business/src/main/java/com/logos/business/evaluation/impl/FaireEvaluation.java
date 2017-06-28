@@ -88,9 +88,9 @@ public class FaireEvaluation implements IFaireEvaluation{
 	}
 
 	@Override
-	public List<Evaluation> getEvaluationByChapitre(Chapitre chapitre) {
-		List<Evaluation> liste= daoEvaluation.getEvaluationsByChapitre(chapitre);
-		return liste;
+	public List<Evaluation> getEvaluationsByChapitre(Chapitre chapitre) {
+		List<Evaluation> listeEval= daoEvaluation.getEvaluationsByChapitre(chapitre);
+		return listeEval;
 	}
 	
 	@Override
@@ -191,4 +191,86 @@ public class FaireEvaluation implements IFaireEvaluation{
 		Set<RealiseEvaluation> listeRE = daoRealiseEvaluation.getRealiseEvaluationByEleve(eleve);
 		return listeRE;
 	}
+
+
+	public IDaoCorrection getDaoCorrection() {
+		return daoCorrection;
+	}
+
+
+	public void setDaoCorrection(IDaoCorrection daoCorrection) {
+		this.daoCorrection = daoCorrection;
+	}
+
+
+	public IDaoEvaluation getDaoEvaluation() {
+		return daoEvaluation;
+	}
+
+
+	public void setDaoEvaluation(IDaoEvaluation daoEvaluation) {
+		this.daoEvaluation = daoEvaluation;
+	}
+
+
+	public IDaoExercice getDaoExercice() {
+		return daoExercice;
+	}
+
+
+	public void setDaoExercice(IDaoExercice daoExercice) {
+		this.daoExercice = daoExercice;
+	}
+
+
+	public IDaoRealiseEvaluation getDaoRealiseEvaluation() {
+		return daoRealiseEvaluation;
+	}
+
+
+	public void setDaoRealiseEvaluation(IDaoRealiseEvaluation daoRealiseEvaluation) {
+		this.daoRealiseEvaluation = daoRealiseEvaluation;
+	}
+
+
+	public IDaoTestDeNiveau getDaoTestDeNiveau() {
+		return daoTestDeNiveau;
+	}
+
+
+	public void setDaoTestDeNiveau(IDaoTestDeNiveau daoTestDeNiveau) {
+		this.daoTestDeNiveau = daoTestDeNiveau;
+	}
+
+
+	public IDaoTestDeValidation getDaoTestDeValidation() {
+		return daoTestDeValidation;
+	}
+
+
+	public void setDaoTestDeValidation(IDaoTestDeValidation daoTestDeValidation) {
+		this.daoTestDeValidation = daoTestDeValidation;
+	}
+
+
+	public IDaoQuestion getDaoQuestion() {
+		return daoQuestion;
+	}
+
+
+	public void setDaoQuestion(IDaoQuestion daoQuestion) {
+		this.daoQuestion = daoQuestion;
+	}
+
+
+	public IDaoReponseEleve getDaoReponseEleve() {
+		return daoReponseEleve;
+	}
+
+
+	public void setDaoReponseEleve(IDaoReponseEleve daoReponseEleve) {
+		this.daoReponseEleve = daoReponseEleve;
+	}
+	
+	
 }
