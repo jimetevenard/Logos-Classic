@@ -3,39 +3,6 @@
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-	<session-factory>
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
-		<property name="hibernate.show_sql">true</property>
-		<property name="hibernate.hbm2ddl.auto">update</property>
-		<mapping class="com.logos.entity.cours.Categorie"></mapping>
-		<mapping class="com.logos.entity.cours.Chapitre"></mapping>
-		<mapping class="com.logos.entity.cours.Cours"></mapping>
-		<mapping class="com.logos.entity.cours.Langue"></mapping>
-		<mapping class="com.logos.entity.cours.Niveau"></mapping>
-		<mapping class="com.logos.entity.cours.SuiviCours"></mapping>
-		<mapping class="com.logos.entity.evaluation.Correction"></mapping>
-		<mapping class="com.logos.entity.evaluation.Evaluation"></mapping>
-		<mapping class="com.logos.entity.evaluation.Exercice"></mapping>
-		<mapping class="com.logos.entity.evaluation.RealiseEvaluation"></mapping>
-		<mapping class="com.logos.entity.evaluation.Test"></mapping>
-		<mapping class="com.logos.entity.evaluation.TestDeNiveau"></mapping>
-		<mapping class="com.logos.entity.evaluation.TestDeValidation"></mapping>
-		<mapping class="com.logos.entity.messagerie.Conversation"></mapping>
-		<mapping class="com.logos.entity.messagerie.Message"></mapping>
-		<mapping class="com.logos.entity.question.Question"></mapping>
-		<mapping class="com.logos.entity.question.QuestionATrous"></mapping>
-		<mapping class="com.logos.entity.question.QuestionDragAndDrop"></mapping>
-		<mapping class="com.logos.entity.question.QuestionFermee"></mapping>
-		<mapping class="com.logos.entity.question.QuestionOuverte"></mapping>
-		<mapping class="com.logos.entity.question.QuestionQcm"></mapping>
-		<mapping class="com.logos.entity.reponse.ReponseATrousEleve"></mapping>
-		<mapping class="com.logos.entity.reponse.ReponseDragAndDropEleve"></mapping>
-		<mapping class="com.logos.entity.reponse.ReponseEleve"></mapping>
-		<mapping class="com.logos.entity.reponse.ReponseFermeeEleve"></mapping>
-		<mapping class="com.logos.entity.reponse.ReponseOuverteEleve"></mapping>
-		<mapping class="com.logos.entity.reponse.ReponseQcmEleve"></mapping>
-		<mapping class="com.logos.entity.user.Eleve"></mapping>
-		<mapping class="com.logos.entity.user.Professeur"></mapping>
-		<mapping class="com.logos.entity.user.Utilisateur"></mapping>
-	</session-factory>
+    <session-factory>
+    </session-factory>
 </hibernate-configuration>

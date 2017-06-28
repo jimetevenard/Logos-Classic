@@ -39,7 +39,7 @@ import com.logos.entity.user.Eleve;
 @Service
 public class FaireEvaluation implements IFaireEvaluation{
 
-	
+
 	@Autowired
 	private IDaoCorrection daoCorrection;
 	@Autowired
@@ -56,19 +56,43 @@ public class FaireEvaluation implements IFaireEvaluation{
 	private IDaoQuestion daoQuestion;
 	@Autowired
 	private IDaoReponseEleve daoReponseEleve;
-	
-	
+
+
 
 
 	@Override
 	public RealiseEvaluation realiserEvaluation(Evaluation evaluation, Eleve eleve, Set<ReponseEleve> reponses) {
 		RealiseEvaluation realiseEval= new RealiseEvaluation(null, new Date(), eleve, evaluation);
-		realiseEval.setReponsesEleve(reponses);
-		daoRealiseEvaluation.addRealiseEvaluation(realiseEval);
+		realiseEval=daoRealiseEvaluation.addRealiseEvaluation(realiseEval);
 		return realiseEval;
 	}
 
-
+	@Override
+	public Set<ReponseEleve> addReponsesEleve(Set<ReponseEleve> reponses, RealiseEvaluation realiseEvaluationEnCours) {
+		List<ReponseFermeeEleve> reponsesFermeesEleve = new ArrayList<>();
+		List<ReponseOuverteEleve> reponsesOuvertesEleve = new ArrayList<>();
+		for(ReponseEleve r : reponses){
+			if(r.getClass().getSimpleName().equals("ReponseOuverteEleve")){
+				ReponseOuverteEleve r2 = (ReponseOuverteEleve)r;
+				if(r2.getCorrection() != null) {
+					reponsesOuvertesEleve.add((ReponseOuverteEleve) r2);
+				}
+			}else{
+				reponsesFermeesEleve.add((ReponseFermeeEleve) r);
+			}
+		}
+		
+		for(ReponseFermeeEleve r: reponsesFermeesEleve){
+			r.setRealiseEvaluation(realiseEvaluationEnCours);
+			daoReponseEleve.addReponseFermee(r);
+		}
+		for(ReponseOuverteEleve r: reponsesOuvertesEleve){
+			r.setRealiseEvaluation(realiseEvaluationEnCours);
+			daoReponseEleve.addReponseOuverte(r);
+		}
+		return reponses;
+	}
+	
 	@Override
 	public List<Question> getQuestionByEvaluation(Evaluation evaluation) {
 		List<Question> questions = daoQuestion.getQuestionByEvaluation(evaluation);
@@ -92,10 +116,16 @@ public class FaireEvaluation implements IFaireEvaluation{
 		List<Evaluation> listeEval= daoEvaluation.getEvaluationsByChapitre(chapitre);
 		return listeEval;
 	}
-	
+
 	@Override
-	public List<Boolean> corrigerReponseFermeeEleve(List<ReponseFermeeEleve> reponses) {
+	public List<Boolean> corrigerReponseFermeeEleve(List<ReponseFermeeEleve> reponses, RealiseEvaluation realiseEval) {
 		List<Boolean> correction=new ArrayList<>();
+		List<ReponseEleve> reponsesAll = getReponseByRealiseEvaluation(realiseEval);
+		for (ReponseEleve r : reponsesAll) {
+			if(r.getClass().getSimpleName().equals("ReponseFermeeEleve")){
+				reponses.add((ReponseFermeeEleve) r);
+			}
+		}
 		for(ReponseFermeeEleve reponse : reponses){
 			switch (reponse.getQuestion().getClass().getSimpleName()) {
 			case "QuestionQcm":
@@ -117,48 +147,59 @@ public class FaireEvaluation implements IFaireEvaluation{
 		}
 		return correction;
 	}
-	
+
 	@Override
 	public Boolean corrigerReponseQcm(ReponseQcmEleve reponseQcm, QuestionQcm questionQcm) {
-//		List<Integer> solutionsQcm = questionQcm.getSolutions(); // à enlever après le test bidon
+		//		List<Integer> solutionsQcm = questionQcm.getSolutions(); // à enlever après le test bidon
 		List<Integer> solutionsQcm = daoQuestion.getSolutionsByQuestionQcm(questionQcm);
-		if(reponseQcm.getReponseQcm().equals(solutionsQcm)){
-			return true;
+		for(int i = 0; i < solutionsQcm.size(); i++){
+			if(! solutionsQcm.get(i).equals(reponseQcm.getReponseQcm().get(i) )){
+				return false;
+			}
 		}
-		return false;
+		return true;
 	}
 
 	@Override
 	public Boolean corrigerReponseATrous(ReponseATrousEleve reponseATrou, QuestionATrous questionATrou) {
-//		List<String> solutions = questionATrou.getSolutions(); // à enlever après le test bidon
+		//		List<String> solutions = questionATrou.getSolutions(); // à enlever après le test bidon
 		List<String> solutions = daoQuestion.getSolutionsByQuestionATrous(questionATrou);
-		if(reponseATrou.getReponseATrou().equals(solutions)){
-			return true;
+		for(int i = 0; i < solutions.size(); i++){
+			if(! solutions.get(i).equals(reponseATrou.getReponseATrou().get(i) )){
+				return false;
+			}
 		}
-		return false;
+		return true;
 	}
 
-	
-	
+	public List<ReponseEleve> getReponseByRealiseEvaluation(RealiseEvaluation realiseEval) {
+		return daoReponseEleve.getReponseByRealiseEvaluation(realiseEval);
+	}
+
 	@Override
-	public double calculerNoteEvaluation(List<ReponseEleve> reponses) {
-		double noteEvaluation = 0;
+	public double calculerNoteEvaluation(List<ReponseEleve> reponses, RealiseEvaluation realiseEval) {
 		List<ReponseFermeeEleve> reponsesFermmeesEleve = new ArrayList<>();
 		List<ReponseOuverteEleve> reponsesOuvertesEleve = new ArrayList<>();
 		for(ReponseEleve r : reponses){
 			if(r.getClass().getSimpleName().equals("ReponseOuverteEleve")){
-				reponsesOuvertesEleve.add((ReponseOuverteEleve) r);
+				ReponseOuverteEleve r2 = (ReponseOuverteEleve)r;
+				if(r2.getCorrection() != null) {
+					reponsesOuvertesEleve.add((ReponseOuverteEleve) r2);
+				}
 			}else{
 				reponsesFermmeesEleve.add((ReponseFermeeEleve) r);
 			}
 		}
-		double noteMoyenneQuestionsFermees = calculNoteMoyenneQuestionsFermees(reponsesFermmeesEleve);
-		double noteMoyenneQuestionsOuvertes = calculNoteMoyenneQuestionsOuvertes(reponsesOuvertesEleve);
-		return (noteMoyenneQuestionsFermees+noteMoyenneQuestionsOuvertes)/2;
+		double noteMoyenneQuestionsFermees = calculNoteMoyenneQuestionsFermees(reponsesFermmeesEleve, realiseEval);
+		if(reponsesOuvertesEleve.size() != 0) {
+			double noteMoyenneQuestionsOuvertes = calculNoteMoyenneQuestionsOuvertes(reponsesOuvertesEleve);
+			return (noteMoyenneQuestionsFermees+noteMoyenneQuestionsOuvertes)/2;
+		}
+		return noteMoyenneQuestionsFermees;
 	}
-	
-	public double calculNoteMoyenneQuestionsFermees(List<ReponseFermeeEleve> reponsesFermmeesEleve){
-		List<Boolean> reponsesFermmeesEleveCorrige = corrigerReponseFermeeEleve(reponsesFermmeesEleve);
+
+	public double calculNoteMoyenneQuestionsFermees(List<ReponseFermeeEleve> reponsesFermmeesEleve, RealiseEvaluation realiseEval){
+		List<Boolean> reponsesFermmeesEleveCorrige = corrigerReponseFermeeEleve(reponsesFermmeesEleve, realiseEval);
 		int nbrReponsesFermeesJustes = 0;
 		for(Boolean b : reponsesFermmeesEleveCorrige){
 			if(b){
@@ -169,12 +210,12 @@ public class FaireEvaluation implements IFaireEvaluation{
 		double noteMoyenneSur20QuestionsFermees =  (20*nbrReponsesFermeesJustes)/nbrReponsesFermees;
 		return noteMoyenneSur20QuestionsFermees;
 	}
-	
+
 	public double calculNoteMoyenneQuestionsOuvertes(List<ReponseOuverteEleve> reponsesOuvertesEleve){
 		double noteMoyenneQuestionsOuvertes=0;
 		List<Integer> notes = new ArrayList<>();
 		for(ReponseOuverteEleve r: reponsesOuvertesEleve){
-//			Integer note = r.getCorrection().getNote(); // à enlever après le test bidon
+			//			Integer note = r.getCorrection().getNote(); // à enlever après le test bidon
 			Integer note = daoCorrection.getCorrectionByReponse(r).getNote();
 			notes.add(note);
 		}
@@ -271,6 +312,9 @@ public class FaireEvaluation implements IFaireEvaluation{
 	public void setDaoReponseEleve(IDaoReponseEleve daoReponseEleve) {
 		this.daoReponseEleve = daoReponseEleve;
 	}
+
+
 	
-	
+
+
 }
