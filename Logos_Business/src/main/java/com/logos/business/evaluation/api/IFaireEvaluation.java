@@ -27,13 +27,14 @@ import com.logos.entity.user.Eleve;
 public interface IFaireEvaluation {
 	List<Evaluation> getEvaluationsByChapitre(Chapitre chapitre);
 	RealiseEvaluation realiserEvaluation(Evaluation evaluation, Eleve eleve, Set<ReponseEleve> reponses);
-	double calculerNoteEvaluation(List<ReponseEleve> reponses);
+	double calculerNoteEvaluation(List<ReponseEleve> reponses,  RealiseEvaluation realiseEval);
 	List<Question> getQuestionByEvaluation(Evaluation evaluation);
 	List<ReponseEleve> getReponseEleveByEvaluation(Evaluation evaluation);
 	Correction getCorrectionByReponseOuverte(ReponseOuverteEleve reponse);
-	List<Boolean> corrigerReponseFermeeEleve(List<ReponseFermeeEleve> reponses);
+	List<Boolean> corrigerReponseFermeeEleve(List<ReponseFermeeEleve> reponses, RealiseEvaluation realiseEval);
 	Boolean corrigerReponseQcm(ReponseQcmEleve reponseQcm, QuestionQcm questionQcm);
 	Boolean corrigerReponseATrous(ReponseATrousEleve reponseATrou, QuestionATrous questionATrou);
 	Set<RealiseEvaluation> getRealiseEvaluationByEleve(Eleve eleve);
+	Set<ReponseEleve> addReponsesEleve(Set<ReponseEleve> reponses, RealiseEvaluation realiseEvaluationEnCours);
 	
 }

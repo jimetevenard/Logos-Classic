@@ -13,9 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.logos.data.reponseeleve.api.IDaoReponseEleve;
 import com.logos.entity.evaluation.Correction;
 import com.logos.entity.evaluation.Evaluation;
+import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.reponse.ReponseATrousEleve;
 import com.logos.entity.reponse.ReponseDragAndDropEleve;
 import com.logos.entity.reponse.ReponseEleve;
+import com.logos.entity.reponse.ReponseFermeeEleve;
 import com.logos.entity.reponse.ReponseOuverteEleve;
 import com.logos.entity.reponse.ReponseQcmEleve;
 import com.logos.entity.user.Eleve;
@@ -60,9 +62,17 @@ public class DaoReponseEleve implements IDaoReponseEleve{
 
 	@Override
 	@Transactional
-	public ReponseEleve addReponse(ReponseEleve reponse) {
+	public ReponseOuverteEleve addReponseOuverte(ReponseOuverteEleve reponse) {
 		Session session = sf.getCurrentSession();
-		session.persist(reponse);
+		session.save(reponse);
+		return reponse;
+	}
+	
+	@Override
+	@Transactional
+	public ReponseFermeeEleve addReponseFermee(ReponseFermeeEleve reponse) {
+		Session session = sf.getCurrentSession();
+		session.save(reponse);
 		return reponse;
 	}
 
@@ -162,10 +172,32 @@ public class DaoReponseEleve implements IDaoReponseEleve{
 		}
 		return null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<ReponseEleve> getReponseByRealiseEvaluation(RealiseEvaluation realiseEval) {
+		Session session = sf.getCurrentSession();
+		List<ReponseEleve> listeReponses = new ArrayList<>();
+		try {
+			Query query = session.createQuery("SELECT r FROM ReponseEleve r where r.realiseEvaluation.idRealiseEvaluation = :realiseEval")
+					.setParameter("realiseEval", realiseEval.getIdRealiseEvaluation());
+			listeReponses = (List<ReponseEleve>) query.list();
+			for (ReponseEleve reponseEleve : listeReponses) {
+				reponseEleve.getQuestion();
+			}
+			return listeReponses ;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public void setSf(SessionFactory sf) {
 		this.sf = sf;
 	}
+
+	
 	
 	
 

@@ -16,6 +16,7 @@ import com.logos.data.cours.api.IDaoCours;
 import com.logos.entity.cours.Chapitre;
 import com.logos.entity.evaluation.Correction;
 import com.logos.entity.evaluation.Evaluation;
+import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.question.Question;
 import com.logos.entity.question.QuestionATrous;
 import com.logos.entity.question.QuestionDragAndDrop;
@@ -92,7 +93,7 @@ public class FaireEvaluationTest {
 //		List<ReponseOuverteEleve> reponsesOuvertes = new ArrayList<>();
 //		Collections.addAll(reponsesOuvertes, repOuverte1,repOuverte2,repOuverte3);
 		Set<ReponseEleve> reponses = new HashSet<>();
-		Collections.addAll(reponses, reponseATroufausse,reponseDragDropfausse,repOuverte2,reponseQcmfausse,repOuverte3,reponseATroujuste,reponseDragDropjuste,reponseQcmjuste,repOuverte1);
+//		Collections.addAll(reponses, reponseATroufausse,reponseDragDropfausse,repOuverte2,reponseQcmfausse,repOuverte3,reponseATroujuste,reponseDragDropjuste,reponseQcmjuste,repOuverte1);
 //		
 //		log.info("note moyenne des questions fermées de l'éval est : "+bu.calculNoteMoyenneQuestionsFermees(reponsesFermees));
 //		log.info("note moyenne des questions ouvertes de l'éval est : "+bu.calculNoteMoyenneQuestionsOuvertes(reponsesOuvertes));
@@ -107,8 +108,61 @@ public class FaireEvaluationTest {
 		
 		Eleve e= new Eleve();
 		e.setIdUtilisateur(1);
-		Evaluation eval = new Evaluation(null, "test eval pourri");
-		bu.realiserEvaluation(eval, e, reponses);
+		Evaluation eval = new Evaluation();
+		eval.setIdEvaluation(1);
+//		bu.realiserEvaluation(eval, e, reponses);
+		
+//		List<Question> questions = bu.getQuestionByEvaluation(eval);
+//		for (Question question : questions) {
+//			log.info(question.getEnonce());
+//		}
+		
+//		List<ReponseEleve> lrep = bu.getReponseEleveByEvaluation(eval);
+//		for (ReponseEleve reponseEleve : lrep) {
+//			log.info(reponseEleve.getIdReponse());
+//		}
+		
+//		ReponseOuverteEleve repOuv = new ReponseOuverteEleve();
+//		repOuv.setIdReponse(8);
+//		Correction correction = bu.getCorrectionByReponseOuverte(repOuv);
+//		log.info(correction.getCorrige());
+		
+//		ReponseQcmEleve rep1 = new ReponseQcmEleve();
+//		rep1.setIdReponse(2);
+//		ReponseATrousEleve rep2 = new ReponseATrousEleve();
+//		rep2.setIdReponse(3);
+//		ReponseDragAndDropEleve rep3 = new ReponseDragAndDropEleve();
+//		rep3.setIdReponse(4);
+		List<ReponseEleve> reponsesAll = bu.getReponseEleveByEvaluation(eval);
+		List<ReponseFermeeEleve> liste = new ArrayList<>();
+		List<ReponseOuverteEleve> li = new ArrayList<>();
+		RealiseEvaluation reall = new RealiseEvaluation();
+		reall.setIdRealiseEvaluation(1);
+		
+		
+//		for(ReponseEleve r : reponsesAll){
+//			if(r.getClass().getSimpleName().equals("ReponseOuverteEleve")){
+//				li.add((ReponseOuverteEleve) r);
+//			}else{
+//				liste.add((ReponseFermeeEleve) r);
+//			}
+//		}
+//		
+//		List<Boolean> corrige = bu.corrigerReponseFermeeEleve(liste, reall);
+//		for (Boolean boolean1 : corrige) {
+//			log.info(boolean1);
+//		}
+		
+//		log.info(bu.calculerNoteEvaluation(reponsesAll, reall));
+		
+		
+		ReponseOuverteEleve repOuverte4 = new ReponseOuverteEleve(null, null, null, "test1", correction1);
+		ReponseOuverteEleve repOuverte5 = new ReponseOuverteEleve(null, null, null, "test2", correction2);
+		ReponseOuverteEleve repOuverte6 = new ReponseOuverteEleve(null, null, null, "test3", correction3);
+//		ReponseOuverteEleve repOuverte7 = new ReponseOuverteEleve(idReponse, realiseEvaluation, question, reponse, correction)
+		Set<ReponseEleve> reponsesEncore = new HashSet<>();
+		Collections.addAll(reponsesEncore, reponseATroufausse);
+		bu.addReponsesEleve(reponsesEncore, reall);
 		
 	}
 

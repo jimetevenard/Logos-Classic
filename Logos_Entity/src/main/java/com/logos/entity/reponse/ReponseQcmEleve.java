@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 
 import com.logos.entity.evaluation.Evaluation;
@@ -25,7 +26,7 @@ public class ReponseQcmEleve extends ReponseFermeeEleve {
 	/**
 	 * 
 	 */
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "reponse_qcm", joinColumns = @JoinColumn(name = "id_reponse"))
 	@Column(name = "reponse_qcm")
 	private List<Integer> reponseQcm;
