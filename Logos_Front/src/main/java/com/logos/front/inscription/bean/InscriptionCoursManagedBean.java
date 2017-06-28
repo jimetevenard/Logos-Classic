@@ -64,12 +64,10 @@ public class InscriptionCoursManagedBean {
 		coursEleve = getCoursByEleve();
 	}
 	
-	public String inscrireACours(Cours c){
+	public String inscrireACours(Cours c){		
 			bu.inscrireEleveACours(eleve, c);
 			init(); // hé oui, il faut mettre à jour les données du Bean
-			System.out.println(buConsulter.consulterCours(c));
-			return buConsulter.consulterCours(c);
-		
+			return buConsulter.consulterCours(c);	
 	}
 	
 	public Double noteCours(Cours c){
@@ -111,6 +109,10 @@ public class InscriptionCoursManagedBean {
 			coursEleve.add(s.getCours());
 		}
 		return coursEleve;
+	}
+	
+	public boolean checkAutorisation(Cours c){
+		return bu.isAutriseASinscrire(eleve, c);
 	}
 	
 	public IInscriptionCours getBu() {
