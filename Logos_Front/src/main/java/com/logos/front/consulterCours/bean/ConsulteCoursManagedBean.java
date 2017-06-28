@@ -92,7 +92,11 @@ public class ConsulteCoursManagedBean {
 		
 		propositionsQcm = q.getPropositions();
 		System.out.println(propositionsQcm.size());
+		for(String s : propositionsQcm){
+			System.out.println(s);
+		}
 		return propositionsQcm;
+		
 	}
 	
 
