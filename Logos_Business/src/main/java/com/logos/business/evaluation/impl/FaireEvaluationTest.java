@@ -13,6 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.logos.business.evaluation.api.IFaireEvaluation;
 import com.logos.data.cours.api.IDaoCours;
+import com.logos.data.question.impl.DaoQuestion;
 import com.logos.entity.cours.Chapitre;
 import com.logos.entity.evaluation.Correction;
 import com.logos.entity.evaluation.Evaluation;
@@ -163,8 +164,23 @@ public class FaireEvaluationTest {
 //		ReponseOuverteEleve repOuverte5 = new ReponseOuverteEleve(null, null, null, "test2", correction2);
 //		ReponseOuverteEleve repOuverte6 = new ReponseOuverteEleve(null, null, null, "test3", correction3);
 //		ReponseOuverteEleve repOuverte7 = new ReponseOuverteEleve(idReponse, realiseEvaluation, question, reponse, correction)
+		Question q1 = bu.getQuestionById(3);
+		ArrayList<String> responseATrousjuste1= new ArrayList<>();
+		Collections.addAll(responseATrousjuste1, "kitchen","garden");
+		ReponseATrousEleve reponseATroujuste1 = new ReponseATrousEleve(null, null, q1, responseATrousjuste1);
+		
+		Question q2 = bu.getQuestionById(2);
+		ArrayList<Integer> responseQcmjuste2= new ArrayList<>();
+		Collections.addAll(responseQcmjuste2, 1,5);
+		ReponseQcmEleve reponseQcmjuste1 = new ReponseQcmEleve(null, null, q2, responseQcmjuste2);
+		
+		Question q3 = bu.getQuestionById(4);
+		ArrayList<String> responseDragDropjuste3= new ArrayList<>();
+		Collections.addAll(responseDragDropjuste3, "white","black");
+		ReponseDragAndDropEleve reponseDragDropjuste1 = new ReponseDragAndDropEleve(null, null, q3, responseDragDropjuste3);
+		
 		Set<ReponseEleve> reponsesEncore = new HashSet<>();
-		Collections.addAll(reponsesEncore, reponseATroufausse,reponseDragDropfausse,repOuverte2,reponseQcmfausse,repOuverte3,reponseATroujuste,reponseDragDropjuste,reponseQcmjuste,repOuverte1);
+		Collections.addAll(reponsesEncore, reponseATroujuste1,reponseQcmjuste1,reponseDragDropjuste1);
 		bu.addReponsesEleve(reponsesEncore, reall);
 		
 	}

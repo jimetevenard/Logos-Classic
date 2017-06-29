@@ -66,31 +66,20 @@ public class FaireEvaluation implements IFaireEvaluation{
 		realiseEval=daoRealiseEvaluation.addRealiseEvaluation(realiseEval);
 		return realiseEval;
 	}
+	
+	public Question getQuestionById(Integer id){
+		Question question = daoQuestion.getQuestionById(id);
+		return question;
+	}
 
 	@Override
 	public Set<ReponseEleve> addReponsesEleve(Set<ReponseEleve> reponses, RealiseEvaluation realiseEvaluationEnCours) {
-//		List<ReponseFermeeEleve> reponsesFermeesEleve = new ArrayList<>();
-//		List<ReponseOuverteEleve> reponsesOuvertesEleve = new ArrayList<>();
-//		for(ReponseEleve r : reponses){
-//			if(r.getClass().getSimpleName().equals("ReponseOuverteEleve")){
-//				ReponseOuverteEleve r2 = (ReponseOuverteEleve)r;
-//				if(r2.getCorrection() != null) {
-//					reponsesOuvertesEleve.add((ReponseOuverteEleve) r2);
-//				}
-//			}else{
-//				reponsesFermeesEleve.add((ReponseFermeeEleve) r);
-//			}
-//		}
-//		
 		for(ReponseEleve r: reponses){
 			r.setRealiseEvaluation(realiseEvaluationEnCours);
-//			daoQuestion.addQuestion(r.getQuestion());
+			Question q1 = getQuestionById(r.getQuestion().getIdQuestion());
+			r.setQuestion(q1);
 			daoReponseEleve.addReponseEleve(r);
 		}
-//		for(ReponseOuverteEleve r: reponsesOuvertesEleve){
-//			r.setRealiseEvaluation(realiseEvaluationEnCours);
-//			daoReponseEleve.addReponseEleve(r);
-//		}
 		return reponses;
 	}
 	

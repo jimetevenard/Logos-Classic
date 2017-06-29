@@ -36,5 +36,6 @@ public interface IFaireEvaluation {
 	Boolean corrigerReponseATrous(ReponseATrousEleve reponseATrou, QuestionATrous questionATrou);
 	Set<RealiseEvaluation> getRealiseEvaluationByEleve(Eleve eleve);
 	Set<ReponseEleve> addReponsesEleve(Set<ReponseEleve> reponses, RealiseEvaluation realiseEvaluationEnCours);
+	Question getQuestionById(Integer id);
 	
 }
