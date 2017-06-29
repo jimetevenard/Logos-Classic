@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIInput;
 import javax.faces.event.ValueChangeEvent;
 
 import com.logos.business.evaluation.api.IFaireEvaluation;
@@ -15,8 +16,10 @@ import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.evaluation.Evaluation;
 import com.logos.entity.question.Question;
+import com.logos.entity.question.QuestionATrous;
 import com.logos.entity.question.QuestionQcm;
 import com.logos.entity.reponse.ReponseOuverteEleve;
+import com.logos.entity.reponse.ReponseQcmEleve;
 
 @ManagedBean(name="mbConsulteCours")
 @SessionScoped
@@ -29,9 +32,10 @@ public class ConsulteCoursManagedBean {
 	private List<Evaluation> evaluationsChapitre;
 	private List<Question> questionsExercice;
 	private List<ReponseOuverteEleve> listeReponseOuverte;
-	private String unechaine = "";
 	private List<String> propositionsQcm;
-
+	private List<String> propositionQcmVide = new ArrayList<>();
+	private String phraseATrous ;
+	private List<String> propositionPhraseATrou;
 
 
 	@ManagedProperty(value="#{inscriptionCours}")
@@ -79,24 +83,33 @@ public class ConsulteCoursManagedBean {
 
 	public void addReponseOuverte(ValueChangeEvent e){
 		Object newVal = e.getNewValue();
-		System.out.println(newVal.toString());
 		ReponseOuverteEleve roe = new ReponseOuverteEleve() ;
-//		System.out.println(newVal.toString());
+		System.out.println( ((Question) ((UIInput) e.getSource()).getAttributes().get("question")).getEnonce() );
 		roe.setReponse(newVal.toString());
-		System.out.println("reponse "+roe.getReponse());
 		listeReponseOuverte=new ArrayList<>();
 		listeReponseOuverte.add(roe);
-		System.out.println(listeReponseOuverte.size());
+	}
+	
+	public void addReponseQcm(ValueChangeEvent e){
+		Object newVal = e.getNewValue();
+		ReponseQcmEleve rqe= new ReponseQcmEleve();
 	}
 	
 	public List<String> getPropositionQcm(QuestionQcm q){
 		
 		propositionsQcm = q.getPropositions();
-		System.out.println(propositionsQcm.size());
 		for(String s : propositionsQcm){
-			System.out.println(s);
 		}
 		return propositionsQcm;
+		
+	}
+	
+	public String getPhraseATrousQuestion(QuestionATrous qat){
+		System.out.println(qat.getEnonce());
+		phraseATrous = qat.getPhraseATrou();
+		System.out.println(phraseATrous);
+		propositionPhraseATrou = qat.getSolutions();
+		return phraseATrous;
 		
 	}
 	
@@ -104,6 +117,7 @@ public class ConsulteCoursManagedBean {
 		Object newVal = e.getNewValue();
 		System.out.println(newVal.toString());
 	}
+	
 	
 
 	public String getUrlTemplate(Question q){
@@ -191,12 +205,13 @@ public class ConsulteCoursManagedBean {
 		this.listeReponseOuverte = listeReponseOuverte;
 	}
 
-	public String getUnechaine() {
-		return unechaine;
+
+	public String getPhraseATrous() {
+		return phraseATrous;
 	}
 
-	public void setUnechaine(String unechaine) {
-		this.unechaine = unechaine;
+	public void setPhraseATrous(String phraseATrous) {
+		this.phraseATrous = phraseATrous;
 	}
 
 	public List<String> getPropositionsQcm() {
@@ -205,6 +220,22 @@ public class ConsulteCoursManagedBean {
 
 	public void setPropositionsQcm(List<String> propositionsQcm) {
 		this.propositionsQcm = propositionsQcm;
+	}
+
+	public List<String> getPropositionQcmVide() {
+		return propositionQcmVide;
+	}
+
+	public void setPropositionQcmVide(List<String> propositionQcmVide) {
+		this.propositionQcmVide = propositionQcmVide;
+	}
+
+	public List<String> getPropositionPhraseATrou() {
+		return propositionPhraseATrou;
+	}
+
+	public void setPropositionPhraseATrou(List<String> propositionPhraseATrou) {
+		this.propositionPhraseATrou = propositionPhraseATrou;
 	}
 
 	
