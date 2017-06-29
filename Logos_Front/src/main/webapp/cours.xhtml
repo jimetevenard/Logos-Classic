@@ -24,29 +24,49 @@
 						escape="false" />
 				</div>
 				<div id="evaluation">
-					<h:outputText value="#{mbConsulteCours.evaluationsChapitre.get(0).titre}" />
+					<h:outputText
+						value="#{mbConsulteCours.evaluationsChapitre.get(0).titre}" />
 					<div id="questions">
 						<ui:repeat var="q" value="#{mbConsulteCours.questionsExercice}">
-						
-							<h:panelGroup rendered="#{q['class'].simpleName == 'QuestionOuverte'}">
+
+							<h:panelGroup
+								rendered="#{q['class'].simpleName == 'QuestionOuverte'}">
 								<h5>#{q.enonce}</h5>
-								<h:inputTextarea  valueChangeListener="#{mbConsulteCours.addReponseOuverte}"  />		
+								<h:inputTextarea
+									valueChangeListener="#{mbConsulteCours.addReponseOuverte}">
+									<f:attribute name="question" value="#{q}" />
+								</h:inputTextarea>
 							</h:panelGroup>
-							<h:panelGroup rendered="#{q['class'].simpleName == 'QuestionQcm'}">
+
+							<h:panelGroup
+								rendered="#{q['class'].simpleName == 'QuestionQcm'}">
 								<h5>#{q.enonce}</h5>
-								<ui:repeat var="p" value="#{mbConsulteCours.getPropositionQcm(q)}">
-									<input type="checkbox" value="#{p}" />
-									<h:outputText value="#{p}" />
+								<h:selectManyCheckbox
+									value="#{mbConsulteCours.propositionQcmVide}"
+									valueChangeListener="#{mbConsulteCours.addReponseQcm}">
+									<f:selectItems itemLabel="#{p}" var="p"
+										value="#{mbConsulteCours.getPropositionQcm(q)}"
+										itemValue="#{p}" />
+									<f:attribute name="question" value="#{q}" />
+								</h:selectManyCheckbox>
+
+							</h:panelGroup>
+							<h:panelGroup
+								rendered="#{q['class'].simpleName == 'QuestionATrous'}">
+								<h5>#{q.enonce}</h5>
+								<h:outputText
+									value="#{mbConsulteCours.getPhraseATrousQuestion(q)}"></h:outputText>
+								<ui:repeat var="f"
+									value="#{mbConsulteCours.propositionPhraseATrou}">
+									<h:inputText />
 								</ui:repeat>
+
 							</h:panelGroup>
-							<h:panelGroup rendered="#{q['class'].simpleName == 'QuestionATrous'}">
-								<h5>#{q.enonce}</h5>
-								<p>question a trous</p>
-							</h:panelGroup>
-							<h:panelGroup rendered="#{q['class'].simpleName == 'QuestionDragAndDrop'}">
+							<h:panelGroup
+								rendered="#{q['class'].simpleName == 'QuestionDragAndDrop'}">
 								<h5>#{q.enonce}</h5>
 							</h:panelGroup>
-										
+
 						</ui:repeat>
 					</div>
 				</div>
