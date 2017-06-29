@@ -33,45 +33,51 @@ public class TestMessagerie {
 		IDaoProfesseur daoProfesseur = bf.getBean(IDaoProfesseur.class);
 		
 		Conversation c1 = new Conversation(null, "lololo");
+		Conversation c2 = new Conversation();
+		c2.setIdConversation(3);
 		Set<Conversation> listeConv = new HashSet<>();
 		Collections.addAll(listeConv, c1);
 		Utilisateur e1 = daoEleve.getEleveById(1);
 		log.info(" élève "+e1.getIdUtilisateur());
 		Utilisateur p1 = daoProfesseur.getProfById(2);
-//		daoConversation.addConversation(c1,p1,e1);
+		//daoConversation.addConversation(c1,p1,e1);
 		
 		Message m1= new Message(null, "salut1");
 		m1.setDateEnvoi(new Date());
+		m1.setAuteur(daoProfesseur.getProfById(2));
 		Message m2= new Message(null, "salut2");
 		m2.setDateEnvoi(new Date());
+		m2.setAuteur(daoProfesseur.getProfById(2));
 		Message m3= new Message(null, "salut3");
 		m3.setDateEnvoi(new Date());
+		m3.setAuteur(daoEleve.getEleveById(1));
 		Message m4= new Message(null, "salut4");
 		m4.setDateEnvoi(new Date());
+		m4.setAuteur(daoEleve.getEleveById(1));
 		Message m5= new Message(null, "salut5");
 		m5.setDateEnvoi(new Date());
+		m5.setAuteur(daoEleve.getEleveById(1));
 		Set<Message> messages = new HashSet<>();
 		Collections.addAll(messages, m1,m2,m3,m4,m5);
 //		for (Message message : messages) {
-//			message.setConversation(c1);
-//			daoMessage.addMessage(message);
+//			daoMessage.addMessage(message, c2);
 //
 //		}
 		
 //		log.info(daoConversation.getConversationById(11).getTitre());
 //		log.info(daoMessage.getMessageById(18).getContenu());
 		
-		List<Conversation> listConversation = daoConversation.getAllConversation(e1);
-		for (Conversation conversation : listConversation) {
-			log.info("liste conversations "+conversation.getIdConversation());
-		}
-		Conversation c2 = daoConversation.getConversationById(7);
-		List<Message> listeMessage = daoMessage.getAllMessages(c2);
-		for (Message message : listeMessage) {
-			log.info("liste messages : "+message.getIdMessage());
-		}
+//		List<Conversation> listConversation = daoConversation.getAllConversation(e1);
+//		for (Conversation conversation : listConversation) {
+//			log.info("liste conversations "+conversation.getIdConversation());
+//		}
+//		Conversation c2 = daoConversation.getConversationById(7);
+//		List<Message> listeMessage = daoMessage.getAllMessages(c2);
+//		for (Message message : listeMessage) {
+//			log.info("liste messages : "+message.getIdMessage());
+//		}
 		
-		
+//		log.info(daoMessage.updateDateLectureMessage(daoMessage.getMessageById(4)));
 		
 
 	}

@@ -1,6 +1,8 @@
 package com.logos.data.messagerie.impl;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,14 +17,18 @@ import com.logos.entity.messagerie.Message;
 
 @Service
 public class DaoMessage implements IDaoMessage {
-	
+
 	@Autowired
 	private SessionFactory sf;
-	
+
 	@Override
 	@Transactional
-	public Message addMessage(Message message) {
+	public Message addMessage(Message message, Conversation conversation) {
 		Session session= sf.getCurrentSession();
+		conversation = (Conversation)session.get(Conversation.class, conversation.getIdConversation());
+		conversation.getMessages().size();
+		message.setDateEnvoi(new Date());
+		message.setConversation(conversation);
 		session.save(message);
 		return message;
 	}
@@ -55,16 +61,18 @@ public class DaoMessage implements IDaoMessage {
 
 	@Override
 	@Transactional
-	public Message updateMessage(Message message) {
-		// TODO Auto-generated method stub
-		return null;
+	public Message updateDateLectureMessage(Message message) {
+		Session session= sf.getCurrentSession();
+		message.setDateLecture(new Date());
+		session.update(message);
+		return message;
 	}
 
 
 	public void setSf(SessionFactory sf) {
 		this.sf = sf;
 	}
-	
-	
+
+
 
 }

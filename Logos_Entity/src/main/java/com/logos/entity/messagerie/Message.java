@@ -10,9 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.logos.entity.user.Utilisateur;
 
 /**
  * 
@@ -57,7 +60,11 @@ public class Message {
     @JoinColumn(name = "id_conversation", foreignKey = @ForeignKey(name = "fk_conversation_message"))
     private Conversation conversation;
     
-
+    @OneToOne
+    @JoinColumn(name = "id_auteur_message", foreignKey = @ForeignKey(name = "fk_auteur_message"))
+    private Utilisateur auteur;
+    
+    
     /**
      * Default constructor
      */
@@ -120,6 +127,18 @@ public class Message {
 	public void setConversation(Conversation conversation) {
 		this.conversation = conversation;
 	}
+
+
+	public Utilisateur getAuteur() {
+		return auteur;
+	}
+
+
+	public void setAuteur(Utilisateur auteur) {
+		this.auteur = auteur;
+	}
+	
+	
     
     
 
