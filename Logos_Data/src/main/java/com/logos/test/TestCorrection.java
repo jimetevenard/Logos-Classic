@@ -119,6 +119,7 @@ public class TestCorrection {
 		ArrayList<Integer> solutionsQcm= new ArrayList<>();
 		Collections.addAll(solutionsQcm, 1,5);
 		QuestionQcm qQcm = new QuestionQcm(null, "what are Samantha's favourite colours ?", propositionsQcm, solutionsQcm);
+		
 		ArrayList<Integer> responseQcmfausse= new ArrayList<>();
 		Collections.addAll(responseQcmfausse, 2,3);
 		ReponseQcmEleve reponseQcmfausse = new ReponseQcmEleve(null, null, qQcm, responseQcmfausse);
@@ -136,7 +137,8 @@ public class TestCorrection {
 		Collections.addAll(responseDragDropjuste, "white","black");
 		ReponseDragAndDropEleve reponseDragDropjuste = new ReponseDragAndDropEleve(null, null, qDragDrop, responseDragDropjuste);
 		
-		daoRep.addReponseFermee(reponseQcmjuste);
+		daoQuest.addQuestion(qDragDrop);
+//		daoRep.addReponseEleve(reponseQcmjuste);
 		
 	}
 }

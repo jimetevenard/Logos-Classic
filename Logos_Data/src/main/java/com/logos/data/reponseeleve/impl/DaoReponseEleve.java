@@ -62,19 +62,12 @@ public class DaoReponseEleve implements IDaoReponseEleve{
 
 	@Override
 	@Transactional
-	public ReponseOuverteEleve addReponseOuverte(ReponseOuverteEleve reponse) {
+	public ReponseEleve addReponseEleve(ReponseEleve reponse) {
 		Session session = sf.getCurrentSession();
 		session.save(reponse);
 		return reponse;
 	}
 	
-	@Override
-	@Transactional
-	public ReponseFermeeEleve addReponseFermee(ReponseFermeeEleve reponse) {
-		Session session = sf.getCurrentSession();
-		session.save(reponse);
-		return reponse;
-	}
 
 	@Override
 	@Transactional
