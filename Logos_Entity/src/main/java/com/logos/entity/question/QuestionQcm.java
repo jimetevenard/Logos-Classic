@@ -22,7 +22,7 @@ public class QuestionQcm extends QuestionFermee {
     /**
      * 
      */
-    @ElementCollection(fetch=FetchType.EAGER)
+    @ElementCollection
     @CollectionTable(name = "proposition_question_qcm", joinColumns = @JoinColumn(name = "id_question"))
     @Column(name = "proposition_question_qcm")
     private List<String> propositions;

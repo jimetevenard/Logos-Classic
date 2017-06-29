@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 
 /**
@@ -25,7 +26,7 @@ public class QuestionATrous extends QuestionFermee {
     /**
      * 
      */
-    @ElementCollection
+    @ElementCollection ()
     @CollectionTable(name = "solution_question_trous", joinColumns = @JoinColumn(name = "id_question"))
     @Column(name = "solution_question_trous")
     private List<String> solutions;

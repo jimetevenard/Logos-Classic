@@ -9,6 +9,11 @@
 
 	<ui:composition template="/WEB-INF/template-eleve.xhtml">
 		<ui:define name="titre">#{mbConsulteCours.coursEnCours.titre}</ui:define>
+		<ui:define name="scriptsEtCss">
+			<script src="../js/question.js"></script>
+			<script src="../js/questionDAD.js"></script>
+			<script src="../js/ui/jquery-ui.min.js"></script>
+		</ui:define>
 		<ui:define name="contenu">
 			<h:form>
 				<h1>
@@ -54,17 +59,54 @@
 							<h:panelGroup
 								rendered="#{q['class'].simpleName == 'QuestionATrous'}">
 								<h5>#{q.enonce}</h5>
-								<h:outputText
-									value="#{mbConsulteCours.getPhraseATrousQuestion(q)}"></h:outputText>
-								<ui:repeat var="f"
-									value="#{mbConsulteCours.propositionPhraseATrou}">
-									<h:inputText />
-								</ui:repeat>
-
+								<h:panelGroup
+									styleClass="zone-phrase-trous question-#{q.idQuestion}"
+									layout="block">
+									<div class="phrase">
+										<h:outputText
+											value="#{mbConsulteCours.getPhraseATrousQuestion(q)}"></h:outputText>
+									</div>
+									<div class="inputs">
+										<ui:repeat var="f"
+											value="#{mbConsulteCours.propositionPhraseATrou}">
+											<span class="wrap-input"><h:inputText
+													valueChangeListener="#{mbConsulteCours.getRepATrouEleve}">
+													<f:attribute name="question" value="#{q}" />
+												</h:inputText></span>
+										</ui:repeat>
+									</div>
+								</h:panelGroup>
 							</h:panelGroup>
+
 							<h:panelGroup
 								rendered="#{q['class'].simpleName == 'QuestionDragAndDrop'}">
 								<h5>#{q.enonce}</h5>
+								<h:panelGroup
+									styleClass="zone-drag-drop question-#{q.idQuestion}"
+									layout="block">
+									<div class="phrase">
+										<h:outputText
+											value="#{mbConsulteCours.getQuestionDAD(q)}"></h:outputText>
+									</div>
+									<div class="inputs-drop">
+										<ui:repeat var="f"
+											value="#{mbConsulteCours.propositionPhraseDAD}">
+											<span class="wrap-input-drop"><h:inputText
+													valueChangeListener="#{mbConsulteCours.getRepDAD}">
+													<f:attribute name="question" value="#{q}" />
+												</h:inputText></span>
+										</ui:repeat>
+									</div>
+									<div class="inputs-drag">
+										<ui:repeat var="f"
+											value="#{mbConsulteCours.propositionPhraseDAD}">
+											<div class="wrap-input-drag"><h:outputText value="#{f}" >
+												<f:attribute name="question" value="#{q}" />
+											</h:outputText></div>
+										</ui:repeat>
+									</div>
+								</h:panelGroup>
+
 							</h:panelGroup>
 
 						</ui:repeat>

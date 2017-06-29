@@ -10,13 +10,17 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIInput;
 import javax.faces.event.ValueChangeEvent;
 
+import org.hibernate.stat.QueryStatistics;
+
 import com.logos.business.evaluation.api.IFaireEvaluation;
 import com.logos.business.inscriptionCours.api.IInscriptionCours;
+import com.logos.business.question.api.IBusinessQuestion;
 import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.evaluation.Evaluation;
 import com.logos.entity.question.Question;
 import com.logos.entity.question.QuestionATrous;
+import com.logos.entity.question.QuestionDragAndDrop;
 import com.logos.entity.question.QuestionQcm;
 import com.logos.entity.reponse.ReponseOuverteEleve;
 import com.logos.entity.reponse.ReponseQcmEleve;
@@ -35,7 +39,11 @@ public class ConsulteCoursManagedBean {
 	private List<String> propositionsQcm;
 	private List<String> propositionQcmVide = new ArrayList<>();
 	private String phraseATrous ;
+	private String phraseDAD ;
 	private List<String> propositionPhraseATrou;
+	private List<String> propositionPhraseDAD;
+	private List<String> reponseQAT = new ArrayList<>() ;
+	private List<String> reponseQDAD = new ArrayList<>() ;
 
 
 	@ManagedProperty(value="#{inscriptionCours}")
@@ -43,9 +51,13 @@ public class ConsulteCoursManagedBean {
 
 	@ManagedProperty(value="#{faireEvaluation}")
 	private IFaireEvaluation buFaireEvaluation;
+	
+	@ManagedProperty(value="#{businessQuestion}")
+	private IBusinessQuestion buQuestion;
 
 	@PostConstruct
 	public void init(){
+		
 
 	}
 
@@ -93,13 +105,12 @@ public class ConsulteCoursManagedBean {
 	public void addReponseQcm(ValueChangeEvent e){
 		Object newVal = e.getNewValue();
 		ReponseQcmEleve rqe= new ReponseQcmEleve();
+		System.out.println( ((Question) ((UIInput) e.getSource()).getAttributes().get("question")).getEnonce() );
+
 	}
 	
 	public List<String> getPropositionQcm(QuestionQcm q){
-		
-		propositionsQcm = q.getPropositions();
-		for(String s : propositionsQcm){
-		}
+		propositionsQcm = buQuestion.getPropositionQuestionQcm(q);
 		return propositionsQcm;
 		
 	}
@@ -108,9 +119,34 @@ public class ConsulteCoursManagedBean {
 		System.out.println(qat.getEnonce());
 		phraseATrous = qat.getPhraseATrou();
 		System.out.println(phraseATrous);
-		propositionPhraseATrou = qat.getSolutions();
+		propositionPhraseATrou =  buQuestion.getSolutionQuestionATrou(qat);
 		return phraseATrous;
 		
+	}
+	
+	public String getQuestionDAD (QuestionDragAndDrop q){
+		phraseDAD = q.getPhraseATrou();
+		System.out.println(phraseDAD);
+		propositionPhraseDAD = buQuestion.getSolutionQuestionATrou(q);
+		return phraseDAD;
+		
+	}
+	
+	public void getRepATrouEleve(ValueChangeEvent e){
+		Object newVal = e.getNewValue();
+		reponseQAT.add(newVal.toString());
+		System.out.println("QUESTION A TROU : "+ ((Question) ((UIInput) e.getSource()).getAttributes().get("question")).getEnonce() );
+
+		System.out.println(newVal.toString());
+		
+	}
+	
+	public void getRepDAD(ValueChangeEvent e){
+		Object newVal = e.getNewValue();
+		reponseQDAD.add(newVal.toString());
+		System.out.println("QUESTION DAD : "+ ((Question) ((UIInput) e.getSource()).getAttributes().get("question")).getEnonce() );
+
+		System.out.println(newVal.toString());
 	}
 	
 	public void getChoix(ValueChangeEvent e){
@@ -238,6 +274,49 @@ public class ConsulteCoursManagedBean {
 		this.propositionPhraseATrou = propositionPhraseATrou;
 	}
 
+	public IBusinessQuestion getBuQuestion() {
+		return buQuestion;
+	}
+
+	public void setBuQuestion(IBusinessQuestion buQuestion) {
+		this.buQuestion = buQuestion;
+	}
+
+	public List<String> getReponseQAT() {
+		return reponseQAT;
+	}
+
+	public void setReponseQAT(List<String> reponseQAT) {
+		this.reponseQAT = reponseQAT;
+	}
+
+	public String getPhraseDAD() {
+		return phraseDAD;
+	}
+
+	public void setPhraseDAD(String phraseDAD) {
+		this.phraseDAD = phraseDAD;
+	}
+
+	public List<String> getPropositionPhraseDAD() {
+		return propositionPhraseDAD;
+	}
+
+	public void setPropositionPhraseDAD(List<String> propositionPhraseDAD) {
+		this.propositionPhraseDAD = propositionPhraseDAD;
+	}
+
+	public List<String> getReponseQDAD() {
+		return reponseQDAD;
+	}
+
+	public void setReponseQDAD(List<String> reponseQDAD) {
+		this.reponseQDAD = reponseQDAD;
+	}
+
+
+	
+	
 	
 	
 
