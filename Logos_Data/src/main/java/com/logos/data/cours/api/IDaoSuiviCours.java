@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.springframework.stereotype.Service;
 
+import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.SuiviCours;
 import com.logos.entity.user.Eleve;
@@ -30,5 +31,7 @@ public interface IDaoSuiviCours {
     public SuiviCours updateSuivi(SuiviCours suivi);
         
     public boolean deleteSuivi(SuiviCours suivi);
+    
+    public Set<Chapitre> getChapitresLuBySuiviCours(SuiviCours suivi);
 
 }

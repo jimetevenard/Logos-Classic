@@ -95,6 +95,9 @@
 	border-radius: 15px;
 }
 
+.badge.bravo {
+	background-color: #008000;
+}
 
 
 input[type="submit"]:hover, input[type="button"]:hover, button:hover {
@@ -156,11 +159,6 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 
 
 
-
-
-
-
-<<<<<<< HEAD
 #cour_langue {
 	margin-left: 4px;
 	margin-top:10px;
@@ -181,5 +179,16 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 	font-size: medium;
 	font-weight: bold;
 }
-=======
->>>>>>> refs/heads/Jim-mercredi-matin-debug-inscription
+
+/* suivi */
+
+.suivi-eleve .mes-cours .cours {
+	padding: 5px;
+}
+.suivi-eleve .mes-cours .cours h3 {
+	margin-top: 0;
+}
+.suivi-eleve .mes-cours .cours:hover {
+	background: rgba(255,255,255,0.5);
+}
+
