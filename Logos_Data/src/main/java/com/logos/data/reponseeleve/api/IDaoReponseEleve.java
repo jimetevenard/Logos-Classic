@@ -15,8 +15,10 @@ import com.logos.entity.user.Eleve;
 public interface IDaoReponseEleve {
 	ReponseEleve getReponseById(Integer id);
 	List<ReponseEleve> getReponseByEvaluation(Evaluation evaluation);
-	ReponseOuverteEleve addReponseOuverte(ReponseOuverteEleve reponse);
-	ReponseFermeeEleve addReponseFermee(ReponseFermeeEleve reponse);
+	ReponseEleve addReponseEleve(ReponseEleve reponse);
+//	ReponseDragAndDropEleve addReponseDragAndDropEleve(ReponseDragAndDropEleve reponse);
+//	ReponseATrousEleve addReponseATrou(ReponseATrousEleve reponse);
+//	ReponseQcmEleve addReponseFermeeQcmEleve (ReponseQcmEleve reponse);
 	ReponseEleve updateReponse(ReponseEleve reponse);
 	boolean deleteReponse(ReponseEleve reponse);
 	ReponseOuverteEleve getReponseOuverteById(Integer id);

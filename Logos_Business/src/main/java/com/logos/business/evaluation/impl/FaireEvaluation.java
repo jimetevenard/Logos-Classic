@@ -69,27 +69,28 @@ public class FaireEvaluation implements IFaireEvaluation{
 
 	@Override
 	public Set<ReponseEleve> addReponsesEleve(Set<ReponseEleve> reponses, RealiseEvaluation realiseEvaluationEnCours) {
-		List<ReponseFermeeEleve> reponsesFermeesEleve = new ArrayList<>();
-		List<ReponseOuverteEleve> reponsesOuvertesEleve = new ArrayList<>();
-		for(ReponseEleve r : reponses){
-			if(r.getClass().getSimpleName().equals("ReponseOuverteEleve")){
-				ReponseOuverteEleve r2 = (ReponseOuverteEleve)r;
-				if(r2.getCorrection() != null) {
-					reponsesOuvertesEleve.add((ReponseOuverteEleve) r2);
-				}
-			}else{
-				reponsesFermeesEleve.add((ReponseFermeeEleve) r);
-			}
-		}
-		
-		for(ReponseFermeeEleve r: reponsesFermeesEleve){
+//		List<ReponseFermeeEleve> reponsesFermeesEleve = new ArrayList<>();
+//		List<ReponseOuverteEleve> reponsesOuvertesEleve = new ArrayList<>();
+//		for(ReponseEleve r : reponses){
+//			if(r.getClass().getSimpleName().equals("ReponseOuverteEleve")){
+//				ReponseOuverteEleve r2 = (ReponseOuverteEleve)r;
+//				if(r2.getCorrection() != null) {
+//					reponsesOuvertesEleve.add((ReponseOuverteEleve) r2);
+//				}
+//			}else{
+//				reponsesFermeesEleve.add((ReponseFermeeEleve) r);
+//			}
+//		}
+//		
+		for(ReponseEleve r: reponses){
 			r.setRealiseEvaluation(realiseEvaluationEnCours);
-			daoReponseEleve.addReponseFermee(r);
+//			daoQuestion.addQuestion(r.getQuestion());
+			daoReponseEleve.addReponseEleve(r);
 		}
-		for(ReponseOuverteEleve r: reponsesOuvertesEleve){
-			r.setRealiseEvaluation(realiseEvaluationEnCours);
-			daoReponseEleve.addReponseOuverte(r);
-		}
+//		for(ReponseOuverteEleve r: reponsesOuvertesEleve){
+//			r.setRealiseEvaluation(realiseEvaluationEnCours);
+//			daoReponseEleve.addReponseEleve(r);
+//		}
 		return reponses;
 	}
 	

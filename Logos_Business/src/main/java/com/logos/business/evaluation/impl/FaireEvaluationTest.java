@@ -20,6 +20,7 @@ import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.question.Question;
 import com.logos.entity.question.QuestionATrous;
 import com.logos.entity.question.QuestionDragAndDrop;
+import com.logos.entity.question.QuestionOuverte;
 import com.logos.entity.question.QuestionQcm;
 import com.logos.entity.reponse.ReponseATrousEleve;
 import com.logos.entity.reponse.ReponseDragAndDropEleve;
@@ -70,13 +71,15 @@ public class FaireEvaluationTest {
 		Collections.addAll(responseQcmjuste, 1,5);
 		ReponseQcmEleve reponseQcmjuste = new ReponseQcmEleve(null, null, qQcm, responseQcmjuste);
 		
-		
+		QuestionOuverte qo1 = new QuestionOuverte(null, "lalala");
+		QuestionOuverte qo2 = new QuestionOuverte(null, "lalola");
+		QuestionOuverte qo3 = new QuestionOuverte(null, "lalula");
 		Correction correction1 = new Correction(null, "c'est vraiment nul ce que vous avez écrit, ca me donne mal à la tête", 6, new Date(), null, null);
 		Correction correction2 = new Correction(null, "Très bien", 18, new Date(), null, null);
 		Correction correction3 = new Correction(null, "Non, Bryan is in the kitchen", 10, new Date(), null, null);
-		ReponseOuverteEleve repOuverte1 = new ReponseOuverteEleve(null, null, null, "la la la la je m'en fou", correction1);
-		ReponseOuverteEleve repOuverte2 = new ReponseOuverteEleve(null, null, null, "Bryan is in the kitchen", correction2);
-		ReponseOuverteEleve repOuverte3 = new ReponseOuverteEleve(null, null, null, "Bryan is in the garden", correction3);
+		ReponseOuverteEleve repOuverte1 = new ReponseOuverteEleve(null, null, qo1, "la la la la je m'en fou", correction1);
+		ReponseOuverteEleve repOuverte2 = new ReponseOuverteEleve(null, null, qo2, "Bryan is in the kitchen", correction2);
+		ReponseOuverteEleve repOuverte3 = new ReponseOuverteEleve(null, null, qo3, "Bryan is in the garden", correction3);
 				
 //		log.info("corrigé de la question à trou fausse : "+bu.corrigerReponseATrous(reponseATroufausse, qTrou));
 //		log.info("corrigé de la question drag and drop fausse: "+bu.corrigerReponseATrous(reponseDragDropfausse, qDragDrop));
@@ -156,12 +159,12 @@ public class FaireEvaluationTest {
 //		log.info(bu.calculerNoteEvaluation(reponsesAll, reall));
 		
 		
-		ReponseOuverteEleve repOuverte4 = new ReponseOuverteEleve(null, null, null, "test1", correction1);
-		ReponseOuverteEleve repOuverte5 = new ReponseOuverteEleve(null, null, null, "test2", correction2);
-		ReponseOuverteEleve repOuverte6 = new ReponseOuverteEleve(null, null, null, "test3", correction3);
+//		ReponseOuverteEleve repOuverte4 = new ReponseOuverteEleve(null, null, null, "test1", correction1);
+//		ReponseOuverteEleve repOuverte5 = new ReponseOuverteEleve(null, null, null, "test2", correction2);
+//		ReponseOuverteEleve repOuverte6 = new ReponseOuverteEleve(null, null, null, "test3", correction3);
 //		ReponseOuverteEleve repOuverte7 = new ReponseOuverteEleve(idReponse, realiseEvaluation, question, reponse, correction)
 		Set<ReponseEleve> reponsesEncore = new HashSet<>();
-		Collections.addAll(reponsesEncore, reponseATroufausse);
+		Collections.addAll(reponsesEncore, reponseATroufausse,reponseDragDropfausse,repOuverte2,reponseQcmfausse,repOuverte3,reponseATroujuste,reponseDragDropjuste,reponseQcmjuste,repOuverte1);
 		bu.addReponsesEleve(reponsesEncore, reall);
 		
 	}
