@@ -2,6 +2,7 @@ package com.logos.data.cours.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.logos.data.cours.api.IDaoSuiviCours;
+import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.SuiviCours;
 import com.logos.entity.user.Eleve;
@@ -106,6 +108,16 @@ public class DaoSuiviCours implements IDaoSuiviCours {
 
 	public void setSf(SessionFactory sf) {
 		this.sf = sf;
+	}
+
+	@Override
+	@Transactional
+	public Set<Chapitre> getChapitresLuBySuiviCours(SuiviCours suivi) {
+		Session session = sf.getCurrentSession();
+		suivi = (SuiviCours) session.get(SuiviCours.class, suivi.getIdSuiviCours());
+		Set<Chapitre> chapitres = suivi.getChapitresLus();
+		suivi.getChapitresLus().size();
+		return chapitres;
 	}
 
 

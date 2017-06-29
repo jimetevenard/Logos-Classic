@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template-eleve.xhtml">
+	<ui:define name="titre">Suivi Élève</ui:define>
+	<ui:define name="contenu">
+		<div class="suivi-eleve">
+		<h:form>
+			<h1>Votre suivi</h1>
+			
+			 <!--  <h:outputText value="appel bean consulteCours" rendered="#{mbConsulteCours != null}" />  -->
+
+			<h:panelGroup rendered="true" styleClass="mes-cours" layout="block">
+
+				<h2>Vos cours</h2>
+				
+				<ui:repeat var="cours" value="#{suiviCoursMB.coursDisplay}">
+					<div class="cours">
+						<h3>
+							<h:commandLink action="#{suiviCoursMB.allerAuCours(cours.leCours)}" value="#{cours.titre}" />
+						</h3>
+						<h:panelGroup rendered="#{cours.fini}">
+							<p>Vous avez terminé ce cours le <h:outputText value="#{cours.dateDisplay}" /></p>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{! cours.fini}">
+							<p>Vous êtes inscrit à ce cours depuis le <h:outputText value="#{cours.dateDisplay}" /></p>
+						</h:panelGroup>
+						
+						<div class="progress">
+							<div class="progress-bar #{cours.fini ? 'progress-bar-success' : ''}" role="progressbar" 
+								style="width: #{cours.pourcentageLu}%; min-width: 90px;">Chapitre <h:outputText value="#{cours.nbChapitresLus}" /> / <h:outputText value="#{cours.nbChapitresTotal}" /></div>
+						</div>
+	
+					</div>				
+				</ui:repeat>
+				
+				
+
+			</h:panelGroup>
+
+			<h:panelGroup reder="true" styleClass="evals" layout="block">
+				<h2>Evaluations</h2>
+				
+				<div class="panel panel-default">
+				  <div class="panel-heading">Évaluations</div>
+				  <div class="panel-body">
+				    Voici vos évaluation réalisées :
+				  </div>
+				  
+				  
+				  <ul class="list-group">
+				  	<ui:repeat var="rev" value="#{suiviCoursMB.reals}" >
+				  		<li class="list-group-item">
+							<span class="badge #{true ? 'bravo' : ''}">_NOTE</span> <b><h:outputText value="#{rev.evaluation['class'].simpleName}" /></b> : <h:outputText value="#{rev.evaluation.titre}" />
+						</li>
+				  	</ui:repeat>
+						
+					</ul>
+				
+				</div>
+				
+				
+			
+			
+			</h:panelGroup>
+			</h:form>
+		</div><!--  .suivi-eleve -->
+	</ui:define>
+</ui:composition>
+</html>
