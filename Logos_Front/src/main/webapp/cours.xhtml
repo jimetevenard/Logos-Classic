@@ -35,8 +35,8 @@
 							<h:panelGroup rendered="#{q['class'].simpleName == 'QuestionQcm'}">
 								<h5>#{q.enonce}</h5>
 								<ui:repeat var="p" value="#{mbConsulteCours.getPropositionQcm(q)}">
-									<input type="checkbox"/>
-									<h:outputText value="p" />
+									<input type="checkbox" value="#{p}" />
+									<h:outputText value="#{p}" />
 								</ui:repeat>
 							</h:panelGroup>
 							<h:panelGroup rendered="#{q['class'].simpleName == 'QuestionATrous'}">

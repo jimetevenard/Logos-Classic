@@ -74,6 +74,7 @@ public class ConsulteCoursManagedBean {
 
 	public void getQuestions(Evaluation e){
 		questionsExercice = buFaireEvaluation.getQuestionByEvaluation(e);
+		
 	}
 
 	public void addReponseOuverte(ValueChangeEvent e){
@@ -97,6 +98,11 @@ public class ConsulteCoursManagedBean {
 		}
 		return propositionsQcm;
 		
+	}
+	
+	public void getChoix(ValueChangeEvent e){
+		Object newVal = e.getNewValue();
+		System.out.println(newVal.toString());
 	}
 	
 
