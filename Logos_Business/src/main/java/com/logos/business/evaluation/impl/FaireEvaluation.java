@@ -74,6 +74,7 @@ public class FaireEvaluation implements IFaireEvaluation{
 
 	@Override
 	public Set<ReponseEleve> addReponsesEleve(Set<ReponseEleve> reponses, RealiseEvaluation realiseEvaluationEnCours) {
+		
 		for(ReponseEleve r: reponses){
 			r.setRealiseEvaluation(realiseEvaluationEnCours);
 			Question q1 = getQuestionById(r.getQuestion().getIdQuestion());

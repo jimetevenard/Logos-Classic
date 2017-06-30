@@ -63,7 +63,11 @@ public class DaoReponseEleve implements IDaoReponseEleve{
 	@Override
 	@Transactional
 	public ReponseEleve addReponseEleve(ReponseEleve reponse) {
+		
 		Session session = sf.getCurrentSession();
+		if (reponse.getRealiseEvaluation() != null){
+			session.save(reponse.getRealiseEvaluation());
+		}
 		session.save(reponse);
 		return reponse;
 	}

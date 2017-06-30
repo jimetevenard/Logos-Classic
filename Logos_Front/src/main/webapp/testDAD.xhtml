@@ -1,25 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
 
-	<ui:composition template="/WEB-INF/template-eleve.xhtml">
-		<ui:define name="titre">#{mbConsulteCours.coursEnCours.titre}</ui:define>
-		<ui:define name="scriptsEtCss">
-			<script src="../js/question.js"></script>
+			<script src="../js/jquery.js"></script>
 			<script src="../js/questionDAD.js"></script>
 			<script src="../js/ui/jquery-ui.min.js"></script>
 			<style>
-			.ui-droppable-hover {background-color: pink; }
-			.wrap-input-drop {background: red; height: 30px; width:150px;display:inline-block; }
-			.wrap-input-drag{width:150px;text-align: center;}
-			
+			.ui-droppable-hover {background-color: pink;}
+			.ui-droppable-active {border: 5px solid orange !important;}
+			.wrap-input-drop {
+			z-index: 2;
+			border:1px solid black;
+			width:150px;/*
+			height:30px;*/
+			}
 			</style>
-		</ui:define>
-		<ui:define name="contenu">
-			<h:form>
+</h:head>
+<body>
+<h:form>
 				<h1>
 					<h:outputText value="#{mbConsulteCours.coursEnCours.titre}" />
 				</h1>
@@ -34,7 +37,7 @@
 				</div>
 				<div id="evaluation">
 					<h:outputText
-						value="#{mbConsulteCours.getPremiereEvaluation().titre}" />
+						value="#{mbConsulteCours.evaluationsChapitre.get(0).titre}" />
 					<div id="questions">
 						<ui:repeat var="q" value="#{mbConsulteCours.questionsExercice}">
 
@@ -95,16 +98,14 @@
 									<div class="inputs-drop">
 										<ui:repeat var="f"
 											value="#{mbConsulteCours.propositionPhraseDAD}">
-											<div class="drop"><div class="wrap-input-drop" ><h:inputHidden valueChangeListener="#{mbConsulteCours.getRepDAD}" data-hidden="hidden" >
-											<f:attribute name="question" value="#{q}" />
-											</h:inputHidden></div></div>
+											<div class="drop"><div class="wrap-input-drop"><div style="width:150px;height: 50px;"></div></div></div>
 										</ui:repeat>
 									</div>
 									<div class="inputs-drag">
 										<ui:repeat var="f"
 											value="#{mbConsulteCours.propositionPhraseDAD}">
-											<div class="wrap-input-drag" data-drag="drag"><h:outputText  value="#{f}" >
-												
+											<div class="wrap-input-drag"><h:outputText  value="#{f}" >
+												<f:attribute name="question" value="#{q}" />
 											</h:outputText></div>
 										</ui:repeat>
 									</div>
@@ -115,7 +116,7 @@
 						</ui:repeat>
 					</div>
 				</div>
-				<h:commandButton action="submit" actionListener="#{mbConsulteCours.envoiReponses}" value="VALIDER" />
+				<h:commandButton action="submit" value="ENVOI FRERE" />
 				<nav aria-label="...">
 				<ul class="pager">
 
@@ -131,10 +132,5 @@
 				</ul>
 				</nav>
 			</h:form>
-		</ui:define>
-	</ui:composition>
-
-<body>
-
 </body>
 </html>
