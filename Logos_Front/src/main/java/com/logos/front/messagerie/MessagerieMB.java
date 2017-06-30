@@ -36,6 +36,11 @@ public class MessagerieMB {
 		messagesConversationSelectionnee = getAllMessagesByConversation();
 	}
 	
+	public void changerConversation(Conversation conversation) {
+		conversationEnCours = conversation;
+		messagesConversationSelectionnee = getAllMessagesByConversation();
+	}
+	
 	public void envoyerMessage(Message message){
 		bu.envoyerMessage(message, conversationEnCours, loginMB.getUserConnected());
 	}
