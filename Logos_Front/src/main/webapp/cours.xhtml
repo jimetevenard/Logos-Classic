@@ -91,16 +91,13 @@
 									<div class="inputs-drop">
 										<ui:repeat var="f"
 											value="#{mbConsulteCours.propositionPhraseDAD}">
-											<span class="wrap-input-drop"><h:inputText
-													valueChangeListener="#{mbConsulteCours.getRepDAD}">
-													<f:attribute name="question" value="#{q}" />
-												</h:inputText></span>
+											<div class="drop"><span class="wrap-input-drop"></span></div>
 										</ui:repeat>
 									</div>
 									<div class="inputs-drag">
 										<ui:repeat var="f"
 											value="#{mbConsulteCours.propositionPhraseDAD}">
-											<div class="wrap-input-drag"><h:outputText value="#{f}" >
+											<div class="wrap-input-drag"><h:outputText  value="#{f}" >
 												<f:attribute name="question" value="#{q}" />
 											</h:outputText></div>
 										</ui:repeat>
