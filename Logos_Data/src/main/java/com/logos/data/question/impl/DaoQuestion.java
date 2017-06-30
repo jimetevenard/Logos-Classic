@@ -177,6 +177,26 @@ public class DaoQuestion implements IDaoQuestion{
 		}
 		return null;
 	}
+	
+	@Override
+	@Transactional
+	public List<String> getPropositionQuestionQcm(QuestionQcm q){
+		List<String> propositions = null ; 
+		Session session = sf.getCurrentSession();
+		try {
+			Query query = session.createSQLQuery("SELECT p.proposition_question_qcm "
+					+ "from proposition_question_qcm p "
+					+ "INNER JOIN question q ON p.id_question = q.id_question "
+					+ "where p.id_question= ?  ").setParameter(0, q.getIdQuestion()) ;
+			propositions = query.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return propositions;
+		
+	}
+	
 
 	public void setSf(SessionFactory sf) {
 		this.sf = sf;
