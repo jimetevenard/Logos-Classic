@@ -10,7 +10,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.logos.business.messagerie.api.IBusinessMessagerie;
-import com.logos.business.messagerie.impl.BusinessMessagerie;
 import com.logos.entity.messagerie.Conversation;
 import com.logos.entity.messagerie.Message;
 import com.logos.entity.user.Utilisateur;

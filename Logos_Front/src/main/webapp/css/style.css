@@ -192,3 +192,83 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 	background: rgba(255,255,255,0.5);
 }
 
+/* MESSAGERIE */
+
+.btn-rafraichir{
+	/*display: none;*/
+}
+
+.conversations{
+	height: 100vmax;
+	background-color: white;
+}
+
+.messages-affiche{
+	height: 600px;
+	margin-top: 50px;
+	position: relative;
+}
+
+.ecrire-message {
+	position: absolute;
+	bottom: 0px;
+	left: 0;
+	right: 0;
+	width: 100%;
+}
+
+.ecrire-message div {
+	display: inline-block;
+	bottom: 0px;
+}
+
+#champs-envoi-div{
+	width: 80%;
+}
+
+.message{
+	border-radius: 10px;
+	margin : 5px;
+	padding : 10px;
+	max-width: 70%;
+}
+
+.messages{
+	overflow: scroll;
+	height:85%;
+}
+
+.myself{
+	background-color: lightgreen;
+	
+}
+
+.other{
+	background-color: lightblue;
+	text-align: right;
+	position: relative;
+	right: -20%;
+	
+}
+
+#titreConversation{
+	text-align: center;
+}
+
+.nomAuteur{
+	display: block;
+	font-style: italic;
+	color: grey;
+	font-weight: 100;
+	font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
