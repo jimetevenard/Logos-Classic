@@ -21,7 +21,6 @@ public interface IDaoSuiviCours {
      */
     public List<Cours> getCoursInscritsByEleve(Eleve eleve);
     
-    
     public List<SuiviCours> getSuiviByEleve(Eleve eleve);
     
     public List<SuiviCours> getSuiviByEleveEtCours(Eleve eleve, Cours cours);

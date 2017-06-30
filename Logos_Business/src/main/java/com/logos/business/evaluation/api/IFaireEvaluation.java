@@ -37,5 +37,6 @@ public interface IFaireEvaluation {
 	Set<RealiseEvaluation> getRealiseEvaluationByEleve(Eleve eleve);
 	Set<ReponseEleve> addReponsesEleve(Set<ReponseEleve> reponses, RealiseEvaluation realiseEvaluationEnCours);
 	Question getQuestionById(Integer id);
+	double calculerNoteEvaluation(RealiseEvaluation realiseEval);
 	
 }

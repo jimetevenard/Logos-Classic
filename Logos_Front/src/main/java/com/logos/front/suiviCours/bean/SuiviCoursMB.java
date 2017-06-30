@@ -8,7 +8,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
+import com.logos.business.evaluation.api.IFaireEvaluation;
 import com.logos.business.inscriptionCours.api.IInscriptionCours;
+import com.logos.business.question.api.IBusinessQuestion;
 import com.logos.business.suiviCours.api.ISuiviCoursBu;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.SuiviCours;
@@ -23,6 +25,9 @@ public class SuiviCoursMB {
 	
 	@ManagedProperty(value = "#{suiviCoursBu}")
 	private ISuiviCoursBu businessSuivi;
+	
+	@ManagedProperty(value = "#{faireEvaluation}")
+	private IFaireEvaluation businessEval;
 	
 	@ManagedProperty(value="#{loginMB}")
 	private LoginMB logMb;
@@ -42,6 +47,7 @@ public class SuiviCoursMB {
 	private List<SuiviCours> suivis;
 	
 	private List<CoursDisplay> coursDisplay = new ArrayList<>();
+	private List<EvalDisplay> evalsDisplay = new ArrayList<>();
 	
 	@PostConstruct
 	public void initialisation(){
@@ -51,6 +57,11 @@ public class SuiviCoursMB {
 			s.getCours().setChapitres( coursBU.getChapitresByCours( s.getCours() ));
 			s.setChapitresLus(businessSuivi.getChapitresLuBySuiviCours(s));
 			coursDisplay.add(new CoursDisplay(s));
+		}
+		for(RealiseEvaluation re : reals){
+			EvalDisplay ed = new EvalDisplay(re);
+			ed.setNote(Double.toString(Math.round(businessEval.calculerNoteEvaluation(re))) + " / 20");
+			evalsDisplay.add(ed);
 		}
 				
 		
@@ -123,6 +134,28 @@ public class SuiviCoursMB {
 	public void setMbConsulter(ConsulteCoursManagedBean mbConsulter) {
 		this.mbConsulter = mbConsulter;
 	}
+
+	public IFaireEvaluation getBusinessEval() {
+		return businessEval;
+	}
+
+	public void setBusinessEval(IFaireEvaluation businessEval) {
+		this.businessEval = businessEval;
+	}
+
+	public List<EvalDisplay> getEvalsDisplay() {
+		return evalsDisplay;
+	}
+
+	public void setEvalsDisplay(List<EvalDisplay> evalsDisplay) {
+		this.evalsDisplay = evalsDisplay;
+	}
+	
+	
+
+	
+	
+	
 	
 	
 	
