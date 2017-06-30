@@ -6,48 +6,61 @@
 <ui:composition template="/WEB-INF/template-eleve.xhtml">
 	<ui:define name="titre">Bienvenue</ui:define>
 	<ui:define name="contenu">
-		<div class="conversation">
+		<div class="conversation col-sm-offset-1">
 			<h:form>
-				<h:panelGroup id="messagesAffiche">
-					<div class="messages">
-						<div id="titreConversation">"#{messagerieMB.conversationEnCours.titre}"</div>
-						<ui:repeat var="c"
-							value="#{messagerieMB.allMessagesByConversation}">
-							<h:panelGroup layout="block" styleClass="message #{c.auteur eq loginMB.userConnected ? 'myself' : 'other'}">
-								<b><h:outputLabel class="nomAuteur"
-									value="#{c.auteur.prenom} #{c.auteur.nom}" /></b><br />
-								<h:outputLabel class="contenuMessage" value="#{c.contenu}" />
-							</h:panelGroup>
-						</ui:repeat>
-					</div>
-					<div class="ecrireMessage">
-
-						<h:inputText id="champsEnvoi" class="form-control"
-							value="#{messagerieMB.messageAEnvoyer}" />
-						<h:commandButton action="#{messagerieMB.envoyerMessage()}"
-							class="btn btn-default envoyer" value="Envoyer">
-							<f:ajax execute="champsEnvoi" render="messagesAffiche" />
-						</h:commandButton>
-						<h:commandButton class="btn btn-default"
-							action="#{messagerieMB.rafraichirMessages()}" value="Rafraichir">
-							<f:ajax render="messagesAffiche" />
-						</h:commandButton>
-
+				<h:panelGroup layout="block" styleClass="col-sm-8 ">
+					<div class="messages-affiche">
+						<div class="messages">
+							<h3 id="titreConversation">#{messagerieMB.conversationEnCours.titre}</h3>
+							<ui:repeat var="c"
+								value="#{messagerieMB.allMessagesByConversation}">
+								<h:panelGroup layout="block"
+									styleClass="message #{c.auteur eq loginMB.userConnected ? 'myself' : 'other'}">
+									<h:outputLabel styleClass="nomAuteur"
+										value="#{c.auteur.prenom} #{c.auteur.nom}" />
+									<h:outputLabel styleClass="contenuMessage" value="#{c.contenu}" />
+								</h:panelGroup>
+							</ui:repeat>
+						</div>
+						<div class="ecrire-message">
+							<div id="champs-envoi-div">
+								<h:inputTextarea id="champsEnvoi"
+									styleClass="envoyer-msg-input form-control"
+									value="#{messagerieMB.messageAEnvoyer}" />
+							</div>
+							<div>
+								<h:commandButton action="#{messagerieMB.envoyerMessage()}"
+									styleClass="btn btn-default envoyer" value="Envoyer">
+									<f:ajax execute="champsEnvoi" render="messages" />
+								</h:commandButton>
+								<h:commandButton styleClass="btn btn-default btn-rafraichir"
+									action="#{messagerieMB.rafraichirMessages()}"
+									value="Rafraichir">
+									<f:ajax render="messages" />
+								</h:commandButton>
+							</div>
+						</div>
 					</div>
 				</h:panelGroup>
-				<div class="conversations">
-					<ui:repeat var="c" value="#{messagerieMB.conversations}">
-						<div class="conversation">
+				<div class="col-sm-offset-1 col-sm-3 conversations">
+					<h2>Mes conversations</h2>
+					<div class="list-group">
+						<ui:repeat var="c" value="#{messagerieMB.conversations}">
 							<h:commandLink action="#{messagerieMB.changerConversation(c)}"
-								class="conversationTitle" value="#{c.titre}">
+								styleClass="conversationTitle list-group-item #{c eq messagerieMB.conversationEnCours ? 'active' : ''}">
+								<h4 class="list-group-item-heading">
+									<h:outputText value="#{c.titre}" />
+								</h4>
 								<ui:repeat var="u"
 									value="#{messagerieMB.getListeUtilisateur(c)}">
-									<h:outputLabel class="conversationParticipants"
-										value="#{u.prenom} #{u.nom}" />
+									<p class="list-group-item-text">
+										<h:outputText styleClass="conversationParticipants"
+											value="#{u.prenom} #{u.nom}" />
+									</p>
 								</ui:repeat>
 							</h:commandLink>
-						</div>
-					</ui:repeat>
+						</ui:repeat>
+					</div>
 				</div>
 
 
