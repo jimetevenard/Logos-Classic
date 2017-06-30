@@ -187,6 +187,13 @@ public class FaireEvaluation implements IFaireEvaluation{
 		}
 		return noteMoyenneQuestionsFermees;
 	}
+	
+	@Override
+	public double calculerNoteEvaluation(RealiseEvaluation realiseEval) {
+		List<ReponseEleve> reponses = daoReponseEleve.getReponseByRealiseEvaluation(realiseEval);
+		
+		return calculerNoteEvaluation(reponses, realiseEval);
+	}
 
 	public double calculNoteMoyenneQuestionsFermees(List<ReponseFermeeEleve> reponsesFermmeesEleve, RealiseEvaluation realiseEval){
 		List<Boolean> reponsesFermmeesEleveCorrige = corrigerReponseFermeeEleve(reponsesFermmeesEleve, realiseEval);

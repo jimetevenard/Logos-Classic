@@ -51,9 +51,9 @@
 				  
 				  
 				  <ul class="list-group">
-				  	<ui:repeat var="rev" value="#{suiviCoursMB.reals}" >
+				  	<ui:repeat var="eval" value="#{suiviCoursMB.evalsDisplay}" >
 				  		<li class="list-group-item">
-							<span class="badge #{true ? 'bravo' : ''}">_NOTE</span> <b><h:outputText value="#{rev.evaluation['class'].simpleName}" /></b> : <h:outputText value="#{rev.evaluation.titre}" />
+							<span class="badge #{true ? 'bravo' : ''}"><h:outputText value="#{eval.note}" /></span> <b><h:outputText value="#{eval.type}" /></b> : <h:outputText value="#{eval.titre}" />
 						</li>
 				  	</ui:repeat>
 						
