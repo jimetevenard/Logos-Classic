@@ -1,6 +1,5 @@
 package com.logos.data.messagerie.impl;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.logos.data.messagerie.api.IDaoConversation;
 import com.logos.entity.messagerie.Conversation;
-import com.logos.entity.messagerie.Message;
 import com.logos.entity.user.Utilisateur;
 
 @Service
@@ -77,5 +75,14 @@ public class DaoConversation implements IDaoConversation{
 		return null;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Utilisateur> getUsersByConversation(Conversation conversation) {
+		Session session= sf.getCurrentSession();
+		Query query = session.createQuery("SELECT c.utilisateurs FROM Conversation c WHERE c.idConversation = :param").setParameter("param", conversation.getIdConversation());
+		List<Utilisateur> users = (List<Utilisateur>) query.list();
+		Set<Utilisateur> liste = new HashSet<>(users);
+		return liste;
+	}
 	
 }

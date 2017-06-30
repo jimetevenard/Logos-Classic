@@ -1,5 +1,6 @@
 package com.logos.front.messagerie;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -18,42 +19,60 @@ import com.logos.front.connexion.LoginMB;
 @ManagedBean
 @SessionScoped
 public class MessagerieMB {
-	
+
 	@ManagedProperty(value = "#{businessMessagerie}")
 	private IBusinessMessagerie bu;
-	
+
 	@ManagedProperty(value = "#{loginMB}")
 	private LoginMB loginMB;
-	
+
 	private Conversation conversationEnCours;
-	private Message message;
 	private List<Conversation>conversations;
 	private List<Message>messagesConversationSelectionnee;
-	
+	private String messageAEnvoyer;
+
 	@PostConstruct
 	public void init() {
 		conversations = getAllConversationsByUser();
-		messagesConversationSelectionnee = getAllMessagesByConversation();
+		for (Conversation conversation : conversations) {
+			conversation.setUtilisateurs(bu.getUsersByConversation(conversation) );
+		}
+		if(conversations.size() != 0) {
+			conversationEnCours = conversations.get(0);
+			messagesConversationSelectionnee = getAllMessagesByConversation();
+		}
 	}
-	
+
 	public void changerConversation(Conversation conversation) {
 		conversationEnCours = conversation;
 		messagesConversationSelectionnee = getAllMessagesByConversation();
 	}
-	
-	public void envoyerMessage(Message message){
+
+	public void envoyerMessage(){
+		Message message = new Message();
+		message.setContenu(messageAEnvoyer);
 		bu.envoyerMessage(message, conversationEnCours, loginMB.getUserConnected());
+		messageAEnvoyer="";
+		
 	}
 	
+	public void rafraichirMessages(){
+		messagesConversationSelectionnee = getAllMessagesByConversation();
+	}
+
 	public List<Conversation> getAllConversationsByUser() {
 		return bu.getAllConversationsByUser(loginMB.getUserConnected());
 	}
-	
+
 	public List<Message> getAllMessagesByConversation() {
 		return bu.getAllMessagesByConversation(conversationEnCours);
 	}
 	
-	
+	public List<Utilisateur> getListeUtilisateur(Conversation c){
+		return new ArrayList<>( c.getUtilisateurs() );
+	}
+
+
 	public IBusinessMessagerie getBu() {
 		return bu;
 	}
@@ -72,12 +91,6 @@ public class MessagerieMB {
 	public void setConversationEnCours(Conversation conversationEnCours) {
 		this.conversationEnCours = conversationEnCours;
 	}
-	public Message getMessage() {
-		return message;
-	}
-	public void setMessage(Message message) {
-		this.message = message;
-	}
 
 	public List<Conversation> getConversations() {
 		return conversations;
@@ -94,5 +107,15 @@ public class MessagerieMB {
 	public void setMessagesConversationSelectionnee(List<Message> messagesConversationSelectionnee) {
 		this.messagesConversationSelectionnee = messagesConversationSelectionnee;
 	}
+
+	public String getMessageAEnvoyer() {
+		return messageAEnvoyer;
+	}
+
+	public void setMessageAEnvoyer(String messageAEnvoyer) {
+		this.messageAEnvoyer = messageAEnvoyer;
+	}
 	
+	
+
 }

@@ -2,6 +2,7 @@ package com.logos.business.messagerie.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.BeanFactory;
@@ -49,7 +50,13 @@ private static Logger log = Logger.getLogger(TestMessagerie.class);
 		
 		//log.info(bu.signalerNombreDeNouveauxMessage(el));
 		
-		bu.setMessageLu(conv, el);
+		//bu.setMessageLu(conv, el);
+		
+		Set<Utilisateur>users = bu.getUsersByConversation(conv);
+		
+		for (Utilisateur utilisateur : users) {
+			log.info(utilisateur.getNom());
+		}
 		
 		
 		

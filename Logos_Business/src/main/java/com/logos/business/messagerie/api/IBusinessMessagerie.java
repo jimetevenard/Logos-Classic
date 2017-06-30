@@ -2,6 +2,7 @@ package com.logos.business.messagerie.api;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.logos.entity.messagerie.Conversation;
 import com.logos.entity.messagerie.Message;
@@ -15,4 +16,5 @@ public interface IBusinessMessagerie {
 	Message envoyerMessage(Message message, Conversation conversation, Utilisateur auteur);
 	int signalerNombreDeNouveauxMessage(Utilisateur userConnected);
 	void setMessageLu(Conversation conversation, Utilisateur userConnected);
+	Set<Utilisateur> getUsersByConversation(Conversation conversation);
 }

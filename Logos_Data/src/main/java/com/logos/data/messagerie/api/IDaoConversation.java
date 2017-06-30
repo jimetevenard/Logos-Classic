@@ -1,6 +1,7 @@
 package com.logos.data.messagerie.api;
 
 import java.util.List;
+import java.util.Set;
 
 import com.logos.entity.messagerie.Conversation;
 import com.logos.entity.user.Utilisateur;
@@ -13,5 +14,6 @@ public interface IDaoConversation {
 	Conversation getConversationById(Integer id);
 	Boolean deleteConversation(Conversation conversation);
 	Conversation updateConversation(Conversation chawa);
+	Set<Utilisateur> getUsersByConversation(Conversation conversation);
 
 }
