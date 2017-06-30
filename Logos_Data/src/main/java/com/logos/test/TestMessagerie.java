@@ -33,6 +33,7 @@ public class TestMessagerie {
 		IDaoProfesseur daoProfesseur = bf.getBean(IDaoProfesseur.class);
 		
 		Conversation c1 = new Conversation(null, "lololo");
+		Conversation c3 = new Conversation(null, "Nananananananananaa");
 		Conversation c2 = new Conversation();
 		c2.setIdConversation(3);
 		Set<Conversation> listeConv = new HashSet<>();
@@ -40,7 +41,7 @@ public class TestMessagerie {
 		Utilisateur e1 = daoEleve.getEleveById(1);
 		log.info(" élève "+e1.getIdUtilisateur());
 		Utilisateur p1 = daoProfesseur.getProfById(2);
-		//daoConversation.addConversation(c1,p1,e1);
+		daoConversation.addConversation(c3,p1,e1);
 		
 		Message m1= new Message(null, "salut1");
 		m1.setDateEnvoi(new Date());
@@ -59,10 +60,9 @@ public class TestMessagerie {
 		m5.setAuteur(daoEleve.getEleveById(1));
 		Set<Message> messages = new HashSet<>();
 		Collections.addAll(messages, m1,m2,m3,m4,m5);
-//		for (Message message : messages) {
-//			daoMessage.addMessage(message, c2);
-//
-//		}
+		for (Message message : messages) {
+			daoMessage.addMessage(message, c3);
+		}
 		
 //		log.info(daoConversation.getConversationById(11).getTitre());
 //		log.info(daoMessage.getMessageById(18).getContenu());
@@ -78,6 +78,13 @@ public class TestMessagerie {
 //		}
 		
 //		log.info(daoMessage.updateDateLectureMessage(daoMessage.getMessageById(4)));
+		
+//		Set<Utilisateur>users = daoConversation.getUsersByConversation(c2);
+//		
+//		for (Utilisateur utilisateur : users) {
+//			log.info(utilisateur.getNom());
+//		}
+		
 		
 
 	}

@@ -3,9 +3,11 @@ package com.logos.business.messagerie.impl;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.context.support.UiApplicationContextUtils;
 
 import com.logos.business.messagerie.api.IBusinessMessagerie;
 import com.logos.data.messagerie.api.IDaoConversation;
@@ -77,6 +79,10 @@ public class BusinessMessagerie implements IBusinessMessagerie {
 				daoMessage.updateDateLectureMessage(msg);
 			}
 		}
+	}
+	
+	public Set<Utilisateur> getUsersByConversation(Conversation conversation) {
+		return daoConversation.getUsersByConversation(conversation);
 	}
 
 	public IDaoMessage getDaoMessage() {

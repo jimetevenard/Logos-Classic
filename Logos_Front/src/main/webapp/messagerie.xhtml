@@ -7,37 +7,56 @@
 	<ui:define name="titre">Bienvenue</ui:define>
 	<ui:define name="contenu">
 		<div class="conversation">
-			<div class="messages">
-				<div id="titreConversation">"#{messagerieMB.conversationEnCours.titre}"</div>
-				<ui:repeat var="c" value="#{messagerieMB.allMessagesByConversation}">
-					<div class="message">
-						<h:outputLabel class="nomAuteur"
-							value="#{c.auteur.prenom} #{c.auteur.nom}" />
-						<h:outputLabel class="contenuMessage" value="#{c.contenu}" />
-					</div>
-				</ui:repeat>
-			</div>
-			<div class="ecrireMessage">
-				<h:form>
-					<h:inputText value="#{messagerieMB.message.contenu}" />
-					<h:commandButton action="#{messagerieMB.envoyerMessage()}"
-						value="Envoyer" />
-				</h:form>
-			</div>
-		</div>
-		<div class="conversations">
-			<ui:repeat var="c" value="#{messagerieMB.allConversationsByUser}">
-				<div class="conversation">
-					<h:commandLink action="#{messagerieMB.changerConversation(c)}"
-						class="conversationTitle" value="#{c.titre}">
-						<ui:repeat var="u" value="#{c.utilisateurs}">
-							<h:outputLabel class="conversationParticipants"
-								value="#{u.prenom} #{u.nom}" />
+			<h:form>
+				<h:panelGroup id="messagesAffiche">
+					<div class="messages">
+						<div id="titreConversation">"#{messagerieMB.conversationEnCours.titre}"</div>
+						<ui:repeat var="c"
+							value="#{messagerieMB.allMessagesByConversation}">
+							<h:panelGroup layout="block" styleClass="message #{c.auteur eq loginMB.userConnected ? 'myself' : 'other'}">
+								<b><h:outputLabel class="nomAuteur"
+									value="#{c.auteur.prenom} #{c.auteur.nom}" /></b><br />
+								<h:outputLabel class="contenuMessage" value="#{c.contenu}" />
+							</h:panelGroup>
 						</ui:repeat>
-					</h:commandLink>
+					</div>
+					<div class="ecrireMessage">
+
+						<h:inputText id="champsEnvoi" class="form-control"
+							value="#{messagerieMB.messageAEnvoyer}" />
+						<h:commandButton action="#{messagerieMB.envoyerMessage()}"
+							class="btn btn-default envoyer" value="Envoyer">
+							<f:ajax execute="champsEnvoi" render="messagesAffiche" />
+						</h:commandButton>
+						<h:commandButton class="btn btn-default"
+							action="#{messagerieMB.rafraichirMessages()}" value="Rafraichir">
+							<f:ajax render="messagesAffiche" />
+						</h:commandButton>
+
+					</div>
+				</h:panelGroup>
+				<div class="conversations">
+					<ui:repeat var="c" value="#{messagerieMB.conversations}">
+						<div class="conversation">
+							<h:commandLink action="#{messagerieMB.changerConversation(c)}"
+								class="conversationTitle" value="#{c.titre}">
+								<ui:repeat var="u"
+									value="#{messagerieMB.getListeUtilisateur(c)}">
+									<h:outputLabel class="conversationParticipants"
+										value="#{u.prenom} #{u.nom}" />
+								</ui:repeat>
+							</h:commandLink>
+						</div>
+					</ui:repeat>
 				</div>
-			</ui:repeat>
+
+
+
+			</h:form>
 		</div>
+
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/messagerie.js"></script>
 	</ui:define>
 </ui:composition>
 </html>
