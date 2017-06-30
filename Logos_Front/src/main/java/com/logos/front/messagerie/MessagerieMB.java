@@ -1,5 +1,6 @@
 package com.logos.front.messagerie;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -57,6 +58,12 @@ public class MessagerieMB {
 	
 	public void rafraichirMessages(){
 		messagesConversationSelectionnee = getAllMessagesByConversation();
+	}
+	
+	public String afficherDateEnvoi(Message message){
+		SimpleDateFormat pattern = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		String str = pattern.format(message.getDateEnvoi());
+		return str;
 	}
 
 	public List<Conversation> getAllConversationsByUser() {

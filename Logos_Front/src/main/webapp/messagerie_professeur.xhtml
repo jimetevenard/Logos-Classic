@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template-prof.xhtml">
+	<ui:define name="titre">Bienvenue</ui:define>
+	<ui:define name="contenu">
+		<div class="conversation col-sm-offset-1">
+			<h:form>
+				<h:panelGroup id="messages-conversation" layout="block" styleClass="col-sm-8 ">
+					<div class="messages-affiche">
+						<div class="messages">
+							<h3 id="titreConversation">#{messagerieMB.conversationEnCours.titre}</h3>
+							<ui:repeat var="m"
+								value="#{messagerieMB.allMessagesByConversation}">
+								<h:panelGroup layout="block"
+									styleClass="message #{m.auteur eq loginMB.userConnected ? 'myself' : 'other'}">
+									<h:outputLabel styleClass="nomAuteur"
+										value="#{m.auteur.prenom} #{m.auteur.nom} #{messagerieMB.afficherDateEnvoi(m)}" />
+									<h:outputLabel styleClass="contenuMessage" value="#{m.contenu}" />
+								</h:panelGroup>
+							</ui:repeat>
+						</div>
+						<div class="ecrire-message">
+							<div id="champs-envoi-div">
+								<h:inputTextarea id="champsEnvoi"
+									styleClass="envoyer-msg-input form-control"
+									value="#{messagerieMB.messageAEnvoyer}" />
+							</div>
+							<div>
+								<h:commandButton action="#{messagerieMB.envoyerMessage()}"
+									styleClass="btn btn-default envoyer" value="Envoyer">
+									<f:ajax execute="champsEnvoi" render="messages-conversation" />
+								</h:commandButton>
+								<h:commandButton styleClass="btn btn-default btn-rafraichir"
+									action="#{messagerieMB.rafraichirMessages()}"
+									value="Rafraichir">
+									<f:ajax render="messages-conversation" />
+								</h:commandButton>
+							</div>
+						</div>
+					</div>
+				</h:panelGroup>
+				<div class="col-sm-offset-1 col-sm-3 conversations">
+					<h2>Mes conversations</h2>
+					<div class="list-group">
+						<ui:repeat var="c" value="#{messagerieMB.conversations}">
+							<h:commandLink action="#{messagerieMB.changerConversation(c)}"
+								styleClass="conversationTitle list-group-item #{c eq messagerieMB.conversationEnCours ? 'active' : ''}">
+								<h4 class="list-group-item-heading">
+									<h:outputText value="#{c.titre}" />
+								</h4>
+								<ui:repeat var="u"
+									value="#{messagerieMB.getListeUtilisateur(c)}">
+									<p class="list-group-item-text">
+										<h:outputText styleClass="conversationParticipants"
+											value="#{u.prenom} #{u.nom}" />
+									</p>
+								</ui:repeat>
+							</h:commandLink>
+						</ui:repeat>
+					</div>
+				</div>
+
+
+
+			</h:form>
+		</div>
+
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/messagerie.js"></script>
+	</ui:define>
+</ui:composition>
+</html>

@@ -35,13 +35,15 @@ public class TestMessagerie {
 		Conversation c1 = new Conversation(null, "lololo");
 		Conversation c3 = new Conversation(null, "Nananananananananaa");
 		Conversation c2 = new Conversation();
-		c2.setIdConversation(3);
-		Set<Conversation> listeConv = new HashSet<>();
-		Collections.addAll(listeConv, c1);
+		c1.setIdConversation(1);
+		c3.setIdConversation(3);
+//		Set<Conversation> listeConv = new HashSet<>();
+//		Collections.addAll(listeConv, c1);
 		Utilisateur e1 = daoEleve.getEleveById(1);
 		log.info(" élève "+e1.getIdUtilisateur());
 		Utilisateur p1 = daoProfesseur.getProfById(2);
 		daoConversation.addConversation(c3,p1,e1);
+		daoConversation.addConversation(c1,p1,e1);
 		
 		Message m1= new Message(null, "salut1");
 		m1.setDateEnvoi(new Date());
@@ -62,6 +64,7 @@ public class TestMessagerie {
 		Collections.addAll(messages, m1,m2,m3,m4,m5);
 		for (Message message : messages) {
 			daoMessage.addMessage(message, c3);
+			daoMessage.addMessage(message, c1);
 		}
 		
 //		log.info(daoConversation.getConversationById(11).getTitre());

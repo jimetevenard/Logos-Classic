@@ -1,5 +1,7 @@
 package com.logos.business.evaluation.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -13,11 +15,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.logos.business.evaluation.api.IFaireEvaluation;
 import com.logos.data.cours.api.IDaoCours;
+import com.logos.data.evaluation.api.IDaoEvaluation;
+import com.logos.data.messagerie.api.IDaoMessage;
+import com.logos.data.question.api.IDaoQuestion;
 import com.logos.data.question.impl.DaoQuestion;
 import com.logos.entity.cours.Chapitre;
 import com.logos.entity.evaluation.Correction;
 import com.logos.entity.evaluation.Evaluation;
 import com.logos.entity.evaluation.RealiseEvaluation;
+import com.logos.entity.messagerie.Message;
 import com.logos.entity.question.Question;
 import com.logos.entity.question.QuestionATrous;
 import com.logos.entity.question.QuestionDragAndDrop;
@@ -39,6 +45,8 @@ public class FaireEvaluationTest {
 	public static void main(String[] args) {
 		BeanFactory bf = new ClassPathXmlApplicationContext("classpath:springBusiness.xml");
 		IFaireEvaluation bu = bf.getBean(IFaireEvaluation.class);
+		IDaoQuestion dao = bf.getBean(IDaoQuestion.class);
+		IDaoMessage daoM = bf.getBean(IDaoMessage.class);
 		
 		ArrayList<String> solutionsATrous= new ArrayList<>();
 		Collections.addAll(solutionsATrous, "kitchen","garden");
@@ -96,12 +104,34 @@ public class FaireEvaluationTest {
 		
 //		List<ReponseOuverteEleve> reponsesOuvertes = new ArrayList<>();
 //		Collections.addAll(reponsesOuvertes, repOuverte1,repOuverte2,repOuverte3);
-		Set<ReponseEleve> reponses = new HashSet<>();
-//		Collections.addAll(reponses, reponseATroufausse,reponseDragDropfausse,repOuverte2,reponseQcmfausse,repOuverte3,reponseATroujuste,reponseDragDropjuste,reponseQcmjuste,repOuverte1);
+//		List<ReponseEleve> reponses = new ArrayList<>();
+//		Set<ReponseEleve> reponsesSet = new HashSet<>();
+//		Collections.addAll(reponses, repOuverte2,repOuverte2,repOuverte2,repOuverte2,repOuverte2,repOuverte2,reponseATroufausse);
+//		Collections.addAll(reponsesSet, reponseATroufausse,reponseDragDropfausse,repOuverte2,reponseQcmfausse,repOuverte3,reponseATroujuste,reponseDragDropjuste,reponseQcmjuste,repOuverte1);
 //		
+//		Evaluation eval = new Evaluation();
+//		eval.setIdEvaluation(1);
+//		Set<Evaluation> setval = new HashSet<>();
+//		Collections.addAll(setval, eval);
+//		RealiseEvaluation reall = new RealiseEvaluation();
+//		reall.setIdRealiseEvaluation(1);
+//		qTrou.setEvaluations(setval);
+//		qDragDrop.setEvaluations(setval);
+//		qQcm.setEvaluations(setval);
+//		qo1.setEvaluations(setval);
+//		qo2.setEvaluations(setval);
+//		qo3.setEvaluations(setval);
+//		dao.addQuestion(qTrou);
+//		dao.addQuestion(qDragDrop);
+//		dao.addQuestion(qQcm);
+//		dao.addQuestion(qo1);
+//		dao.addQuestion(qo2);
+//		dao.addQuestion(qo3);
+//		bu.addReponsesEleve(reponsesSet, reall);
+		
 //		log.info("note moyenne des questions fermées de l'éval est : "+bu.calculNoteMoyenneQuestionsFermees(reponsesFermees));
 //		log.info("note moyenne des questions ouvertes de l'éval est : "+bu.calculNoteMoyenneQuestionsOuvertes(reponsesOuvertes));
-//		log.info("note moyenne des questions ouvertes de l'éval est : "+bu.calculerNoteEvaluation(reponses));
+//		log.info("note moyenne de toutes les questions de l'éval est : "+bu.calculerNoteEvaluation(reponses,reall));
 		
 //		Chapitre chap = new Chapitre();
 //		chap.setIdChapitre(1);
@@ -110,10 +140,10 @@ public class FaireEvaluationTest {
 //			log.info(evaluation.getTitre());
 //		}
 		
-		Eleve e= new Eleve();
-		e.setIdUtilisateur(1);
-		Evaluation eval = new Evaluation();
-		eval.setIdEvaluation(1);
+//		Eleve e= new Eleve();
+//		e.setIdUtilisateur(1);
+//		Evaluation eval = new Evaluation();
+//		eval.setIdEvaluation(1);
 //		bu.realiserEvaluation(eval, e, reponses);
 		
 //		List<Question> questions = bu.getQuestionByEvaluation(eval);
@@ -137,12 +167,12 @@ public class FaireEvaluationTest {
 //		rep2.setIdReponse(3);
 //		ReponseDragAndDropEleve rep3 = new ReponseDragAndDropEleve();
 //		rep3.setIdReponse(4);
-		List<ReponseEleve> reponsesAll = bu.getReponseEleveByEvaluation(eval);
-		List<ReponseFermeeEleve> liste = new ArrayList<>();
-		List<ReponseOuverteEleve> li = new ArrayList<>();
-		RealiseEvaluation reall = new RealiseEvaluation();
-		reall.setIdRealiseEvaluation(1);
-		
+//		List<ReponseEleve> reponsesAll = bu.getReponseEleveByEvaluation(eval);
+//		List<ReponseFermeeEleve> liste = new ArrayList<>();
+//		List<ReponseOuverteEleve> li = new ArrayList<>();
+//		RealiseEvaluation reall = new RealiseEvaluation();
+//		reall.setIdRealiseEvaluation(1);
+//		
 		
 //		for(ReponseEleve r : reponsesAll){
 //			if(r.getClass().getSimpleName().equals("ReponseOuverteEleve")){
@@ -164,24 +194,35 @@ public class FaireEvaluationTest {
 //		ReponseOuverteEleve repOuverte5 = new ReponseOuverteEleve(null, null, null, "test2", correction2);
 //		ReponseOuverteEleve repOuverte6 = new ReponseOuverteEleve(null, null, null, "test3", correction3);
 //		ReponseOuverteEleve repOuverte7 = new ReponseOuverteEleve(idReponse, realiseEvaluation, question, reponse, correction)
-		Question q1 = bu.getQuestionById(3);
-		ArrayList<String> responseATrousjuste1= new ArrayList<>();
-		Collections.addAll(responseATrousjuste1, "kitchen","garden");
-		ReponseATrousEleve reponseATroujuste1 = new ReponseATrousEleve(null, null, q1, responseATrousjuste1);
+//		Question q1 = bu.getQuestionById(3);
+//		ArrayList<String> responseATrousjuste1= new ArrayList<>();
+//		Collections.addAll(responseATrousjuste1, "kitchen","garden");
+//		ReponseATrousEleve reponseATroujuste1 = new ReponseATrousEleve(null, null, q1, responseATrousjuste1);
+//		
+//		Question q2 = bu.getQuestionById(2);
+//		ArrayList<Integer> responseQcmjuste2= new ArrayList<>();
+//		Collections.addAll(responseQcmjuste2, 1,5);
+//		ReponseQcmEleve reponseQcmjuste1 = new ReponseQcmEleve(null, null, q2, responseQcmjuste2);
+//		
+//		Question q3 = bu.getQuestionById(4);
+//		ArrayList<String> responseDragDropjuste3= new ArrayList<>();
+//		Collections.addAll(responseDragDropjuste3, "white","black");
+//		ReponseDragAndDropEleve reponseDragDropjuste1 = new ReponseDragAndDropEleve(null, null, q3, responseDragDropjuste3);
+//		
+//		Set<ReponseEleve> reponsesEncore = new HashSet<>();
+//		Collections.addAll(reponsesEncore, reponseATroujuste1,reponseQcmjuste1,reponseDragDropjuste1);
+//		bu.addReponsesEleve(reponsesEncore, reall);
 		
-		Question q2 = bu.getQuestionById(2);
-		ArrayList<Integer> responseQcmjuste2= new ArrayList<>();
-		Collections.addAll(responseQcmjuste2, 1,5);
-		ReponseQcmEleve reponseQcmjuste1 = new ReponseQcmEleve(null, null, q2, responseQcmjuste2);
-		
-		Question q3 = bu.getQuestionById(4);
-		ArrayList<String> responseDragDropjuste3= new ArrayList<>();
-		Collections.addAll(responseDragDropjuste3, "white","black");
-		ReponseDragAndDropEleve reponseDragDropjuste1 = new ReponseDragAndDropEleve(null, null, q3, responseDragDropjuste3);
-		
-		Set<ReponseEleve> reponsesEncore = new HashSet<>();
-		Collections.addAll(reponsesEncore, reponseATroujuste1,reponseQcmjuste1,reponseDragDropjuste1);
-		bu.addReponsesEleve(reponsesEncore, reall);
+		Message message = daoM.getMessageById(2);
+		SimpleDateFormat pattern = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+		String str = pattern.format(message.getDateEnvoi());
+		log.info("date avant parse : "+str);
+		try {
+			log.info("la date est "+pattern.parse(str).toString());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

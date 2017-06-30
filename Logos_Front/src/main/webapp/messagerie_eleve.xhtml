@@ -8,17 +8,17 @@
 	<ui:define name="contenu">
 		<div class="conversation col-sm-offset-1">
 			<h:form>
-				<h:panelGroup layout="block" styleClass="col-sm-8 ">
+				<h:panelGroup id="messages-conversation" layout="block" styleClass="col-sm-8 ">
 					<div class="messages-affiche">
 						<div class="messages">
 							<h3 id="titreConversation">#{messagerieMB.conversationEnCours.titre}</h3>
-							<ui:repeat var="c"
+							<ui:repeat var="m"
 								value="#{messagerieMB.allMessagesByConversation}">
 								<h:panelGroup layout="block"
-									styleClass="message #{c.auteur eq loginMB.userConnected ? 'myself' : 'other'}">
+									styleClass="message #{m.auteur eq loginMB.userConnected ? 'myself' : 'other'}">
 									<h:outputLabel styleClass="nomAuteur"
-										value="#{c.auteur.prenom} #{c.auteur.nom}" />
-									<h:outputLabel styleClass="contenuMessage" value="#{c.contenu}" />
+										value="#{m.auteur.prenom} #{m.auteur.nom} #{messagerieMB.afficherDateEnvoi(m)}" />
+									<h:outputLabel styleClass="contenuMessage" value="#{m.contenu}" />
 								</h:panelGroup>
 							</ui:repeat>
 						</div>
@@ -31,12 +31,12 @@
 							<div>
 								<h:commandButton action="#{messagerieMB.envoyerMessage()}"
 									styleClass="btn btn-default envoyer" value="Envoyer">
-									<f:ajax execute="champsEnvoi" render="messages" />
+									<f:ajax execute="champsEnvoi" render="messages-conversation" />
 								</h:commandButton>
 								<h:commandButton styleClass="btn btn-default btn-rafraichir"
 									action="#{messagerieMB.rafraichirMessages()}"
 									value="Rafraichir">
-									<f:ajax render="messages" />
+									<f:ajax render="messages-conversation" />
 								</h:commandButton>
 							</div>
 						</div>

@@ -141,7 +141,7 @@ public class FaireEvaluation implements IFaireEvaluation{
 
 	@Override
 	public Boolean corrigerReponseQcm(ReponseQcmEleve reponseQcm, QuestionQcm questionQcm) {
-		//		List<Integer> solutionsQcm = questionQcm.getSolutions(); // à enlever après le test bidon
+//				List<Integer> solutionsQcm = questionQcm.getSolutions(); // à enlever après le test bidon
 		List<Integer> solutionsQcm = daoQuestion.getSolutionsByQuestionQcm(questionQcm);
 		for(int i = 0; i < solutionsQcm.size(); i++){
 			if(! solutionsQcm.get(i).equals(reponseQcm.getReponseQcm().get(i) )){
@@ -153,7 +153,7 @@ public class FaireEvaluation implements IFaireEvaluation{
 
 	@Override
 	public Boolean corrigerReponseATrous(ReponseATrousEleve reponseATrou, QuestionATrous questionATrou) {
-		//		List<String> solutions = questionATrou.getSolutions(); // à enlever après le test bidon
+//				List<String> solutions = questionATrou.getSolutions(); // à enlever après le test bidon
 		List<String> solutions = daoQuestion.getSolutionsByQuestionATrous(questionATrou);
 		for(int i = 0; i < solutions.size(); i++){
 			if(! solutions.get(i).equals(reponseATrou.getReponseATrou().get(i) )){
@@ -184,7 +184,7 @@ public class FaireEvaluation implements IFaireEvaluation{
 		double noteMoyenneQuestionsFermees = calculNoteMoyenneQuestionsFermees(reponsesFermmeesEleve, realiseEval);
 		if(reponsesOuvertesEleve.size() != 0) {
 			double noteMoyenneQuestionsOuvertes = calculNoteMoyenneQuestionsOuvertes(reponsesOuvertesEleve);
-			return (noteMoyenneQuestionsFermees+noteMoyenneQuestionsOuvertes)/2;
+			return ((noteMoyenneQuestionsFermees*reponsesFermmeesEleve.size())+noteMoyenneQuestionsOuvertes*reponsesOuvertesEleve.size())/(reponsesFermmeesEleve.size()+reponsesOuvertesEleve.size());
 		}
 		return noteMoyenneQuestionsFermees;
 	}
@@ -213,7 +213,7 @@ public class FaireEvaluation implements IFaireEvaluation{
 		double noteMoyenneQuestionsOuvertes=0;
 		List<Integer> notes = new ArrayList<>();
 		for(ReponseOuverteEleve r: reponsesOuvertesEleve){
-			//			Integer note = r.getCorrection().getNote(); // à enlever après le test bidon
+//						Integer note = r.getCorrection().getNote(); // à enlever après le test bidon
 			Integer note = daoCorrection.getCorrectionByReponse(r).getNote();
 			notes.add(note);
 		}
