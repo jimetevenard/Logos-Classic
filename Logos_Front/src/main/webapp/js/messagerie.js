@@ -1,6 +1,11 @@
 $(function (){
-	$(".envoyer").on("click", function(e){
-		
-	});
+	
+	
+	setInterval(function(){
+		console.log('fx timeout')
+		$(".btn-rafraichir").trigger("click");
+	
+	},1000);
+	
 	
 });

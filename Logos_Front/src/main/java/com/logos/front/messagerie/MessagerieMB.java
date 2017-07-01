@@ -30,6 +30,8 @@ public class MessagerieMB {
 	private List<Conversation>conversations;
 	private List<Message>messagesConversationSelectionnee;
 	private String messageAEnvoyer;
+	
+	private Integer nbNouveauxMessages;
 
 	@PostConstruct
 	public void init() {
@@ -41,11 +43,14 @@ public class MessagerieMB {
 			conversationEnCours = conversations.get(0);
 			messagesConversationSelectionnee = getAllMessagesByConversation();
 		}
+		bu.setMessageLu(conversationEnCours, loginMB.getUserConnected());
+		updateNombreMessagesNonLus();
 	}
 
 	public void changerConversation(Conversation conversation) {
 		conversationEnCours = conversation;
 		messagesConversationSelectionnee = getAllMessagesByConversation();
+		bu.setMessageLu(conversationEnCours, loginMB.getUserConnected());
 	}
 
 	public void envoyerMessage(){
@@ -57,13 +62,34 @@ public class MessagerieMB {
 	}
 	
 	public void rafraichirMessages(){
-		messagesConversationSelectionnee = getAllMessagesByConversation();
+		List<Message> tousMessages = getAllMessagesByConversation();
+		for (Message message : tousMessages) {
+			if(message.getDateLecture()==null){
+				messagesConversationSelectionnee.add(message);			
+			}
+		}
+		bu.setMessageLu(conversationEnCours, loginMB.getUserConnected());
 	}
 	
 	public String afficherDateEnvoi(Message message){
 		SimpleDateFormat pattern = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		String str = pattern.format(message.getDateEnvoi());
 		return str;
+	}
+	
+	public String afficherDateLecture(Message message){
+		if(message.getAuteur().getIdUtilisateur() == loginMB.getUserConnected().getIdUtilisateur() && message.getDateLecture()!=null){
+			SimpleDateFormat pattern = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			String str = "Lu à "+pattern.format(message.getDateLecture());
+			return str;
+		}
+		return "";
+	
+	}
+	
+	public void updateNombreMessagesNonLus() {
+		//nbNouveauxMessages++;
+		nbNouveauxMessages = bu.signalerNombreDeNouveauxMessage(loginMB.getUserConnected());
 	}
 
 	public List<Conversation> getAllConversationsByUser() {
@@ -77,7 +103,8 @@ public class MessagerieMB {
 	public List<Utilisateur> getListeUtilisateur(Conversation c){
 		return new ArrayList<>( c.getUtilisateurs() );
 	}
-
+	
+	
 
 	public IBusinessMessagerie getBu() {
 		return bu;
@@ -121,6 +148,16 @@ public class MessagerieMB {
 	public void setMessageAEnvoyer(String messageAEnvoyer) {
 		this.messageAEnvoyer = messageAEnvoyer;
 	}
+
+	public Integer getNbNouveauxMessages() {
+		return nbNouveauxMessages;
+	}
+
+	public void setNbNouveauxMessages(Integer nbNouveauxMessages) {
+		this.nbNouveauxMessages = nbNouveauxMessages;
+	}
+	
+	
 	
 	
 

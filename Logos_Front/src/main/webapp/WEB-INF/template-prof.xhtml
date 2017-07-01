@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
 	<script src="../js/jquery.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/logos.js"></script>
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, shrink-to-fit=no"></meta>
 	<ui:insert name="scriptsEtCss" />
@@ -42,12 +43,13 @@
 							<ul id="profilMenu">
 								<li><span class="glyphicon glyphicon-copy"></span>Suivi</li>
 								<li><span class="glyphicon glyphicon-book"></span>Cours</li>
-								<li><span class="glyphicon glyphicon-envelope"></span>Messages
-									<p class="badge">55</p></li>
+								<li><span class="glyphicon glyphicon-envelope"></span><h:link outcome="messagerie_professeur.xhtml">Messages</h:link>
+									<p class="badge"><h:outputText id="nb-messages" value="#{messagerieMB.nbNouveauxMessages}" /></p></li>
 								<li><span class="glyphicon glyphicon-edit"></span>Corrections
-									<p class="badge">128</p></li>
+									<p class="badge">3</p></li>
 							</ul>
 						</div>
+						<h:commandButton action="#{messagerieMB.updateNombreMessagesNonLus()}" value="Refresh" styleClass="btn-refresh-nb-messages"><f:ajax render="nb-messages"></f:ajax></h:commandButton>
 					</div>
 				</h:form>
 			</div>

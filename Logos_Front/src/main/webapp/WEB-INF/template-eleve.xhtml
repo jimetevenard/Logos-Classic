@@ -8,9 +8,10 @@
 <h:head>
 	<title><ui:insert name="titre" /></title>
 	<link rel="stylesheet" href="../css/bootstrap.min.css" />
-	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<link rel="stylesheet" href="../css/style.css" type="text/css" />
 	<script src="../js/jquery.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/logos.js"></script>
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, shrink-to-fit=no"></meta>
 	<ui:insert name="scriptsEtCss" />
@@ -48,10 +49,11 @@
 							<ul id="profilMenu">
 								<li><span class="glyphicon glyphicon-copy"></span><h:link outcome="suivi_eleve.xhtml">Suivi</h:link></li>
 								<li><span class="glyphicon glyphicon-book"></span><h:link outcome="inscription_cours2.xhtml">Cours</h:link></li>
-								<li><span class="glyphicon glyphicon-envelope"></span><h:link outcome="messagerie.xhtml">Messages</h:link>
-									<span class="badge">55</span></li>
+								<li><span class="glyphicon glyphicon-envelope"></span><h:link outcome="messagerie_eleve.xhtml">Messages</h:link>
+									<span class="badge"><h:outputText id="nb-messages" value="#{messagerieMB.nbNouveauxMessages}" /></span></li>
 							</ul>
 						</div>
+						<h:commandButton action="#{messagerieMB.updateNombreMessagesNonLus()}" value="Refresh" styleClass="btn-refresh-nb-messages"><f:ajax render="nb-messages"></f:ajax></h:commandButton>
 						<div id="divPremium">
 							<span class="glyphicon glyphicon-star-empty" />
 							<div>Devenez premium</div>

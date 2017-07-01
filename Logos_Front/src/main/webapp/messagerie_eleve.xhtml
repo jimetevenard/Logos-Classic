@@ -10,7 +10,8 @@
 			<h:form>
 				<h:panelGroup id="messages-conversation" layout="block" styleClass="col-sm-8 ">
 					<div class="messages-affiche">
-						<div class="messages">
+						<h:panelGroup layout="block" id="les-messages" styleClass="messages">
+						
 							<h3 id="titreConversation">#{messagerieMB.conversationEnCours.titre}</h3>
 							<ui:repeat var="m"
 								value="#{messagerieMB.allMessagesByConversation}">
@@ -19,9 +20,11 @@
 									<h:outputLabel styleClass="nomAuteur"
 										value="#{m.auteur.prenom} #{m.auteur.nom} #{messagerieMB.afficherDateEnvoi(m)}" />
 									<h:outputLabel styleClass="contenuMessage" value="#{m.contenu}" />
+									<h:outputLabel styleClass="date-lecture" value="#{messagerieMB.afficherDateLecture(m)}" rendered="#{m.auteur eq loginMB.userConnected}"/>
 								</h:panelGroup>
-							</ui:repeat>
-						</div>
+							</ui:repeat>				
+						</h:panelGroup><!-- .messages -->
+						
 						<div class="ecrire-message">
 							<div id="champs-envoi-div">
 								<h:inputTextarea id="champsEnvoi"
@@ -36,7 +39,7 @@
 								<h:commandButton styleClass="btn btn-default btn-rafraichir"
 									action="#{messagerieMB.rafraichirMessages()}"
 									value="Rafraichir">
-									<f:ajax render="messages-conversation" />
+									<f:ajax render="les-messages" />
 								</h:commandButton>
 							</div>
 						</div>
@@ -68,7 +71,7 @@
 			</h:form>
 		</div>
 
-		<script type="text/javascript" src="../js/jquery.js"></script>
+		
 		<script type="text/javascript" src="../js/messagerie.js"></script>
 	</ui:define>
 </ui:composition>
