@@ -204,22 +204,22 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 }
 
 .messages-affiche{
-/* 	height: 600px; */
 	margin-top: 50px;
 	position: relative;
+	height: 100vmax;
 }
 
 .ecrire-message {
-	position: absolute;
+	/*position: absolute;
 	bottom: 0px;
 	left: 0;
-	right: 0;
+	right: 0;*/
 	width: 100%;
 }
 
 .ecrire-message div {
 	display: inline-block;
-	bottom: 0px;
+	/*bottom: 0px;*/
 }
 
 #champs-envoi-div{
@@ -245,9 +245,7 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 	right: -20%;
 }
 
-.myself, .date-lecture{
-	display: none;
-}
+
 
 .other{
 	background-color: lightblue;
@@ -267,6 +265,13 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 	font-size: 12px;
 }
 
+
+/* DIVERS */
+
+input.btn-refresh-nb-messages {
+	display: none;
+	font-size: 3em;
+}
 
 
 

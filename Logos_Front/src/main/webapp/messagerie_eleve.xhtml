@@ -20,7 +20,7 @@
 									<h:outputLabel styleClass="nomAuteur"
 										value="#{m.auteur.prenom} #{m.auteur.nom} #{messagerieMB.afficherDateEnvoi(m)}" />
 									<h:outputLabel styleClass="contenuMessage" value="#{m.contenu}" />
-									<h:outputLabel styleClass="date-lecture" value="#{messagerieMB.afficherDateLecture(m)}" />
+									<h:outputLabel styleClass="date-lecture" value="#{messagerieMB.afficherDateLecture(m)}" rendered="#{m.auteur eq loginMB.userConnected}"/>
 								</h:panelGroup>
 							</ui:repeat>				
 						</h:panelGroup><!-- .messages -->
