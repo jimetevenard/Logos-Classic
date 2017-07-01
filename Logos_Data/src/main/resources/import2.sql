@@ -154,16 +154,34 @@ INSERT INTO `proposition_question_qcm` (`id_question`, `proposition_question_qcm
 -- Contenu de la table `realise_evaluation`
 --
 
+INSERT INTO `realise_evaluation` (`id_realise_evaluation`, `date_evaluation`, `id_eleve`, `id_evaluation`) VALUES(1, '2017-06-21 00:00:00', 1, 1);
 
 
 --
 -- Contenu de la table `reponse_eleve`
 --
+
+INSERT INTO `reponse_eleve` (`type_reponse_eleve`, `id_reponse_eleve`, `reponse_ouverte_eleve`, `id_question`, `id_realise_evaluation`, `id_correction_reponse_ouverte`) VALUES('ReponseOuverteEleve', 1, 'Je pense qu''il est blanc', 1, 1, NULL);
+INSERT INTO `reponse_eleve` (`type_reponse_eleve`, `id_reponse_eleve`, `reponse_ouverte_eleve`, `id_question`, `id_realise_evaluation`, `id_correction_reponse_ouverte`) VALUES('ReponseQcmEleve', 2, '', 2, 1, NULL);
+INSERT INTO `reponse_eleve` (`type_reponse_eleve`, `id_reponse_eleve`, `reponse_ouverte_eleve`, `id_question`, `id_realise_evaluation`, `id_correction_reponse_ouverte`) VALUES('ReponseATrousEleve', 3, '', 3, 1, NULL);
+INSERT INTO `reponse_eleve` (`type_reponse_eleve`, `id_reponse_eleve`, `reponse_ouverte_eleve`, `id_question`, `id_realise_evaluation`, `id_correction_reponse_ouverte`) VALUES('ReponseDragAndDropEleve', 4, '', 4, 1, NULL);
+
 --
 -- Contenu de la table `reponse_qcm`
 --
 
+INSERT INTO `reponse_qcm` (`id_reponse`, `reponse_qcm`) VALUES(2, 0);
+INSERT INTO `reponse_qcm` (`id_reponse`, `reponse_qcm`) VALUES(2, 2);
+
+--
 -- Contenu de la table `reponse_trous`
+--
+
+INSERT INTO `reponse_trous` (`id_reponse`, `reponse_trous`) VALUES(3, 'cheval');
+INSERT INTO `reponse_trous` (`id_reponse`, `reponse_trous`) VALUES(3, 'jaune');
+INSERT INTO `reponse_trous` (`id_reponse`, `reponse_trous`) VALUES(4, 'roi');
+INSERT INTO `reponse_trous` (`id_reponse`, `reponse_trous`) VALUES(4, 'culotte');
+
 --
 -- Contenu de la table `solution_question_qcm`
 --
