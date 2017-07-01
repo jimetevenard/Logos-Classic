@@ -41,6 +41,7 @@ public class MessagerieMB {
 			conversationEnCours = conversations.get(0);
 			messagesConversationSelectionnee = getAllMessagesByConversation();
 		}
+		bu.setMessageLu(conversationEnCours, loginMB.getUserConnected());
 	}
 
 	public void changerConversation(Conversation conversation) {
@@ -57,12 +58,24 @@ public class MessagerieMB {
 	}
 	
 	public void rafraichirMessages(){
-		messagesConversationSelectionnee = getAllMessagesByConversation();
+		List<Message> tousMessages = getAllMessagesByConversation();
+		for (Message message : tousMessages) {
+			if(message.getDateLecture()==null){
+				messagesConversationSelectionnee.add(message);			
+			}
+		}
+		bu.setMessageLu(conversationEnCours, loginMB.getUserConnected());
 	}
 	
 	public String afficherDateEnvoi(Message message){
 		SimpleDateFormat pattern = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		String str = pattern.format(message.getDateEnvoi());
+		return str;
+	}
+	
+	public String afficherDateLecture(Message message){
+		SimpleDateFormat pattern = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		String str = "Lu à "+pattern.format(message.getDateLecture());
 		return str;
 	}
 
