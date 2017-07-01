@@ -76,7 +76,7 @@ public class FaireEvaluation implements IFaireEvaluation{
 	public Set<ReponseEleve> addReponsesEleve(Set<ReponseEleve> reponses, RealiseEvaluation realiseEvaluationEnCours) {
 		
 		for(ReponseEleve r: reponses){
-			r.setRealiseEvaluation(realiseEvaluationEnCours);
+//			r.setRealiseEvaluation(realiseEvaluationEnCours);
 			Question q1 = getQuestionById(r.getQuestion().getIdQuestion());
 			r.setQuestion(q1);
 			daoReponseEleve.addReponseEleve(r);

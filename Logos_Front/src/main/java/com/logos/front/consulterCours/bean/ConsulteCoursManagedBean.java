@@ -29,6 +29,7 @@ import com.logos.entity.question.QuestionQcm;
 import com.logos.entity.reponse.ReponseATrousEleve;
 import com.logos.entity.reponse.ReponseDragAndDropEleve;
 import com.logos.entity.reponse.ReponseEleve;
+import com.logos.entity.reponse.ReponseFermeeEleve;
 import com.logos.entity.reponse.ReponseOuverteEleve;
 import com.logos.entity.reponse.ReponseQcmEleve;
 import com.logos.entity.user.Eleve;
@@ -62,6 +63,11 @@ public class ConsulteCoursManagedBean {
 	private Evaluation evalEnCours;
 	private ReponseOuverteEleve roe;
 	private RealiseEvaluation ree ;
+	
+	private List<ReponseFermeeEleve> reponsesFermeesEleves ;
+	private List<Boolean> correctionsEleves;
+	
+	private boolean envoye ;
 
 
 	@ManagedProperty(value="#{inscriptionCours}")
@@ -83,7 +89,7 @@ public class ConsulteCoursManagedBean {
 		rate = new ReponseATrousEleve();
 		rdad = new ReponseDragAndDropEleve();
 		roe = new ReponseOuverteEleve() ;
-		ree = new RealiseEvaluation();
+//		ree = new RealiseEvaluation();
 
 	}
 
@@ -146,9 +152,13 @@ public class ConsulteCoursManagedBean {
 	}
 
 	public void addReponseQcm(ValueChangeEvent e){
-		Object newVal = e.getNewValue();
-		numReponseQcm = new ArrayList<>();
-		numReponseQcm.add(propositionsQcm.indexOf(newVal.toString()));
+		List<String> newVal =(List<String>) e.getNewValue();
+			numReponseQcm = new ArrayList<>();
+		for (String pro : newVal) {
+			numReponseQcm.add(propositionsQcm.indexOf(pro));
+//			System.out.println(pro);
+		}
+		
 		rqe.setReponseQcm(numReponseQcm);
 		QuestionQcm qQcm = (QuestionQcm) ((Question) ((UIInput) e.getSource()).getAttributes().get("question")) ;
 		rqe.setQuestion(qQcm);
@@ -185,7 +195,7 @@ public class ConsulteCoursManagedBean {
 
 	public void getRepDAD(ValueChangeEvent e){
 		Object newVal = e.getNewValue();
-		reponseQDAD.add(newVal.toString());
+		reponseQDAD.add(newVal.toString().trim());
 
 		QuestionDragAndDrop qDAD = (QuestionDragAndDrop) ((Question) ((UIInput) e.getSource()).getAttributes().get("question")) ;
 		rdad.setQuestion(qDAD);
@@ -193,29 +203,30 @@ public class ConsulteCoursManagedBean {
 	}
 	
 	public void envoiReponses(ActionEvent event){
+		envoye = true ;
 		listeReponsesEleve = new HashSet<>();
 		listeReponsesEleve.add(rqe);
 		rate.setReponseATrou(reponseQAT);
-		System.out.println(reponseQAT);
 		listeReponsesEleve.add(rate);
 		rdad.setReponseATrou(reponseQDAD);
+
+		
 		listeReponsesEleve.add(rdad);
 		listeReponsesEleve.add(roe);
-		ree.setEleve(eleve);
-		ree.setDateEvaluation(new Date());
-		ree.setReponsesEleve(listeReponsesEleve);
-		ree.setEvaluation(evalEnCours);
-		System.out.println(ree.getIdRealiseEvaluation());
-		buFaireEvaluation.addReponsesEleve(listeReponsesEleve, buFaireEvaluation.realiserEvaluation(evalEnCours, eleve, listeReponsesEleve));
+		ree= buFaireEvaluation.realiserEvaluation(evalEnCours, eleve, listeReponsesEleve);
+		buFaireEvaluation.addReponsesEleve(listeReponsesEleve, ree);
+		reponsesFermeesEleves = new ArrayList<>();
+		
+		reponsesFermeesEleves.add(rqe);
+		reponsesFermeesEleves.add(rate);
+		reponsesFermeesEleves.add(rdad);
+		
+		correctionsEleves = buFaireEvaluation.corrigerReponseFermeeEleve(reponsesFermeesEleves, ree);
+		
+
+		
 		
 	}
-
-	public void getChoix(ValueChangeEvent e){
-		Object newVal = e.getNewValue();
-		System.out.println(newVal.toString());
-	}
-
-
 
 	public String getUrlTemplate(Question q){
 		return new StringBuilder().append(q.getClass().getSimpleName()).append(".xhtml").toString();
@@ -228,7 +239,6 @@ public class ConsulteCoursManagedBean {
 	public void setListeChapitre(List<Chapitre> listeChapitre) {
 		this.listeChapitre = listeChapitre;
 	}
-
 
 	public int getIndiceChapitreEnCours() {
 		return indiceChapitreEnCours;
@@ -245,7 +255,6 @@ public class ConsulteCoursManagedBean {
 	public void setChapitreEnCours(Chapitre chapitreEnCours) {
 		this.chapitreEnCours = chapitreEnCours;
 	}
-
 
 	public IInscriptionCours getBuInscription() {
 		return buInscription;
@@ -453,6 +462,30 @@ public class ConsulteCoursManagedBean {
 
 	public void setRee(RealiseEvaluation ree) {
 		this.ree = ree;
+	}
+
+	public boolean isEnvoye() {
+		return envoye;
+	}
+
+	public void setEnvoye(boolean envoye) {
+		this.envoye = envoye;
+	}
+
+	public List<ReponseFermeeEleve> getReponsesFermeesEleves() {
+		return reponsesFermeesEleves;
+	}
+
+	public void setReponsesFermeesEleves(List<ReponseFermeeEleve> reponsesFermeesEleves) {
+		this.reponsesFermeesEleves = reponsesFermeesEleves;
+	}
+
+	public List<Boolean> getCorrectionsEleves() {
+		return correctionsEleves;
+	}
+
+	public void setCorrectionsEleves(List<Boolean> correctionsEleves) {
+		this.correctionsEleves = correctionsEleves;
 	}
 
 
