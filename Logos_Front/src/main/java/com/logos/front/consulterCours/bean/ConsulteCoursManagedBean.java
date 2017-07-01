@@ -1,6 +1,7 @@
 package com.logos.front.consulterCours.bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,16 +24,20 @@ import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.question.Question;
 import com.logos.entity.question.QuestionATrous;
 import com.logos.entity.question.QuestionDragAndDrop;
+import com.logos.entity.question.QuestionOuverte;
 import com.logos.entity.question.QuestionQcm;
 import com.logos.entity.reponse.ReponseATrousEleve;
 import com.logos.entity.reponse.ReponseDragAndDropEleve;
 import com.logos.entity.reponse.ReponseEleve;
 import com.logos.entity.reponse.ReponseOuverteEleve;
 import com.logos.entity.reponse.ReponseQcmEleve;
+import com.logos.entity.user.Eleve;
+import com.logos.front.connexion.LoginMB;
 
 @ManagedBean(name="mbConsulteCours")
 @SessionScoped
 public class ConsulteCoursManagedBean {
+	private Eleve eleve;
 	private List<Chapitre> listeChapitre ;
 	private int indiceChapitreEnCours ;
 	private Cours coursEnCours;
@@ -51,10 +56,12 @@ public class ConsulteCoursManagedBean {
 	private List<String> reponseQDAD = new ArrayList<>() ;
 	private Set<ReponseEleve> listeReponsesEleve;
 	private List<Integer> numReponseQcm ;
-	ReponseQcmEleve rqe;
-	ReponseATrousEleve rate;
-	ReponseDragAndDropEleve rdad;
-	Evaluation evalEnCours;
+	private ReponseQcmEleve rqe;
+	private ReponseATrousEleve rate;
+	private ReponseDragAndDropEleve rdad;
+	private Evaluation evalEnCours;
+	private ReponseOuverteEleve roe;
+	private RealiseEvaluation ree ;
 
 
 	@ManagedProperty(value="#{inscriptionCours}")
@@ -65,12 +72,18 @@ public class ConsulteCoursManagedBean {
 
 	@ManagedProperty(value="#{businessQuestion}")
 	private IBusinessQuestion buQuestion;
+	
+	@ManagedProperty(value="#{loginMB}")
+	private LoginMB loginMb;
 
 	@PostConstruct
 	public void init(){
+		eleve = (Eleve) loginMb.getUserConnected();
 		rqe = new ReponseQcmEleve();
 		rate = new ReponseATrousEleve();
 		rdad = new ReponseDragAndDropEleve();
+		roe = new ReponseOuverteEleve() ;
+		ree = new RealiseEvaluation();
 
 	}
 
@@ -124,18 +137,16 @@ public class ConsulteCoursManagedBean {
 
 	public void addReponseOuverte(ValueChangeEvent e){
 		Object newVal = e.getNewValue();
-		ReponseOuverteEleve roe = new ReponseOuverteEleve() ;
-		System.out.println( ((Question) ((UIInput) e.getSource()).getAttributes().get("question")).getEnonce() );
+		QuestionOuverte qOuverte = (QuestionOuverte) ((Question) ((UIInput) e.getSource()).getAttributes().get("question")) ;
 		roe.setReponse(newVal.toString());
+		roe.setQuestion(qOuverte);
 		listeReponseOuverte=new ArrayList<>();
 		listeReponseOuverte.add(roe);
-//		listeReponsesEleve.add(roe);
 
 	}
 
 	public void addReponseQcm(ValueChangeEvent e){
 		Object newVal = e.getNewValue();
-		System.out.println( ((Question) ((UIInput) e.getSource()).getAttributes().get("question")).getEnonce());
 		numReponseQcm = new ArrayList<>();
 		numReponseQcm.add(propositionsQcm.indexOf(newVal.toString()));
 		rqe.setReponseQcm(numReponseQcm);
@@ -150,9 +161,7 @@ public class ConsulteCoursManagedBean {
 	}
 
 	public String getPhraseATrousQuestion(QuestionATrous qat){
-		System.out.println(qat.getEnonce());
 		phraseATrous = qat.getPhraseATrou();
-		System.out.println(phraseATrous);
 		propositionPhraseATrou =  buQuestion.getSolutionQuestionATrou(qat);
 		return phraseATrous;
 
@@ -160,7 +169,6 @@ public class ConsulteCoursManagedBean {
 
 	public String getQuestionDAD (QuestionDragAndDrop q){
 		phraseDAD = q.getPhraseATrou();
-		System.out.println(phraseDAD);
 		propositionPhraseDAD = buQuestion.getSolutionQuestionATrou(q);
 		return phraseDAD;
 
@@ -168,8 +176,6 @@ public class ConsulteCoursManagedBean {
 
 	public void getRepATrouEleve(ValueChangeEvent e){
 		Object newVal = e.getNewValue();
-		reponseQAT.add(newVal.toString());
-		System.out.println("QUESTION A TROU : "+ ((Question) ((UIInput) e.getSource()).getAttributes().get("question")).getEnonce() );
 		QuestionATrous questionATrou = (QuestionATrous) ((Question) ((UIInput) e.getSource()).getAttributes().get("question")) ;
 		rate.setQuestion(questionATrou);
 		reponseQAT.add(newVal.toString());
@@ -180,11 +186,9 @@ public class ConsulteCoursManagedBean {
 	public void getRepDAD(ValueChangeEvent e){
 		Object newVal = e.getNewValue();
 		reponseQDAD.add(newVal.toString());
-		System.out.println("QUESTION DAD : "+ ((Question) ((UIInput) e.getSource()).getAttributes().get("question")).getEnonce() );
 
 		QuestionDragAndDrop qDAD = (QuestionDragAndDrop) ((Question) ((UIInput) e.getSource()).getAttributes().get("question")) ;
 		rdad.setQuestion(qDAD);
-		System.out.println(newVal.toString());
 		
 	}
 	
@@ -192,13 +196,17 @@ public class ConsulteCoursManagedBean {
 		listeReponsesEleve = new HashSet<>();
 		listeReponsesEleve.add(rqe);
 		rate.setReponseATrou(reponseQAT);
+		System.out.println(reponseQAT);
 		listeReponsesEleve.add(rate);
 		rdad.setReponseATrou(reponseQDAD);
 		listeReponsesEleve.add(rdad);
-		RealiseEvaluation ree = new RealiseEvaluation();
+		listeReponsesEleve.add(roe);
+		ree.setEleve(eleve);
+		ree.setDateEvaluation(new Date());
 		ree.setReponsesEleve(listeReponsesEleve);
 		ree.setEvaluation(evalEnCours);
-		buFaireEvaluation.addReponsesEleve(listeReponsesEleve, ree);
+		System.out.println(ree.getIdRealiseEvaluation());
+		buFaireEvaluation.addReponsesEleve(listeReponsesEleve, buFaireEvaluation.realiserEvaluation(evalEnCours, eleve, listeReponsesEleve));
 		
 	}
 
@@ -415,8 +423,40 @@ public class ConsulteCoursManagedBean {
 		this.evalEnCours = evalEnCours;
 	}
 
+	public Eleve getEleve() {
+		return eleve;
+	}
+
+	public void setEleve(Eleve eleve) {
+		this.eleve = eleve;
+	}
+
+	public LoginMB getLoginMb() {
+		return loginMb;
+	}
+
+	public void setLoginMb(LoginMB loginMb) {
+		this.loginMb = loginMb;
+	}
+
+	public ReponseOuverteEleve getRoe() {
+		return roe;
+	}
+
+	public void setRoe(ReponseOuverteEleve roe) {
+		this.roe = roe;
+	}
+
+	public RealiseEvaluation getRee() {
+		return ree;
+	}
+
+	public void setRee(RealiseEvaluation ree) {
+		this.ree = ree;
+	}
 
 
+	
 
 
 
