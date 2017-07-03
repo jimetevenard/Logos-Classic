@@ -175,6 +175,22 @@ public class DaoCours implements IDaoCours{
 		this.sf = sf;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Cours> getAllCours() {
+		List<Cours> listeCours = new ArrayList<>();
+		Session session = sf.getCurrentSession();
+		try {
+			Query query = session.createQuery("SELECT c FROM Cours c");
+			listeCours = query.list();
+			return listeCours ;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 
 

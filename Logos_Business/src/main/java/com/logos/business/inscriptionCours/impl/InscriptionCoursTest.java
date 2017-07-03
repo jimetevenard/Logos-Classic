@@ -147,6 +147,12 @@ public class InscriptionCoursTest implements IInscriptionCours{
 		return null;
 	}
 
+	@Override
+	public boolean isDejaInscritACours(Cours cours, Eleve eleve) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 	
 	

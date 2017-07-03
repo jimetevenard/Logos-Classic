@@ -1,6 +1,7 @@
 package com.logos.business.inscriptionCours.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -117,17 +118,20 @@ public class InscriptionCours implements IInscriptionCours{
 		return daoCours.getCoursByNiveau(niveau);
 		
 	}
+	
+	
 
 	@Override
 	public List<Cours> getCoursRecommandes(Eleve eleve) {
-		// TODO Auto-generated method stub
-		
-		// Cours dans les langues de l'évève,
-		// de niveau supérieur supérieur
-		// ( les mieux noté en premier ?)
-		// 
-		
-		return daoSuiviCours.getCoursInscritsByEleve(eleve);
+		List<Cours> tousLesCours = daoCours.getAllCours();
+		List<Cours> recommandes = new ArrayList<>();
+		for (Cours cours : tousLesCours) {
+			if( ! isDejaInscritACours(cours, eleve) ){
+				recommandes.add(cours);
+			}
+		}	
+		Collections.shuffle(recommandes);	
+		return recommandes;
 	}
 
 	@Override
@@ -199,6 +203,20 @@ public class InscriptionCours implements IInscriptionCours{
 	@Override
 	public List<Chapitre> getChapitresByCours(Cours c) {
 		return daoChapitre.getAllChapitresByCours(c);
+	}
+
+	@Override
+	public boolean isDejaInscritACours(Cours cours, Eleve eleve) {
+		List<SuiviCours> suivis = getSuiviCourByEleve(eleve);
+		for (SuiviCours suiviCours : suivis) {
+			System.out.println("Le cours " + suiviCours.getCours());
+			System.out.println("la dateFin " + suiviCours.getDateFinSuivi());
+			if(suiviCours.getCours().equals(cours) && suiviCours.getDateFinSuivi() == null){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	

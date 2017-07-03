@@ -99,7 +99,9 @@ public class InscriptionCoursManagedBean {
 	}
 	
 	
-	
+	public boolean isDejaInscritACours(Cours cours){
+		return bu.isDejaInscritACours(cours, eleve);
+	}
 	
 	public List<Cours> getCoursByEleve(){
 		List<SuiviCours> suivis = new ArrayList<>();

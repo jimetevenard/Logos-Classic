@@ -44,8 +44,8 @@ public class ConsulteCoursManagedBean {
 	private Cours coursEnCours;
 	private Chapitre chapitreEnCours;
 	private int indexCourant = 0;
-	private List<Evaluation> evaluationsChapitre;
-	private List<Question> questionsExercice;
+	private List<Evaluation> evaluationsChapitre = new ArrayList<>();
+	private List<Question> questionsExercice = new ArrayList<>();
 	private List<ReponseOuverteEleve> listeReponseOuverte;
 	private List<String> propositionsQcm;
 	private List<String> propositionQcmVide = new ArrayList<>();

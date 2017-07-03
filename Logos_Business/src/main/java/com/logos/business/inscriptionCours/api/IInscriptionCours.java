@@ -54,6 +54,8 @@ public interface IInscriptionCours {
      */
     public List<Cours> getCoursByLangue(Langue langue, Eleve eleve);
 
+    
+    public boolean isDejaInscritACours(Cours cours, Eleve eleve);
     /**
      * @param category 
      * @param eleve 

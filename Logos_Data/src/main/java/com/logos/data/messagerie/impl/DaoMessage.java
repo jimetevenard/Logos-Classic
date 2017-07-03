@@ -38,6 +38,8 @@ public class DaoMessage implements IDaoMessage {
 	@Transactional
 	public List<Message> getAllMessages(Conversation conversation) {
 		Session session= sf.getCurrentSession();
+		System.out.println("LA SESSION => " + session);
+		System.out.println("conversation => " + conversation);
 		Query query = session.createQuery("SELECT c.messages FROM Conversation c WHERE c.idConversation = :param").setParameter("param", conversation.getIdConversation());
 		List<Message> liste=query.list();
 		return liste;

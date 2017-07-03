@@ -13,6 +13,7 @@ public interface IDaoCours {
 	Cours updateCours(Cours cours);
 	boolean deleteCours(Cours cours);
 	Cours getCoursByid(Integer id);
+	List<Cours> getAllCours();
 	List<Cours> getCoursByLangue(Langue langue);
 	List<Cours> getCoursByCategorie(Categorie categorie);
 	List<Cours> getCoursByNiveau(Niveau niveau);

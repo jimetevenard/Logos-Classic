@@ -27,14 +27,14 @@
 
 
 				<h2>Découvrez nos cours</h2>
-
-				<div class="alert alert-info" role="alert">
+				
+				<!-- REGLE DE GESTION HARCODEE !! -->
+				<h:panelGroup layout="block" styleClass="alert alert-info" rendered="#{mbInscriptionCours.coursEleve.size() > 2}">
 					<p>
-						<b>Vous avez atteint votre quota de cours</b><br /> Ce message ne
-						s'affichera que si l'userConnected n'est pas premium et qu'il est
-						inscrit à plus de trois cours...
+						<b>Vous avez atteint votre quota de cours</b><br /> Pour vous inscrire à plus de trois cours,
+						nous vous invitons à <a href="#" onclick="return false">devenir membre premium</a>
 					</p>
-				</div>
+				</h:panelGroup>>
 				<div class="panel panel-default">
 					<div class="panel-heading">Recommandés pour vous</div>
 					<div class="panel-body">
@@ -46,10 +46,18 @@
 						<ui:repeat var="c" value="#{mbInscriptionCours.coursesR}">
 							<li class="list-group-item cours inscription"><h:outputLabel
 									value="#{c.titre}" /> <h:outputLabel
-									value="#{mbInscriptionCours.noteCours(c)}" /> <h:commandButton
+									value="#{mbInscriptionCours.noteCours(c)}" />
+									
+									<!-- pas déjà inscrit :  -->
+									<h:commandButton
 									action="#{mbInscriptionCours.inscrireACours(c)}"
 									disabled="#{not mbInscriptionCours.checkAutorisation(c)}"
-									value="S'inscrire" styleClass="btn btn-sm btn-primary" /></li>
+									rendered="#{ ! mbInscriptionCours.isDejaInscritACours(c)}"
+									value="S'inscrire" styleClass="btn btn-sm btn-primary" />
+									
+									<!-- déjà inscrit :  -->
+									<h:outputLabel styleClass="deja-inscrit-cours" value="Vous suivez ce cours" rendered="#{mbInscriptionCours.isDejaInscritACours(c)}"/>
+							</li>
 						</ui:repeat>
 					</ul>
 				</div>
@@ -87,10 +95,15 @@
 											<li class="list-group-item cours inscription">
 												<h:outputLabel value="#{cc.titre}" />
 												<h:outputLabel value="#{mbInscriptionCours.noteCours(cc)}" />
-												<h:commandButton
-													action="#{mbInscriptionCours.inscrireACours(cc)}"
-													disabled="#{not mbInscriptionCours.checkAutorisation(cc)}"
-													value="S'inscrire" styleClass="btn btn-sm btn-primary" />
+												<!-- pas déjà inscrit :  -->
+									<h:commandButton
+									action="#{mbInscriptionCours.inscrireACours(cc)}"
+									disabled="#{not mbInscriptionCours.checkAutorisation(cc)}"
+									rendered="#{not mbInscriptionCours.isDejaInscritACours(cc)}"
+									value="S'inscrire" styleClass="btn btn-sm btn-primary" />
+									
+									<!-- déjà inscrit :  -->
+									<h:outputLabel styleClass="deja-inscrit-cours" value="Vous suivez ce cours" rendered="#{mbInscriptionCours.isDejaInscritACours(cc)}"/>
 											</li>
 										</ui:repeat>
 									</ul>

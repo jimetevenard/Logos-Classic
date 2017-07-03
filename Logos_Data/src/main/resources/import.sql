@@ -92,7 +92,7 @@ INSERT INTO `niveau` (`id_niveau`, `libelle_niveau`, `valeur_niveau`, `id_langue
 --
 
 INSERT INTO `cours` (`id_cours`, `dateCreation_cours`, `dateMiseAJour_cours`, `introduction_cours`, `titre_cours`, `id_auteur`, `id_niveau`) VALUES(1, '2017-06-01 00:00:00', '2017-06-01 00:00:00', 'introduction vocabulaire maritime anglais ', 'Vocabulaire maritime anglais', 2, 2);
-INSERT INTO `cours` (`id_cours`, `dateCreation_cours`, `dateMiseAJour_cours`, `introduction_cours`, `titre_cours`, `id_auteur`, `id_niveau`) VALUES(2, '2017-06-01 00:00:00', '2017-06-02 00:00:00', 'Un cours pas fait pour les poules mouillées...', 'Vocabulaire marin Anglais', 2, 1);
+-- INSERT INTO `cours` (`id_cours`, `dateCreation_cours`, `dateMiseAJour_cours`, `introduction_cours`, `titre_cours`, `id_auteur`, `id_niveau`) VALUES(2, '2017-06-01 00:00:00', '2017-06-02 00:00:00', 'Un cours pas fait pour les poules mouillées...', 'Vocabulaire marin Anglais', 2, 1);
 INSERT INTO `cours` (`id_cours`, `dateCreation_cours`, `dateMiseAJour_cours`, `introduction_cours`, `titre_cours`, `id_auteur`, `id_niveau`) VALUES(3, '2017-06-03 00:00:00', '2017-06-03 00:00:00', 'Devenez maitre de la conjugaison espagnole', 'Verbes irréguliers espagnols', 2, 4);
 INSERT INTO `cours` (`id_cours`, `dateCreation_cours`, `dateMiseAJour_cours`, `introduction_cours`, `titre_cours`, `id_auteur`, `id_niveau`) VALUES(4, '2017-06-13 00:00:00', '2017-06-13 00:00:00', 'Dinez avec la reine', 'Parlez politique en UK', 2, 1);
 INSERT INTO `cours` (`id_cours`, `dateCreation_cours`, `dateMiseAJour_cours`, `introduction_cours`, `titre_cours`, `id_auteur`, `id_niveau`) VALUES(5, '2017-06-12 00:00:00', '2017-06-12 00:00:00', 'Allez, soyez pas timides !', 'Déclarer sa flamme à NY', 2, 2);
@@ -254,6 +254,31 @@ INSERT INTO `question_evaluation` (`fk_question`, `fk_evaluation`) VALUES(1, 1);
 INSERT INTO `question_evaluation` (`fk_question`, `fk_evaluation`) VALUES(2, 1);
 INSERT INTO `question_evaluation` (`fk_question`, `fk_evaluation`) VALUES(3, 1);
 INSERT INTO `question_evaluation` (`fk_question`, `fk_evaluation`) VALUES(4, 1);
+
+
+--
+-- Contenu de la table `conversation`
+--
+
+INSERT INTO `conversation` (`id_conversation`, `titre_conversation`) VALUES(1, 'A propos du Cours de Vocabluaire');
+INSERT INTO `conversation` (`id_conversation`, `titre_conversation`) VALUES(2, 'Conférence à l''INALCO');
+
+--
+-- Contenu de la table `message`
+--
+
+INSERT INTO `message` (`id_message`, `contenu_message`, `date_envoi_message`, `date_lecture_message`, `id_auteur_message`, `id_conversation`) VALUES(1, 'Salut Willy !', '2017-07-02 00:00:00', '2017-07-03 11:30:32', 2, 1);
+INSERT INTO `message` (`id_message`, `contenu_message`, `date_envoi_message`, `date_lecture_message`, `id_auteur_message`, `id_conversation`) VALUES(2, 'Salut Seb !', '2017-07-02 05:00:00', NULL, 1, 1);
+INSERT INTO `message` (`id_message`, `contenu_message`, `date_envoi_message`, `date_lecture_message`, `id_auteur_message`, `id_conversation`) VALUES(3, 'Voici ce que je voulais vous dire :', '2017-07-03 00:00:00', NULL, 1, 2);
+
+--
+-- Contenu de la table `utilisateur_conversation`
+--
+
+INSERT INTO `utilisateur_conversation` (`fk_utilisateur`, `fk_conversation`) VALUES(1, 1);
+INSERT INTO `utilisateur_conversation` (`fk_utilisateur`, `fk_conversation`) VALUES(2, 1);
+INSERT INTO `utilisateur_conversation` (`fk_utilisateur`, `fk_conversation`) VALUES(1, 2);
+INSERT INTO `utilisateur_conversation` (`fk_utilisateur`, `fk_conversation`) VALUES(2, 2);
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

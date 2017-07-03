@@ -38,7 +38,7 @@ $(function(){
 				$(this).append(ui.draggable[0]);
 				$(this).find('input').val(ui.draggable.text());
 		
-				$(ui.draggable[0]).css({top:"0px",left:"0px"});	
+				$(ui.draggable[0]).css({position: "static"});	
 			}
 		});
 	

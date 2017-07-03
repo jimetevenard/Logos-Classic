@@ -50,7 +50,12 @@
 								<li><span class="glyphicon glyphicon-copy"></span><h:link outcome="suivi_eleve.xhtml">Suivi</h:link></li>
 								<li><span class="glyphicon glyphicon-book"></span><h:link outcome="inscription_cours2.xhtml">Cours</h:link></li>
 								<li><span class="glyphicon glyphicon-envelope"></span><h:link outcome="messagerie_eleve.xhtml">Messages</h:link>
-									<span class="badge"><h:outputText id="nb-messages" value="#{messagerieMB.nbNouveauxMessages}" /></span></li>
+									&nbsp;
+									<h:panelGroup id="nb-messages" styleClass="badge" >
+										<f:passThroughAttribute name="data-nb-messages" value="#{messagerieMB.nbNouveauxMessages}" />
+										<h:outputText    value="#{messagerieMB.nbNouveauxMessages}" />
+									</h:panelGroup>
+								</li>
 							</ul>
 						</div>
 						<h:commandButton action="#{messagerieMB.updateNombreMessagesNonLus()}" value="Refresh" styleClass="btn-refresh-nb-messages"><f:ajax render="nb-messages"></f:ajax></h:commandButton>

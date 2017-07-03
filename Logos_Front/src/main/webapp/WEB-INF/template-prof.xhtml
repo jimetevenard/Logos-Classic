@@ -33,18 +33,24 @@
 						</div>
 						<div id="profil">
 							<img id="profilPicture"
-								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREGFIu103swa_lNxgruLW21Mzkdp7W7hSVqP9mqZTRWb_imuC_"
+								src="../images/arbre.jpg"
 								alt="image_profil" />
 							<p>#{loginMB.userConnected.prenom}
 								#{loginMB.userConnected.nom}</p>
-							<p>Vous avez un resultat pourri</p>
+							
 						</div>
 						<div id="nav">
 							<ul id="profilMenu">
 								<li><span class="glyphicon glyphicon-copy"></span>Suivi</li>
 								<li><span class="glyphicon glyphicon-book"></span>Cours</li>
-								<li><span class="glyphicon glyphicon-envelope"></span><h:link outcome="messagerie_professeur.xhtml">Messages</h:link>
-									<p class="badge"><h:outputText id="nb-messages" value="#{messagerieMB.nbNouveauxMessages}" /></p></li>
+								<li>
+									<span class="glyphicon glyphicon-envelope"></span><h:link outcome="messagerie_professeur.xhtml">Messages</h:link>
+									&nbsp;
+									<h:panelGroup id="nb-messages" styleClass="badge" >
+										<f:passThroughAttribute name="data-nb-messages" value="#{messagerieMB.nbNouveauxMessages}" />
+										<h:outputText    value="#{messagerieMB.nbNouveauxMessages}" />
+									</h:panelGroup>									
+								</li>
 								<li><span class="glyphicon glyphicon-edit"></span>Corrections
 									<p class="badge">3</p></li>
 							</ul>

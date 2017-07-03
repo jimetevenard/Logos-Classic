@@ -38,6 +38,7 @@ public class MessagerieMB {
 		conversations = getAllConversationsByUser();
 		for (Conversation conversation : conversations) {
 			conversation.setUtilisateurs(bu.getUsersByConversation(conversation) );
+			System.out.println("CONV :: " + conversation);
 		}
 		if(conversations.size() != 0) {
 			conversationEnCours = conversations.get(0);

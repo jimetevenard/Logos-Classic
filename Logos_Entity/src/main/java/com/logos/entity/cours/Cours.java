@@ -86,6 +86,33 @@ public class Cours {
 		this.auteur = auteur;
 		this.testDeValidation = testDeValidation;
 	}
+	
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idCours == null) ? 0 : idCours.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cours other = (Cours) obj;
+		if (idCours == null) {
+			if (other.idCours != null)
+				return false;
+		} else if (!idCours.equals(other.idCours))
+			return false;
+		return true;
+	}
 
 	public Integer getIdCours() {
 		return idCours;

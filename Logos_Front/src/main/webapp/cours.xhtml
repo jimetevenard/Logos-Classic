@@ -11,23 +11,7 @@
 		<script src="../js/question.js"></script>
 		<script src="../js/questionDAD.js"></script>
 		<script src="../js/ui/jquery-ui.min.js"></script>
-		<style>
-.ui-droppable-hover {
-	background-color: pink;
-}
 
-.wrap-input-drop {
-	background: red;
-	height: 30px;
-	width: 150px;
-	display: inline-block;
-}
-
-.wrap-input-drag {
-	width: 150px;
-	text-align: center;
-}
-</style>
 	</ui:define>
 	<ui:define name="contenu">
 		<h:form>
@@ -43,12 +27,29 @@
 				<h:outputText value="#{mbConsulteCours.chapitreEnCours.contenu}"
 					escape="false" />
 			</div>
-			<div id="evaluation">
-				<h:outputText
-					value="#{mbConsulteCours.getPremiereEvaluation().titre}" />
-				<h:outputText rendered="#{mbConsulteCours.envoye}" value="SALUT" />
-				<div id="questions">
+			
+			
+			
+			<h:panelGroup styleClass="the-evaluation" layout="block" rendered="#{mbConsulteCours.getPremiereEvaluation() != null}">
+				<h2>Exercice :</h2>
+				
+				<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title"><h:outputText value="#{mbConsulteCours.getPremiereEvaluation().titre}" /></h3>
+			  </div>
+			  
+			  <div class="panel-body">
+			    <h:outputText rendered="#{mbConsulteCours.envoye}" value="Vos réponse ont été envoyées." />
+			    <h:outputText rendered="#{ ! mbConsulteCours.envoye}" value="Répondez aux questions suivantes pour valider le chapitre :" />
+			  </div>
+			
+			
+			
+				
+				
+				<div id="questions" class="list-group">
 					<ui:repeat var="q" value="#{mbConsulteCours.questionsExercice}">
+						<div class="list-group-item">
 
 						<h:panelGroup
 							rendered="#{q['class'].simpleName == 'QuestionOuverte'}">
@@ -61,10 +62,22 @@
 
 						<h:panelGroup rendered="#{q['class'].simpleName == 'QuestionQcm'}">
 							<h5>#{q.enonce}</h5>
-							<h:outputText rendered="#{mbConsulteCours.envoye}"
-								value="#{mbConsulteCours.correctionsEleves.get(q.idQuestion-2)?'bonne réponse':'faux'}" />
-
+							
+								<h:panelGroup styleClass="alert alert-success"
+								layout="block"
+								rendered="#{mbConsulteCours.envoye and mbConsulteCours.correctionsEleves.get(q.idQuestion-2)}"
+								>
+									Bravo ! C'est la bonne réponse.
+								</h:panelGroup>
+								<h:panelGroup styleClass="alert alert-danger"
+								layout="block"
+								rendered="#{mbConsulteCours.envoye and !(mbConsulteCours.correctionsEleves.get(q.idQuestion-2))}"
+								>
+									Navré, votre réponse est incorrecte.
+								</h:panelGroup>
+							<div class="qcm-wrap">
 							<h:selectManyCheckbox
+								
 								value="#{mbConsulteCours.propositionQcmVide}"
 								valueChangeListener="#{mbConsulteCours.addReponseQcm}">
 								<f:selectItems itemLabel="#{p}" var="p"
@@ -72,13 +85,24 @@
 									itemValue="#{p}" />
 								<f:attribute name="question" value="#{q}" />
 							</h:selectManyCheckbox>
+							</div>
 
 						</h:panelGroup>
 						<h:panelGroup
 							rendered="#{q['class'].simpleName == 'QuestionATrous'}">
 							<h5>#{q.enonce}</h5>
-							<h:outputText rendered="#{mbConsulteCours.envoye}"
-								value="#{mbConsulteCours.correctionsEleves.get(q.idQuestion-2)?'bonne réponse':'faux'}" />
+							<h:panelGroup styleClass="alert alert-success"
+								layout="block"
+								rendered="#{mbConsulteCours.envoye and mbConsulteCours.correctionsEleves.get(q.idQuestion-2)}"
+								>
+									Bravo ! C'est la bonne réponse.
+								</h:panelGroup>
+								<h:panelGroup styleClass="alert alert-danger"
+								layout="block"
+								rendered="#{mbConsulteCours.envoye and !(mbConsulteCours.correctionsEleves.get(q.idQuestion-2))}"
+								>
+									Navré, votre réponse est incorrecte.
+								</h:panelGroup>
 							<h:panelGroup
 								styleClass="zone-phrase-trous question-#{q.idQuestion}"
 								layout="block">
@@ -101,8 +125,20 @@
 						<h:panelGroup
 							rendered="#{q['class'].simpleName == 'QuestionDragAndDrop'}">
 							<h5>#{q.enonce}</h5>
-							<h:outputText rendered="#{mbConsulteCours.envoye}"
-								value="#{mbConsulteCours.correctionsEleves.get(q.idQuestion-2)?'bonne réponse':'faux'}" />
+							
+							<h:panelGroup styleClass="alert alert-success"
+								layout="block"
+								rendered="#{mbConsulteCours.envoye and mbConsulteCours.correctionsEleves.get(q.idQuestion-2)}"
+								>
+									Bravo ! C'est la bonne réponse.
+								</h:panelGroup>
+								<h:panelGroup styleClass="alert alert-danger"
+								layout="block"
+								rendered="#{mbConsulteCours.envoye and !(mbConsulteCours.correctionsEleves.get(q.idQuestion-2))}"
+								>
+									Navré, votre réponse est incorrecte.
+								</h:panelGroup>
+							
 							<h:panelGroup
 								styleClass="zone-drag-drop question-#{q.idQuestion}"
 								layout="block">
@@ -134,25 +170,35 @@
 									</ui:repeat>
 								</div>
 							</h:panelGroup>
-							<h:commandButton action="submit"
-								actionListener="#{mbConsulteCours.envoiReponses}"
-								value="VALIDER" />
+							
 						</h:panelGroup>
-
+						
+						</div><!-- .list-group-item -->
 					</ui:repeat>
-				</div>
-			</div>
+					<div class="panel-footer">
+						<h:commandButton action="submit"
+								styleClass="btn btn-default"
+								rendered = "#{!mbConsulteCours.envoye}"
+								actionListener="#{mbConsulteCours.envoiReponses}"
+								value="Valider" />
+						<h:outputLabel value="Vous avez répondu à cet exercice." rendered="#{mbConsulteCours.envoye}"/>
+					</div>
+					
+				</div><!--  #questions .list-group -->
+				</div><!--  .panel evaluation -->
+			</h:panelGroup><!--  .the-evaluation -->
 
 			<nav aria-label="...">
 			<ul class="pager">
 
-				<li id="previous"><h:commandLink
+				<li id="previous" class="previous"><h:commandLink
 						action="#{mbConsulteCours.changerChapitre(-1)}"
 						value="Chapitre précédent"
 						rendered="#{mbConsulteCours.chapitreEnCours ne mbConsulteCours.listeChapitre.get(0)}" /></li>
-				<li id="next"><h:commandLink
+				<li id="next" class="next #{((mbConsulteCours.getPremiereEvaluation() == null) or mbConsulteCours.envoye) ? '' : 'disabled'}"><h:commandLink
 						action="#{mbConsulteCours.changerChapitre(1)}"
 						value="Chapitre suivant"
+						disabled="#{!((mbConsulteCours.getPremiereEvaluation() == null) or mbConsulteCours.envoye)}"
 						rendered="#{mbConsulteCours.indexCourant ne mbConsulteCours.listeChapitre.size()-1}" /></li>
 
 			</ul>
