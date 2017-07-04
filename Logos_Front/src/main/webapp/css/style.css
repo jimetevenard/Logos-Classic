@@ -1,6 +1,6 @@
 
 #aside {
-	height: 100vmax;
+	height: 130vmax;
 	position: relative;
 }
 
@@ -97,6 +97,9 @@
 
 .badge.bravo {
 	background-color: #008000;
+}
+.badge.pending {
+	background-color: #ffcf2d;
 }
 
 
@@ -208,7 +211,7 @@ label.deja-inscrit-cours {
 }
 
 .messages-affiche{
-	padding: 50px 12px ;
+	padding: 50px 20px 50px 0;
 	position: relative;
 	
 }
@@ -227,14 +230,14 @@ label.deja-inscrit-cours {
 }
 
 #champs-envoi-div{
-	width: 80%;
+	width: 100%;
 }
 
 .message{
 	border-radius: 10px;
 	margin : 5px;
 	padding : 10px;
-	max-width: 70%;
+	max-width: 80%;
 }
 
 /* .messages{ */
@@ -324,6 +327,9 @@ span[data-nb-messages="0"] {
 	display: none;
 }
 
+
+
+	
 
 
 

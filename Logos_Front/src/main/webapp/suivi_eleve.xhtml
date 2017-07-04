@@ -53,7 +53,7 @@
 				  <ul class="list-group">
 				  	<ui:repeat var="eval" value="#{suiviCoursMB.evalsDisplay}" >
 				  		<li class="list-group-item">
-							<span class="badge #{true ? 'bravo' : ''}"><h:outputText value="#{eval.note}" /></span> <b><h:outputText value="#{eval.type}" /></b> : <h:outputText value="#{eval.titre}" />
+							<span class="badge #{true ? 'pending' : ''}"><h:outputText value="Correction en attente..." /></span> <b><h:outputText value="#{eval.type}" /></b> : <h:outputText value="#{eval.titre}" />
 						</li>
 				  	</ui:repeat>
 						

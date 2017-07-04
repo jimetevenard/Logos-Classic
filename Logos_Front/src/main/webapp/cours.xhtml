@@ -54,6 +54,14 @@
 						<h:panelGroup
 							rendered="#{q['class'].simpleName == 'QuestionOuverte'}">
 							<h5>#{q.enonce}</h5>
+							
+							<h:panelGroup styleClass="alert alert-warning"
+								layout="block"
+								rendered="#{mbConsulteCours.envoye}"
+							>
+								Votre réponse fera l'objet d'une correction personalisée par un de nos experts.
+							</h:panelGroup>
+								
 							<h:inputTextarea
 								valueChangeListener="#{mbConsulteCours.addReponseOuverte}">
 								<f:attribute name="question" value="#{q}" />
