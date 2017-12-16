@@ -1,15 +1,13 @@
 package com.logos.entity.user;
 
-import java.util.*;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Langue;
 import com.logos.entity.evaluation.Correction;
@@ -26,24 +24,28 @@ public class Professeur extends Utilisateur {
     /**
      * 
      */
+	@JsonIgnore
     @OneToMany(mappedBy="auteur")
     private Set<Cours> coursEcrits;
 
     /**
      * 
      */
+	@JsonIgnore
     @ManyToMany(mappedBy="superviseurs")
     private Set<Cours> coursSupervises;
 
     /**
      * 
      */
+	@JsonIgnore
     @OneToMany(mappedBy="professeur")
     private Set<Correction> corrections;
 
     /**
      * 
      */
+	@JsonIgnore
     @ManyToMany(mappedBy="professeurs")
     private Set<Langue> langues;
 

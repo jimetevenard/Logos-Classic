@@ -1,17 +1,14 @@
 package com.logos.entity.user;
 
-import java.util.*;
+import java.util.Set;
 
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.logos.entity.cours.Niveau;
 import com.logos.entity.cours.SuiviCours;
 import com.logos.entity.evaluation.RealiseEvaluation;
@@ -33,18 +30,21 @@ public class Eleve extends Utilisateur {
     /**
      * 
      */
+    @JsonIgnore
     @OneToMany(mappedBy= "eleve")
     private Set<SuiviCours> suiviCours;
 
     /**
      * 
      */
+    @JsonIgnore
     @ManyToMany(mappedBy = "eleves")
     private Set<Niveau> niveaux;
 
     /**
      * 
      */
+    @JsonIgnore
     @OneToMany(mappedBy="eleve")
     private Set<RealiseEvaluation> realisationEvaluations;
 

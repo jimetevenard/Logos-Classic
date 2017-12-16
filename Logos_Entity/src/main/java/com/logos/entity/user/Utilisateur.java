@@ -1,6 +1,6 @@
 package com.logos.entity.user;
 
-import java.util.*;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.logos.entity.messagerie.Conversation;
 
 
@@ -60,6 +61,7 @@ public class Utilisateur {
     /**
      * 
      */
+	@JsonIgnore
 	@Column(name = "password_utilisateur", nullable = false, length = 50)
     private String password;
 
@@ -78,6 +80,7 @@ public class Utilisateur {
     /**
      * 
      */
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "utilisateur_conversation", joinColumns = { 
 			@JoinColumn(name = "fk_utilisateur") }, inverseJoinColumns = { @JoinColumn(name = "fk_conversation") })
