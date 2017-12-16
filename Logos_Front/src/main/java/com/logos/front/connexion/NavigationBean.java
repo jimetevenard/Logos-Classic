@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 public class NavigationBean {
 	
 	public String redirectToAccueilEleve(){
+		
 		return "/suivi_eleve.xhtml?faces-redirect=true";
 	}
 	

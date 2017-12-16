@@ -9,6 +9,7 @@
   	org.springframework.web.context.ContextLoaderListener
   </listener-class>
   </listener>
+  
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -18,6 +19,21 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/logos/*</url-pattern>
   </servlet-mapping>
+  
+  	<servlet>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+	
+
+  
+  
   <error-page>
     <exception-type>javax.faces.application.ViewExpiredException</exception-type>
     <location>/login.xhtml</location>
