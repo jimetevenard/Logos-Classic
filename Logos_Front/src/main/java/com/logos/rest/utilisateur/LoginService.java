@@ -17,7 +17,6 @@ import com.logos.entity.user.Utilisateur;
 import com.logos.rest.RestUtils;
 
 
-
 @RestController
 public class LoginService {
 	
