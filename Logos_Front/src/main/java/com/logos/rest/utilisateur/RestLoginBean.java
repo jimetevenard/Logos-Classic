@@ -1,4 +1,4 @@
-package com.logos.rest.login;
+package com.logos.rest.utilisateur;
 
 import com.logos.entity.user.Utilisateur;
 
@@ -20,7 +20,33 @@ public class RestLoginBean {
 	 */
 	private String token;
 	
+	private boolean isEleve = false;
 	
+	private boolean isPremium = false;
+	
+	
+	
+	
+	public boolean isEleve() {
+		return isEleve;
+	}
+
+
+	public void setEleve(boolean isEleve) {
+		this.isEleve = isEleve;
+	}
+
+
+	public boolean isPremium() {
+		return isPremium;
+	}
+
+
+	public void setPremium(boolean isPremium) {
+		this.isPremium = isPremium;
+	}
+
+
 	/**
 	 * L'utilisateur qu'on transporte
 	 * s

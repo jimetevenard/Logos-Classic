@@ -1,15 +1,20 @@
-package com.logos.rest.login;
+package com.logos.rest.utilisateur;
 
 import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.text.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.logos.business.connexion.api.IBusinessConnexionPlateforme;
+import com.logos.entity.user.Eleve;
 import com.logos.entity.user.Utilisateur;
+import com.logos.rest.RestUtils;
 
 
 
@@ -25,6 +30,7 @@ public class LoginService {
 	static {	
 		FAILURE_BEAN = new RestLoginBean();
 		FAILURE_BEAN.setOk(false);
+
 		
 		generateur = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
 	}
@@ -50,7 +56,7 @@ public class LoginService {
  	 *
 	 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public RestLoginBean restLogin(LoginPasswordBean loginPassword){
+	public RestLoginBean restLogin(HttpServletResponse response,@RequestBody LoginPasswordBean loginPassword){
 		
 		
 		Utilisateur utilisateur = businessLginBean.checkLoginPassword(loginPassword.getLogin(), loginPassword.getPassword());
@@ -61,9 +67,14 @@ public class LoginService {
 			retour.setOk(true);
 			retour.setToken( "testa" + token );
 			retour.setUtilisateur(utilisateur);
+			if(utilisateur instanceof Eleve){
+				retour.setEleve(true);
+				retour.setPremium(((Eleve)utilisateur).isStatutPremium());
+			}
 			
 			ConnexionsActives.getInstance().put(token, retour);
 			
+			RestUtils.accessHeader(response);
 			return retour;
 		} else {
 			

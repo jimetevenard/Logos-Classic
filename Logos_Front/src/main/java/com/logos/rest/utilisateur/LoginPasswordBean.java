@@ -1,4 +1,4 @@
-package com.logos.rest.login;
+package com.logos.rest.utilisateur;
 
 public class LoginPasswordBean {
 	
