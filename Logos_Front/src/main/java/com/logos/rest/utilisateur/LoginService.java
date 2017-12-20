@@ -91,8 +91,9 @@ public class LoginService {
 	 * @return collection des tokens actifs
 	 */
 	@RequestMapping("/test-tokens")
-	public Set<String> getTokens(){
+	public Set<String> getTokens(HttpServletResponse response){
 		
+		RestUtils.accessHeader(response);
 		return ConnexionsActives.getInstance().keySet();
 	}
 
