@@ -9,6 +9,13 @@ public class PremiumBeans {
 		return p;
 	}
 	
+	public static PremiumResponse nagativeResponse(){
+		PremiumResponse p = new PremiumResponse();
+		p.setMessage("ECHEC, l'utlisateur n'est pas premuim");
+		p.setOk(false);
+		return p;
+	}
+	
 	public static class PremiumRequest {
 		private int id;
 		private String cle;

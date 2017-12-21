@@ -24,12 +24,13 @@
 
 
 				</div>
+				
 
 
 				<h2>Découvrez nos cours</h2>
 				
 				<!-- REGLE DE GESTION HARCODEE !! -->
-				<h:panelGroup layout="block" styleClass="alert alert-info" rendered="#{mbInscriptionCours.coursEleve.size() > 2}">
+				<h:panelGroup layout="block" styleClass="alert alert-info" rendered="#{mbInscriptionCours.canSuscribeMore()}">
 					<p>
 						<b>Vous avez atteint votre quota de cours</b><br /> Pour vous inscrire à plus de trois cours,
 						nous vous invitons à <a href="#" onclick="return false">devenir membre premium</a>

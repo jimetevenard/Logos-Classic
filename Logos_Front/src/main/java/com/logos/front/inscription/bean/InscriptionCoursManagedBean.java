@@ -1,9 +1,7 @@
 package com.logos.front.inscription.bean;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,15 +12,13 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.logos.business.inscriptionCours.api.IInscriptionCours;
-import com.logos.business.inscriptionCours.impl.InscriptionCoursTest;
+import com.logos.business.inscriptionCours.impl.InscriptionCours;
 import com.logos.entity.cours.Categorie;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Langue;
 import com.logos.entity.cours.Niveau;
 import com.logos.entity.cours.SuiviCours;
-import com.logos.entity.evaluation.TestDeValidation;
 import com.logos.entity.user.Eleve;
-import com.logos.entity.user.Professeur;
 import com.logos.front.connexion.LoginMB;
 import com.logos.front.consulterCours.bean.ConsulteCoursManagedBean;
 
@@ -63,6 +59,7 @@ public class InscriptionCoursManagedBean {
 		changerLangue(langues.get(0));
 		coursEleve = getCoursByEleve();
 	}
+	
 	
 	public String inscrireACours(Cours c){		
 			bu.inscrireEleveACours(eleve, c);
@@ -115,6 +112,11 @@ public class InscriptionCoursManagedBean {
 	
 	public boolean checkAutorisation(Cours c){
 		return bu.isAutriseASinscrire(eleve, c);
+	}
+	
+	public boolean canSuscribeMore(){
+		
+		return eleve.isStatutPremium() || (coursEleve.size() >= InscriptionCours.NB_COURS_MAX_NON_PREMIUM);
 	}
 	
 	public IInscriptionCours getBu() {

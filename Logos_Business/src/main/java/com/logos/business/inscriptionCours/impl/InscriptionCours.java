@@ -56,7 +56,13 @@ public class InscriptionCours implements IInscriptionCours{
 
 	@Override
 	public boolean isAutriseASinscrire(Eleve eleve, Cours cours) {
-		return daoSuiviCours.getSuiviByEleve(eleve).size() < NB_COURS_MAX_NON_PREMIUM;
+		if(eleve.isStatutPremium()){
+			return true;
+		} else {
+			return daoSuiviCours.getSuiviByEleve(eleve).size() < NB_COURS_MAX_NON_PREMIUM;
+		}
+		
+		
 	}
 	
 	@Override
