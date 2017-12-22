@@ -32,4 +32,13 @@ public class BusinessConnexionPlateforme implements IBusinessConnexionPlateforme
 		return daoConnexion.checkLoginPassword(login, password);
 	}
 
+	@Override
+	public Eleve refreshEleve(Eleve eleve) {
+		
+		return daoEleve.getEleveById(eleve.getIdUtilisateur());
+
+	}
+	
+	
+
 }

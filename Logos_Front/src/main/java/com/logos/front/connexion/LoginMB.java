@@ -2,13 +2,10 @@ package com.logos.front.connexion;
 
 import java.io.Serializable;
 
-
-import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.HttpSession;
 
 import com.logos.business.connexion.api.IBusinessConnexionPlateforme;
@@ -70,6 +67,17 @@ public class LoginMB implements Serializable {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean refreshEleve(){
+		try {
+			this.userConnected = bu.refreshEleve((Eleve) this.userConnected);
+			return true;
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 

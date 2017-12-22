@@ -12,4 +12,6 @@ public interface IBusinessConnexionPlateforme {
 	Professeur inscrireProfesseur(Professeur professeur);
 	Utilisateur checkLoginPassword(String login, String mdp);
 	
+	Eleve refreshEleve(Eleve eleve);
+	
 }

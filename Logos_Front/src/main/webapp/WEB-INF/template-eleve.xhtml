@@ -22,6 +22,9 @@
 	</f:metadata>
 </h:head>
 <body class="window">
+
+	<p style="display: none;" id="la-balise-refresh-global"><h:outputText value="#{loginMB.refreshEleve()}"></h:outputText></p>
+				
 	<div class="container-fluid">
 		<div class="row">
 			<div id="aside" class="col-sm-2 eleve">
@@ -56,12 +59,18 @@
 										<h:outputText    value="#{messagerieMB.nbNouveauxMessages}" />
 									</h:panelGroup>
 								</li>
+								<li><span class="glyphicon glyphicon-glass"></span><a href="#{navigationBean.linkBoutique}">Boutique Logos</a></li>
+								
+								<h:panelGroup rendered="#{!loginMB.userConnected.statutPremium}">
+								<li><span class="glyphicon glyphicon-star-empty"></span><a href="#{navigationBean.linkPremium}">Devenez Premium !</a></li>
+								</h:panelGroup>
+								
 							</ul>
 						</div>
 						<h:commandButton action="#{messagerieMB.updateNombreMessagesNonLus()}" value="Refresh" styleClass="btn-refresh-nb-messages"><f:ajax render="nb-messages"></f:ajax></h:commandButton>
 						<div id="divPremium">
 							<span class="glyphicon glyphicon-star-empty" />
-							<div>Devenez premium</div>
+							<div><a href="#{navigationBean.linkPremium}">Devenez premium</a></div>
 						</div>
 					</div>
 				</h:form>

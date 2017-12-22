@@ -5,6 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
+	
+	
 
 	<ui:composition template="/WEB-INF/template-eleve.xhtml">
 		<ui:define name="titre">Inscription à un cours</ui:define>
@@ -25,12 +27,12 @@
 
 				</div>
 				
-
-
+				<!--  On rafraichit l'élève connecté à chaque chargement de cette page -->
+				<p style="display: none;" id="la-balise-refresh"><h:outputText value="#{mbInscriptionCours.refreshEleve()}"></h:outputText></p>
+				
 				<h2>Découvrez nos cours</h2>
 				
-				<!-- REGLE DE GESTION HARCODEE !! -->
-				<h:panelGroup layout="block" styleClass="alert alert-info" rendered="#{mbInscriptionCours.canSuscribeMore()}">
+				<h:panelGroup layout="block" styleClass="alert alert-info" rendered="#{ mbInscriptionCours.canNotSuscribeMore() }">
 					<p>
 						<b>Vous avez atteint votre quota de cours</b><br /> Pour vous inscrire à plus de trois cours,
 						nous vous invitons à <a href="#" onclick="return false">devenir membre premium</a>

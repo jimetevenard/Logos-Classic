@@ -110,13 +110,29 @@ public class InscriptionCoursManagedBean {
 		return coursEleve;
 	}
 	
+	public boolean refreshEleve(){
+		try {
+			boolean ok = logMb.refreshEleve();
+			this.eleve = (Eleve) logMb.getUserConnected();
+			return ok;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+ 		}
+		
+	}
+	
 	public boolean checkAutorisation(Cours c){
 		return bu.isAutriseASinscrire(eleve, c);
 	}
 	
-	public boolean canSuscribeMore(){
-		
-		return eleve.isStatutPremium() || (coursEleve.size() >= InscriptionCours.NB_COURS_MAX_NON_PREMIUM);
+	public boolean canNotSuscribeMore(){
+		if((eleve.isStatutPremium()) || (coursEleve.size() < InscriptionCours.NB_COURS_MAX_NON_PREMIUM)){
+			return false;
+		} else {
+			return true;
+		}
+
 	}
 	
 	public IInscriptionCours getBu() {
