@@ -2,14 +2,18 @@
 #aside {
 	height: 130vmax;
 	position: relative;
+	color: white;
+}
+#aside a {
+	color: #cceeff
 }
 
 .eleve {
-	background: linear-gradient(rgb(72, 191, 170), rgb(153, 255, 230));
+	background: rgb(0, 29, 18,0.65);
 }
 
 .prof {
-	background: linear-gradient(#9966FF, #CCCCFF);
+	background: rgb(0, 06, 28,0.65);
 }
 
 #asideContent > * {
@@ -56,7 +60,7 @@
 	padding-right: 10px;
 	margin: 0px;
 	font-size: 20px;
-	color: #333333;
+	color: #fcfcfc;
 }
 
 #profilPicture {
@@ -137,9 +141,9 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 }
 
 .window {
-	background-image: url("../images/bluewallpaper.jpg");
+	background-image: url("../images/mountain.jpg");
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: 100%;
 }
 
 /* INSCRIPTION COURS */
@@ -246,16 +250,18 @@ label.deja-inscrit-cours {
 /* } */
 
 .myself{
-	background-color: lightgreen;
+	background-color: rgba(0,35,0,0.7);
 	text-align: right;
 	position: relative;
 	right: -20%;
+	color: white;
 }
 
 
 
 .other{
-	background-color: lightblue;
+	background-color: rgba(0,20,35,0.7);
+	color: white;
 	
 	
 }
@@ -266,8 +272,8 @@ label.deja-inscrit-cours {
 
 .nomAuteur, .date-lecture{
 	display: block;
-	font-style: italic;
-	color: grey;
+	/*font-style: italic;*/
+	color: #ccc;
 	font-weight: 100;
 	font-size: 12px;
 }
@@ -330,6 +336,7 @@ span[data-nb-messages="0"] {
 
 
 	
+
 
 
 
