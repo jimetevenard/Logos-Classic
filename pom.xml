@@ -2,19 +2,22 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.logos</groupId>
-	<artifactId>Logos_Business</artifactId>
+	<artifactId>Logos</artifactId>
 	<version>1.0</version>
+	<packaging>pom</packaging>
+	<build>
+	   <finalName>Logos</finalName>
+	 </build>
+	
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.3.3.RELEASE</spring.version>
 	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>com.logos</groupId>
-			<artifactId>Logos_Data</artifactId>
-			<version>1.0</version>
-		</dependency>
-	</dependencies>
+	
+	<modules>
+		<module>entity</module>
+		<module>data</module>
+		<module>business</module>
+		<module>front</module>
+	</modules>
 </project>
