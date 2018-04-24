@@ -4,8 +4,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.logos.data.cours.api.IDaoCours;
 import com.logos.entity.cours.Cours;
+
+import api.com.logos.data.cours.IDaoCours;
 
 public class Test {
 	private static Logger log = Logger.getLogger(Test.class);

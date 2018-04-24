@@ -10,14 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.logos.business.evaluation.api.IFaireEvaluation;
-import com.logos.data.correction.api.IDaoCorrection;
-import com.logos.data.evaluation.api.IDaoEvaluation;
-import com.logos.data.evaluation.api.IDaoExercice;
-import com.logos.data.evaluation.api.IDaoRealiseEvaluation;
-import com.logos.data.evaluation.api.IDaoTestDeNiveau;
-import com.logos.data.evaluation.api.IDaoTestDeValidation;
-import com.logos.data.question.api.IDaoQuestion;
-import com.logos.data.reponseeleve.api.IDaoReponseEleve;
 import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Niveau;
@@ -35,6 +27,15 @@ import com.logos.entity.reponse.ReponseFermeeEleve;
 import com.logos.entity.reponse.ReponseOuverteEleve;
 import com.logos.entity.reponse.ReponseQcmEleve;
 import com.logos.entity.user.Eleve;
+
+import api.com.logos.data.correction.IDaoCorrection;
+import api.com.logos.data.evaluation.IDaoEvaluation;
+import api.com.logos.data.evaluation.IDaoExercice;
+import api.com.logos.data.evaluation.IDaoRealiseEvaluation;
+import api.com.logos.data.evaluation.IDaoTestDeNiveau;
+import api.com.logos.data.evaluation.IDaoTestDeValidation;
+import api.com.logos.data.question.IDaoQuestion;
+import api.com.logos.data.reponseeleve.IDaoReponseEleve;
 
 @Service
 public class FaireEvaluation implements IFaireEvaluation{
