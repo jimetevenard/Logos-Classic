@@ -32,7 +32,9 @@
 	
 	<modules>
 		<module>entity</module>
-		<module>data</module>
+		<module>data-api</module>
+        <module>data-mysql</module>
+        <module>data-mongo</module>
 		<module>business</module>
 		<module>front</module>
 	</modules>

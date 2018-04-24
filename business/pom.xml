@@ -18,9 +18,15 @@
 		<spring.version>4.3.3.RELEASE</spring.version>
 	</properties>
 	<dependencies>
-		<dependency>
+	<dependency>
+			<artifactId>data-api</artifactId>
 			<groupId>com.logos</groupId>
-			<artifactId>data</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+		<!-- TODO remplacer par business -->
+			<groupId>com.logos</groupId>
+			<artifactId>data-mysql</artifactId>
 			<version>1.0</version>
 		</dependency>
 	</dependencies>
