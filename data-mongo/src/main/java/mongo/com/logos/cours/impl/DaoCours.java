@@ -18,6 +18,10 @@ public class DaoCours implements IDaoCours {
 	
 	@Autowired
 	MongoOperations mongoOps;
+	
+	public DaoCours(MongoOperations mongoOps) {
+		this.mongoOps = mongoOps;
+	}
 
 	@Override
 	public Cours addCours(Cours cours) {

@@ -1,3 +1,5 @@
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.logos.entity.cours.Cours;
 
 import api.com.logos.data.cours.IDaoCours;
@@ -10,9 +12,14 @@ public class TestMongo {
 		Cours c = new Cours();
 		c.setIntroduction("Coucou");
 		
-		IDaoCours dao = new DaoCours();
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("springMongo.xml");
+		DaoCours dao = ctx.getBean("coursDao",DaoCours.class);
 		
 		dao.addCours(c);
+		
+		//IDaoCours dao = new DaoCours();
+		
+		//dao.addCours(c);
 
 	}
 
