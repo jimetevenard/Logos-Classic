@@ -12,12 +12,16 @@ import api.com.logos.data.cours.IDaoCours;
 import mongo.com.logos.config.MongoConfig;
 import mongo.com.logos.data.impl.DaoCours;
 
-@ContextConfiguration(classes = MongoConfig.class)
+//@ContextConfiguration(classes = MongoConfig.class)
 public class MongoTest {
 	
-@Autowired
+//@Autowired
 private MongoTemplate mongoTemplate;
 	
+// Les annotation Spring sur les attributs ne fonctionnent qu'avec un objet
+// instancié par Spring.
+
+// Elle ne sont d'aucun effet ici.
 
     @Test
    public void testTAMERE () {

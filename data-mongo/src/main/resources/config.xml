@@ -10,18 +10,29 @@
        http://www.springframework.org/schema/context/spring-context-3.2.xsd"
 >
     <context:annotation-config/>
+    <context:component-scan base-package="mongo.com.logos"></context:component-scan>
     
-    <mongo:mongo port="27017" id="mongo" host="localhost" />
+    
   
-    <mongo:db-factory id="mongoDbFactory" dbname="logos-core-mongo" mongo-ref="mongo" />
-  
-
-    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-        <constructor-arg ref="mongoDbFactory"/>
-    </bean>
+<!-- 
+	@jim:
+	Ce Bean est déjà annoté, pas besoin de le redéfinir ici.
+	
+	Par ailleurs, aucun Bean ne s'apelle mongoDbFactory...
+ -->
+<!--     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"> -->
+<!--         <constructor-arg ref="mongoDbFactory"/> -->
+<!--     </bean> -->
     
     <bean id="DaoCours" class="mongo.com.logos.data.impl.DaoCours">
-        <constructor-arg  name="mongoOp" ref="mongoTemplate"/>
+    	<!-- 
+    		Ce n'est pas un argument du constructeur.
+    		il est simplement autowired.
+    		
+    		Rien à faire donc.
+    	 -->
+    	 
+        <!-- <constructor-arg  name="mongoOp" ref="mongoTemplate"/> -->
     </bean>
 
 </beans>
