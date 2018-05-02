@@ -1,3 +1,4 @@
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.logos.entity.cours.Cours;
@@ -10,10 +11,10 @@ public class TestMongo {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Cours c = new Cours();
-		c.setIntroduction("Coucou");
+		c.setIntroduction("Coucou again");
 		
-		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("springMongo.xml");
-		DaoCours dao = ctx.getBean("coursDao",DaoCours.class);
+		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("springMongo.xml");
+		DaoCours dao = ctx.getBean(DaoCours.class);
 		
 		dao.addCours(c);
 		

@@ -3,7 +3,9 @@ package mongo.com.logos.cours.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.logos.entity.cours.Categorie;
@@ -12,12 +14,17 @@ import com.logos.entity.cours.Langue;
 import com.logos.entity.cours.Niveau;
 
 import api.com.logos.data.cours.IDaoCours;
+import mongo.com.logos.config.AppConfig;
 
 @Repository
+
 public class DaoCours implements IDaoCours {
 	
 	@Autowired
 	MongoOperations mongoOps;
+	
+	/*@Autowired
+	MongoTemplate mongoTemplate;*/
 	
 	public DaoCours(MongoOperations mongoOps) {
 		this.mongoOps = mongoOps;
