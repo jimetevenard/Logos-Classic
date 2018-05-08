@@ -12,6 +12,8 @@ import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Langue;
 import com.logos.entity.cours.Niveau;
+import com.logos.entity.question.Question;
+import com.logos.entity.question.QuestionATrous;
 import com.logos.entity.user.Eleve;
 import com.logos.entity.user.Professeur;
 
@@ -19,6 +21,7 @@ import api.com.logos.data.cours.IDaoCours;
 import mongo.com.logos.cours.impl.DaoCours;
 import mongo.com.logos.eleve.impl.DaoEleve;
 import mongo.com.logos.professeur.impl.DaoProfesseur;
+import mongo.com.logos.question.impl.DaoQuestion;
 
 public class TestMongo {
 
@@ -70,21 +73,36 @@ public class TestMongo {
 		e.setNom("Padawan");
 		e.setPrenom("Petit");
 		
+		Question q = new Question();
+		q.setEnonce("Une question basique again new try it will work...");
+		
+		QuestionATrous qat = new QuestionATrous();
+		qat.setPhraseATrou("Question a ((trou)) again");
+		
 		
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("springMongo.xml");
 		DaoCours dao = ctx.getBean(DaoCours.class);
 		DaoProfesseur dapProf = ctx.getBean(DaoProfesseur.class);
 		DaoEleve daoEle = ctx.getBean(DaoEleve.class);
+		DaoQuestion daoQuestion = ctx.getBean(DaoQuestion.class);
 		
 		/*daoEle.ajouterEleve(e);
 		dapProf.ajouterProf(p);
 		dao.addCours(c);*/
 		
-		System.out.println(daoEle.getEleveById("5aef5644f135d89198709864"));
+		//System.out.println(daoEle.getEleveById("5af196f7a0d2cae798ad9af6"));
 		
 		//IDaoCours dao = new DaoCours();
 		
 		//dao.addCours(c);
+		
+		//daoQuestion.addQuestion(q);
+		/*daoQuestion.addQuestion(qat);*/
+		
+		System.out.println(daoQuestion.getQuestionById("5af19942a0d225a5be30ff0e"));
+		q.setEnonce("ew enonce");
+		daoQuestion.updateQuestion(q);
+		//daoQuestion.deleteQuestion(q);
 
 	}
 

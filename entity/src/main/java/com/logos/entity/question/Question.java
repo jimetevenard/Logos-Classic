@@ -8,7 +8,6 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -17,16 +16,21 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.evaluation.Evaluation;
 import com.logos.entity.reponse.ReponseEleve;
 
 /**
  * 
  */
-@Entity
-@Table(name= "question")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type_question")
+//@Entity
+//@Table(name= "question")
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "type_question")
+
+@Document
 public class Question {
 
     
@@ -34,9 +38,9 @@ public class Question {
      * 
      */
     @Id
-    @Column(name = "id_question")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idQuestion;
+   // @Column(name = "id_question")
+    @GeneratedValue(generator= "uuid")
+    private String idQuestion;
 
     /**
      * 
@@ -65,17 +69,24 @@ public class Question {
     public Question() {
     }
 
-	public Question(Integer idQuestion, String enonce) {
+	public Question(String idQuestion, String enonce) {
 		super();
 		this.idQuestion = idQuestion;
 		this.enonce = enonce;
 	}
+	
+	
 
-	public Integer getIdQuestion() {
+	@Override
+	public String toString() {
+		return "Question [idQuestion=" + idQuestion + ", enonce=" + enonce + "]";
+	}
+
+	public String getIdQuestion() {
 		return idQuestion;
 	}
 
-	public void setIdQuestion(Integer idQuestion) {
+	public void setIdQuestion(String idQuestion) {
 		this.idQuestion = idQuestion;
 	}
 

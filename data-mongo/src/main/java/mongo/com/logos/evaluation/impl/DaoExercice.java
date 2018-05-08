@@ -4,12 +4,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Repository;
 
 import com.logos.entity.cours.Cours;
 import com.logos.entity.evaluation.Exercice;
 
 import api.com.logos.data.evaluation.IDaoExercice;
 
+@Repository
 public class DaoExercice implements IDaoExercice {
 	
 	@Autowired
@@ -21,19 +26,20 @@ public class DaoExercice implements IDaoExercice {
 
 	@Override
 	public Exercice addExercice(Exercice exercice) {
-		// TODO Auto-generated method stub
-		return null;
+		mongoOps.insert(exercice);
+		return exercice;
 	}
 
 	@Override
 	public Exercice updateExercice(Exercice exercice) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = new Query(Criteria.where("_id").is(exercice.getIdEvaluation()));
+		Exercice exerciceUpdated = mongoOps.findAndModify(query, new Update(), Exercice.class);
+		return exerciceUpdated;
 	}
 
 	@Override
 	public boolean deleteExercice(Exercice exercice) {
-		// TODO Auto-generated method stub
+		mongoOps.remove(exercice);
 		return false;
 	}
 
