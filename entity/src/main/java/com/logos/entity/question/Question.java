@@ -30,7 +30,7 @@ import com.logos.entity.reponse.ReponseEleve;
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@DiscriminatorColumn(name = "type_question")
 
-@Document
+@Document(collection = "question")
 public class Question {
 
     
@@ -39,8 +39,8 @@ public class Question {
      */
     @Id
    // @Column(name = "id_question")
-    @GeneratedValue(generator= "uuid")
-    private String idQuestion;
+   // @GeneratedValue(generator= "uuid")
+    private long idQuestion;
 
     /**
      * 
@@ -69,7 +69,7 @@ public class Question {
     public Question() {
     }
 
-	public Question(String idQuestion, String enonce) {
+	public Question(long idQuestion, String enonce) {
 		super();
 		this.idQuestion = idQuestion;
 		this.enonce = enonce;
@@ -82,11 +82,11 @@ public class Question {
 		return "Question [idQuestion=" + idQuestion + ", enonce=" + enonce + "]";
 	}
 
-	public String getIdQuestion() {
+	public long getIdQuestion() {
 		return idQuestion;
 	}
 
-	public void setIdQuestion(String idQuestion) {
+	public void setIdQuestion(long idQuestion) {
 		this.idQuestion = idQuestion;
 	}
 

@@ -18,7 +18,7 @@ public class QuestionDragAndDrop extends QuestionATrous {
     public QuestionDragAndDrop() {
     }
 
-	public QuestionDragAndDrop(String idQuestion, String enonce, String phraseATrou, List<String> solutions) {
+	public QuestionDragAndDrop(long idQuestion, String enonce, String phraseATrou, List<String> solutions) {
 		super(idQuestion, enonce, phraseATrou, solutions);
 		// TODO Auto-generated constructor stub
 	}

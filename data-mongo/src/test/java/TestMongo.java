@@ -99,10 +99,17 @@ public class TestMongo {
 		//daoQuestion.addQuestion(q);
 		/*daoQuestion.addQuestion(qat);*/
 		
-		System.out.println(daoQuestion.getQuestionById("5af19942a0d225a5be30ff0e"));
+		System.out.println(daoQuestion.getQuestionById(2));
 		q.setEnonce("ew enonce");
-		daoQuestion.updateQuestion(q);
-		//daoQuestion.deleteQuestion(q);
+		//daoQuestion.updateQuestion(q);
+		daoQuestion.deleteQuestion(q);
+		
+		/*System.out.println(daoQuestion.getAllQuestion());
+		
+		Question q2 = new Question();
+		q2.setEnonce("New Test....");
+		//daoQuestion.addQuestion(q2);
+		daoQuestion.deleteQuestion(q2);*/
 
 	}
 

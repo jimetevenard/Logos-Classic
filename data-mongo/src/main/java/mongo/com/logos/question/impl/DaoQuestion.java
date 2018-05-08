@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -16,27 +17,37 @@ import com.logos.entity.question.QuestionATrous;
 import com.logos.entity.question.QuestionDragAndDrop;
 import com.logos.entity.question.QuestionOuverte;
 import com.logos.entity.question.QuestionQcm;
+import com.mongodb.WriteResult;
 
 import api.com.logos.data.question.IDaoQuestion;
+import mongo.com.logos.config.NextSequenceService;
 
 @Repository
 public class DaoQuestion implements IDaoQuestion {
 	
-	@Autowired
-	MongoOperations mongoOps;
+	/*@Autowired
+	MongoOperations mongoOps;*/
 	
-	public DaoQuestion(MongoOperations mongoOps) {
-		this.mongoOps = mongoOps;
+	@Autowired
+	MongoTemplate mongoTemplate;
+	
+	@Autowired
+	private NextSequenceService sequence;
+	
+	private static final String COLLECTION = "question";
+	
+	public DaoQuestion(MongoTemplate mongoTemplate) {
+		this.mongoTemplate = mongoTemplate;
 	}
 
 	@Override
 	public Question getQuestionById(Integer id) {
-		Question question = mongoOps.findById(id, Question.class);
+		Question question = mongoTemplate.findById(id, Question.class);
 		return question;
 	}
 	
-	public Question getQuestionById(String id) {
-		Question question = mongoOps.findById(id, Question.class);
+	public Question getQuestionById(long id) {
+		Question question = mongoTemplate.findById(id, Question.class);
 		return question;
 	}
 
@@ -48,21 +59,28 @@ public class DaoQuestion implements IDaoQuestion {
 
 	@Override
 	public Question addQuestion(Question question) {
-		mongoOps.insert(question);
+		question.setIdQuestion(sequence.getNextSequence(COLLECTION));
+		mongoTemplate.insert(question);
 		return question;
 	}
 
 	@Override
 	public Question updateQuestion(Question question) {
-		Query query = new Query(Criteria.where("_id").is(question.getIdQuestion()));
-		mongoOps.updateFirst(query, new Update(), Question.class);
+		
+		mongoTemplate.save(question, COLLECTION);
 		return question;
 	}
 
 	@Override
 	public boolean deleteQuestion(Question question) {
-		mongoOps.remove(question);
-		return false;
+		System.out.println(question.getIdQuestion());
+		Query query = new Query(Criteria.where("_id").is(question.getIdQuestion()));
+		WriteResult result = mongoTemplate.remove(query, Question.class, COLLECTION);
+		boolean delete = false;
+		if(result.getN() != 0) {
+			delete = true;
+		}
+		return delete;
 	}
 
 	@Override
@@ -74,7 +92,7 @@ public class DaoQuestion implements IDaoQuestion {
 	
 	public Question getMongoQuestionOuverteById(Integer id) {
 		Query query = new Query(Criteria.where("ouverte").is(true).andOperator(Criteria.where("_id").is(id)));
-		Question questionOuverte = (Question) mongoOps.find(query, Question.class);
+		Question questionOuverte = (Question) mongoTemplate.find(query, Question.class);
 		return questionOuverte;
 	}
 
@@ -86,7 +104,7 @@ public class DaoQuestion implements IDaoQuestion {
 	
 	public Question getMongoQuestionATrousById(Integer id) {
 		Query query = new Query(Criteria.where("trous").is(true).andOperator(Criteria.where("_id").is(id)));
-		Question questionATrou = (Question) mongoOps.find(query, Question.class);
+		Question questionATrou = (Question) mongoTemplate.find(query, Question.class);
 		return questionATrou;
 	}
 
@@ -98,7 +116,7 @@ public class DaoQuestion implements IDaoQuestion {
 	
 	public Question getMongoQuestionQcmById(Integer id) {
 		Query query = new Query(Criteria.where("qcm").is(true).andOperator(Criteria.where("_id").is(id)));
-		Question questionQcm = (Question) mongoOps.find(query, Question.class);
+		Question questionQcm = (Question) mongoTemplate.find(query, Question.class);
 		return questionQcm;
 	}
 
@@ -110,14 +128,14 @@ public class DaoQuestion implements IDaoQuestion {
 	
 	public Question getMongoQuestionDragAndDropById(Integer id) {
 		Query query = new Query(Criteria.where("dad").is(true).andOperator(Criteria.where("_id").is(id)));
-		Question questionDad = (Question) mongoOps.find(query, Question.class);
+		Question questionDad = (Question) mongoTemplate.find(query, Question.class);
 		return questionDad;
 	}
 
 	@Override
 	public List<Integer> getSolutionsByQuestionQcm(QuestionQcm question) {
 		List<Integer> solutions = new ArrayList<>();
-		QuestionQcm questionFound = (QuestionQcm) mongoOps.findById(question.getIdQuestion(), Question.class);
+		QuestionQcm questionFound = (QuestionQcm) mongoTemplate.findById(question.getIdQuestion(), Question.class);
 		solutions = questionFound.getSolutions();
 		return solutions;
 	}
@@ -125,7 +143,7 @@ public class DaoQuestion implements IDaoQuestion {
 	@Override
 	public List<String> getSolutionsByQuestionATrous(QuestionATrous question) {
 		List<String> solutions = new ArrayList<>();
-		QuestionATrous questionFound = (QuestionATrous) mongoOps.findById(question.getIdQuestion(), Question.class);
+		QuestionATrous questionFound = (QuestionATrous) mongoTemplate.findById(question.getIdQuestion(), Question.class);
 		solutions = questionFound.getSolutions();
 		return solutions;
 	}
@@ -133,9 +151,14 @@ public class DaoQuestion implements IDaoQuestion {
 	@Override
 	public List<String> getPropositionQuestionQcm(QuestionQcm q) {
 		List<String> propositions = new ArrayList<>();
-		QuestionQcm questionFound = (QuestionQcm) mongoOps.findById(q.getIdQuestion(), Question.class);
+		QuestionQcm questionFound = (QuestionQcm) mongoTemplate.findById(q.getIdQuestion(), Question.class);
 		propositions = questionFound.getPropositions();
 		return propositions;
+	}
+	
+	
+	public List<Question> getAllQuestion(){
+		return (List<Question>) mongoTemplate.findAll(Question.class, COLLECTION);
 	}
 
 }
