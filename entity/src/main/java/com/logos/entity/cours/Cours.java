@@ -1,6 +1,8 @@
 package com.logos.entity.cours;
 
 import java.util.*;
+
+import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +30,7 @@ public class Cours {
 
 	@Id
 	@Column(name="id_cours")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator= "uuid")
     private Integer idCours;
 
     @Column(name="titre_cours", nullable=false, length=100)

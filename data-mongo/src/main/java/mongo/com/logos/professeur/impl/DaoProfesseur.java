@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.stereotype.Repository;
 
 import com.logos.entity.user.Professeur;
 
 import api.com.logos.data.professeur.IDaoProfesseur;
 
+@Repository
 public class DaoProfesseur implements IDaoProfesseur {
 	
 	@Autowired
@@ -20,8 +22,8 @@ public class DaoProfesseur implements IDaoProfesseur {
 
 	@Override
 	public Professeur ajouterProf(Professeur prof) {
-		// TODO Auto-generated method stub
-		return null;
+		mongoOps.insert(prof);
+		return prof;
 	}
 
 	@Override
