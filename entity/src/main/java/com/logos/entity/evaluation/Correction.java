@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.reponse.ReponseOuverteEleve;
 import com.logos.entity.user.Professeur;
 
@@ -23,6 +25,7 @@ import com.logos.entity.user.Professeur;
  */
 @Entity
 @Table(name="correction")
+@Document
 public class Correction {
 
 	/**

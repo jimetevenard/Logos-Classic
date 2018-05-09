@@ -5,11 +5,14 @@ import java.util.*;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * 
  */
 @Entity
 @DiscriminatorValue(value = "QuestionDragAndDrop")
+@Document
 public class QuestionDragAndDrop extends QuestionATrous {
 
     /**

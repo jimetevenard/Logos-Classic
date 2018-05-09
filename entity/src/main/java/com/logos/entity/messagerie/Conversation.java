@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.user.Utilisateur;
 
 /**
@@ -18,6 +20,7 @@ import com.logos.entity.user.Utilisateur;
  */
 @Entity
 @Table(name="conversation")
+@Document
 public class Conversation {
 
    

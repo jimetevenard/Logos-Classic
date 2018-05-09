@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.user.Eleve;
 
 /**
@@ -24,6 +26,7 @@ import com.logos.entity.user.Eleve;
  */
 @Entity
 @Table(name="suivi_cours")
+@Document
 public class SuiviCours {
 
   

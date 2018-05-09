@@ -14,10 +14,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.evaluation.TestDeNiveau;
 
 @Entity
 @Table(name="categorie")
+@Document
 public class Categorie {
 
 	@Id

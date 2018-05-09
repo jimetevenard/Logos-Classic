@@ -16,6 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.logos.entity.messagerie.Conversation;
 
@@ -27,6 +29,7 @@ import com.logos.entity.messagerie.Conversation;
 @Table(name= "utilisateur")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type_utilisateur")
+@Document
 public class Utilisateur {
 
     

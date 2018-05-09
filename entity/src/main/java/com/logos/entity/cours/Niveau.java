@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.evaluation.TestDeNiveau;
 import com.logos.entity.user.Eleve;
 
@@ -24,6 +26,7 @@ import com.logos.entity.user.Eleve;
  */
 @Entity
 @Table(name="niveau")
+@Document
 public class Niveau {
 
 	public static final int A1 = 10;

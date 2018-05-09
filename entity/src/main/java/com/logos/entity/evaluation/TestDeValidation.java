@@ -6,6 +6,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.cours.Cours;
 
 /**
@@ -13,6 +15,7 @@ import com.logos.entity.cours.Cours;
  */
 @Entity
 @DiscriminatorValue(value = "TestDeValidation")
+@Document
 public class TestDeValidation extends Test {
 
     /**

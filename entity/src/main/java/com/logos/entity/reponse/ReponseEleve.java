@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.evaluation.Evaluation;
 import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.question.Question;
@@ -26,6 +28,7 @@ import com.logos.entity.question.Question;
 @Table(name="reponse_eleve")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type_reponse_eleve")
+@Document
 public class ReponseEleve {
 
 	/**

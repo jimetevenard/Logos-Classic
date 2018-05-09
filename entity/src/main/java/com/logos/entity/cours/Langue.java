@@ -13,10 +13,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.user.Professeur;
 
 @Entity
 @Table(name="langue")
+@Document
 public class Langue {
 
     

@@ -6,6 +6,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.cours.Chapitre;
 
 /**
@@ -13,6 +15,7 @@ import com.logos.entity.cours.Chapitre;
  */
 @Entity
 @DiscriminatorValue(value = "Exercice")
+@Document
 public class Exercice extends Evaluation {
 
 

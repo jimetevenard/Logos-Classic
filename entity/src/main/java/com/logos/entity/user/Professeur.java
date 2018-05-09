@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Langue;
@@ -17,6 +19,7 @@ import com.logos.entity.evaluation.Correction;
  */
 @Entity
 @DiscriminatorValue(value="Professeur")
+@Document
 public class Professeur extends Utilisateur {
 
     

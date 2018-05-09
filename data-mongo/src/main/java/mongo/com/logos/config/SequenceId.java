@@ -9,7 +9,7 @@ public class SequenceId {
 	
 	private String name;
 	
-	private long seq;
+	private Integer seq;
 
 	public String getName() {
 		return name;
@@ -19,11 +19,11 @@ public class SequenceId {
 		this.name = name;
 	}
 
-	public long getSeq() {
+	public Integer getSeq() {
 		return seq;
 	}
 
-	public void setSeq(long seq) {
+	public void setSeq(Integer seq) {
 		this.seq = seq;
 	}
 

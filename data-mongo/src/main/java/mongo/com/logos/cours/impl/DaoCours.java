@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.logos.entity.cours.Categorie;
@@ -52,43 +54,44 @@ public class DaoCours implements IDaoCours {
 	@Override
 	public Cours getCoursByid(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findById(id, Cours.class);
 	}
 
 	@Override
 	public List<Cours> getAllCours() {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findAll(Cours.class);
 	}
 
 	@Override
 	public List<Cours> getCoursByLangue(Langue langue) {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = new Query(Criteria.where("niveau.langue").is(langue));
+		return mongoOps.find(q,Cours.class);
 	}
 
 	@Override
 	public List<Cours> getCoursByCategorie(Categorie categorie) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = new Query(Criteria.where("categories").elemMatch(Criteria.where("_id").is(categorie.getIdCategorie())));
+		return mongoOps.find(query, Cours.class);
 	}
 
 	@Override
 	public List<Cours> getCoursByNiveau(Niveau niveau) {
-		// TODO Auto-generated method stub
-		return null;
+		Query q = new Query(Criteria.where("niveau").is(niveau));
+		return mongoOps.find(q,Cours.class);
 	}
 
 	@Override
 	public List<Cours> getCoursByNiveauSuperieur(Niveau niveau) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO completer
+		return getCoursByLangue(niveau.getLangue());
 	}
 
 	@Override
 	public Double getNoteMoyenneByCours(Cours cours) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO oupsy !
+		return 6.66;
 	}
 
 }

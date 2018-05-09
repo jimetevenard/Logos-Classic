@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.evaluation.Correction;
 import com.logos.entity.evaluation.Evaluation;
 import com.logos.entity.evaluation.RealiseEvaluation;
@@ -19,6 +21,7 @@ import com.logos.entity.question.Question;
  */
 @Entity
 @DiscriminatorValue(value = "ReponseOuverteEleve")
+@Document
 public class ReponseOuverteEleve extends ReponseEleve {
 
 

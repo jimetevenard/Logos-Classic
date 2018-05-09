@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.cours.Categorie;
 import com.logos.entity.cours.Niveau;
 
@@ -17,6 +19,7 @@ import com.logos.entity.cours.Niveau;
  */
 @Entity
 @DiscriminatorValue(value = "TestDeNiveau")
+@Document
 public class TestDeNiveau extends Test {
 
 

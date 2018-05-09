@@ -10,11 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * 
  */
 @Entity
 @DiscriminatorValue(value = "QuestionQcm")
+@Document
 public class QuestionQcm extends QuestionFermee {
 
     

@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.user.Utilisateur;
 
 /**
@@ -22,6 +24,7 @@ import com.logos.entity.user.Utilisateur;
  */
 @Entity
 @Table(name = "message")
+@Document
 public class Message {
 
 

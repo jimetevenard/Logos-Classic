@@ -16,6 +16,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.reponse.ReponseEleve;
 import com.logos.entity.user.Eleve;
 
@@ -24,6 +26,7 @@ import com.logos.entity.user.Eleve;
  */
 @Entity
 @Table(name="realise_evaluation")
+@Document
 public class RealiseEvaluation {
 
 

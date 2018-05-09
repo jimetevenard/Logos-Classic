@@ -21,11 +21,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.evaluation.TestDeValidation;
 import com.logos.entity.user.Professeur;
 
 @Entity
 @Table(name="cours")
+@Document
 public class Cours {
 
 	@Id

@@ -8,11 +8,15 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import com.logos.entity.cours.Categorie;
 
 import api.com.logos.data.cours.IDaoCategorie;
+import mongo.com.logos.config.NextSequenceService;
 
 public class DaoCategorie implements IDaoCategorie {
 	
 	@Autowired
 	MongoOperations mongoOps;
+	
+//	@Autowired
+//	private NextSequenceService sequence;
 	
 	public DaoCategorie(MongoOperations mongoOps) {
 		this.mongoOps = mongoOps;
@@ -20,14 +24,14 @@ public class DaoCategorie implements IDaoCategorie {
 
 	@Override
 	public Categorie getCategoryById(Integer Id) {
-		// TODO Auto-generated method stub
-		return null;
+		Categorie cat = mongoOps.findById(Id, Categorie.class);
+		return cat;
 	}
 
 	@Override
 	public List<Categorie> getAllCategories() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Categorie> categories = mongoOps.findAll(Categorie.class);
+		return categories;
 	}
 
 	@Override

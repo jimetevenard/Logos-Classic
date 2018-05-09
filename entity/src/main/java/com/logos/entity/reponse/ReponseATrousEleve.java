@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.logos.entity.evaluation.Evaluation;
 import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.question.Question;
@@ -19,6 +21,7 @@ import com.logos.entity.question.Question;
  */
 @Entity
 @DiscriminatorValue(value = "ReponseATrousEleve")
+@Document
 public class ReponseATrousEleve extends ReponseFermeeEleve {
 
 

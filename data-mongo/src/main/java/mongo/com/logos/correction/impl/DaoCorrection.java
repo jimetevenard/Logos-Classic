@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.logos.entity.evaluation.Correction;
 import com.logos.entity.reponse.ReponseEleve;
@@ -12,6 +15,7 @@ import com.logos.entity.user.Professeur;
 
 import api.com.logos.data.correction.IDaoCorrection;
 
+@Repository
 public class DaoCorrection implements IDaoCorrection {
 	
 	@Autowired
@@ -24,13 +28,13 @@ public class DaoCorrection implements IDaoCorrection {
 	@Override
 	public List<Correction> getAllCorrections() {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findAll(Correction.class);
 	}
 
 	@Override
 	public Correction getCorrectionById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findById(id, Correction.class);
 	}
 
 	@Override
@@ -54,6 +58,8 @@ public class DaoCorrection implements IDaoCorrection {
 	@Override
 	public Correction getCorrectionByReponse(ReponseEleve reponse) {
 		// TODO Auto-generated method stub
+		Query query = new Query(Criteria.where("_id").is(reponse.getIdReponse()));
+		ReponseEleve rep = mongoOps.findOne(query, ReponseEleve.class);
 		return null;
 	}
 
