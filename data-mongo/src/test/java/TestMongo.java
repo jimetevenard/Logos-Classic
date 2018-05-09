@@ -76,6 +76,9 @@ public class TestMongo {
 		Question q = new Question();
 		q.setEnonce("Une question basique again new try it will work...");
 		
+		Question q2 = new Question();
+		q.setEnonce("Une deuxieme question basique again new try it will work...");
+		
 		QuestionATrous qat = new QuestionATrous();
 		qat.setPhraseATrou("Question a ((trou)) again");
 		
@@ -96,13 +99,16 @@ public class TestMongo {
 		
 		//dao.addCours(c);
 		
-		//daoQuestion.addQuestion(q);
-		/*daoQuestion.addQuestion(qat);*/
+		//daoQuestion.addQuestion(q2);
+		/*daoQuestion.addQuestion(qat);
 		
-		System.out.println(daoQuestion.getQuestionById(2));
-		q.setEnonce("ew enonce");
-		//daoQuestion.updateQuestion(q);
-		daoQuestion.deleteQuestion(q);
+		System.out.println(qat.getIdQuestion());
+		
+		qat.setIdQuestion(qat.getIdQuestion());
+		System.out.println(qat.getIdQuestion());
+		qat.setEnonce("ew enonce");*/
+		//daoQuestion.updateQuestion(qat);
+		daoQuestion.deleteQuestion(qat);
 		
 		/*System.out.println(daoQuestion.getAllQuestion());
 		

@@ -66,8 +66,14 @@ public class DaoQuestion implements IDaoQuestion {
 
 	@Override
 	public Question updateQuestion(Question question) {
-		
-		mongoTemplate.save(question, COLLECTION);
+		Query query = new Query(Criteria.where("_id").is(question.getIdQuestion()));
+		Question questionToUpdate = mongoTemplate.findOne(query, Question.class);
+		System.out.println(questionToUpdate);
+		System.out.println(question.getIdQuestion());
+		questionToUpdate.setEnonce(question.getEnonce());
+		questionToUpdate.setEvaluations(question.getEvaluations());
+		questionToUpdate.setReponsesEleve(question.getReponsesEleve());
+		mongoTemplate.save(questionToUpdate);
 		return question;
 	}
 
