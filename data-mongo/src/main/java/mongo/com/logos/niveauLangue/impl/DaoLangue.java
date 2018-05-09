@@ -21,13 +21,13 @@ public class DaoLangue implements IDaoLangues {
 	@Override
 	public Langue getLangueById(Integer Id) {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findById(Id, Langue.class);
 	}
 
 	@Override
 	public List<Langue> getAllLangues() {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findAll(Langue.class);
 	}
 
 	@Override

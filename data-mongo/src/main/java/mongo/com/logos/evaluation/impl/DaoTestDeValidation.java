@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import com.logos.entity.cours.Cours;
 import com.logos.entity.evaluation.TestDeValidation;
@@ -40,7 +42,8 @@ public class DaoTestDeValidation implements IDaoTestDeValidation {
 	@Override
 	public List<TestDeValidation> getTestValidationByCours(Cours cours) {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = new Query(Criteria.where("cours").is(cours));
+		return mongoOps.find(q, TestDeValidation.class);
 	}
 
 }

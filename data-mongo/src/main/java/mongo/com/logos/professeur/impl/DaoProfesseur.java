@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.logos.entity.user.Professeur;
 
 import api.com.logos.data.professeur.IDaoProfesseur;
+import mongo.com.logos.config.NextSequenceService;
 
 @Repository
 public class DaoProfesseur implements IDaoProfesseur {
@@ -16,12 +17,18 @@ public class DaoProfesseur implements IDaoProfesseur {
 	@Autowired
 	MongoOperations mongoOps;
 	
+	@Autowired
+	private NextSequenceService sequence;
+	
+	private static final String COLLECTION = "professeur";
+	
 	public DaoProfesseur(MongoOperations mongoOps) {
 		this.mongoOps = mongoOps;
 	}
 
 	@Override
 	public Professeur ajouterProf(Professeur prof) {
+		prof.setIdUtilisateur(sequence.getNextSequence(COLLECTION));
 		mongoOps.insert(prof);
 		return prof;
 	}
@@ -29,7 +36,7 @@ public class DaoProfesseur implements IDaoProfesseur {
 	@Override
 	public Professeur getProfById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findById(id, Professeur.class);
 	}
 
 	@Override
@@ -47,7 +54,7 @@ public class DaoProfesseur implements IDaoProfesseur {
 	@Override
 	public List<Professeur> getAllProf() {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findAll(Professeur.class);
 	}
 
 }

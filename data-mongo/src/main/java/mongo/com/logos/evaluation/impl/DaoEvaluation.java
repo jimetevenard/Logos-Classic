@@ -15,6 +15,7 @@ import com.logos.entity.evaluation.Evaluation;
 import com.logos.entity.user.Eleve;
 
 import api.com.logos.data.evaluation.IDaoEvaluation;
+import mongo.com.logos.config.NextSequenceService;
 
 @Repository
 public class DaoEvaluation implements IDaoEvaluation {
@@ -22,12 +23,18 @@ public class DaoEvaluation implements IDaoEvaluation {
 	@Autowired
 	MongoOperations mongoOps;
 	
+	@Autowired
+	private NextSequenceService sequence;
+	
+	private static final String COLLECTION = "evaluation";
+	
 	public DaoEvaluation(MongoOperations mongoOps) {
 		this.mongoOps = mongoOps;
 	}
 
 	@Override
 	public Evaluation addEvaluation(Evaluation evaluation) {
+		evaluation.setIdEvaluation(sequence.getNextSequence(COLLECTION));
 		mongoOps.insert(evaluation);
 		return evaluation;
 	}
@@ -48,9 +55,9 @@ public class DaoEvaluation implements IDaoEvaluation {
 	@Override
 	public List<Evaluation> getEvaluationByEleve(Eleve eleve) {
 		List<Evaluation> evaluations = new ArrayList<>();
-		List<Eleve> eleves = new ArrayList<>();
-		Query query = new Query(Criteria.where("evaluation").exists(true).andOperator(Criteria.where("_id").is(eleve.getIdUtilisateur())));
-		eleves = mongoOps.find(query, Eleve.class);
+		
+		Query query = new Query(Criteria.where("realiseEvaluations.evaluation").exists(true).andOperator(Criteria.where("_id").is(eleve.getIdUtilisateur())));
+		Eleve eleveFound = mongoOps.findOne(query, Eleve.class);
 		
 		return null;
 	}

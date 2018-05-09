@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.logos.entity.cours.Categorie;
 import com.logos.entity.cours.Niveau;
@@ -11,6 +14,7 @@ import com.logos.entity.evaluation.TestDeNiveau;
 
 import api.com.logos.data.evaluation.IDaoTestDeNiveau;
 
+@Repository
 public class DaoTestDeNiveau implements IDaoTestDeNiveau {
 	
 	@Autowired
@@ -41,7 +45,8 @@ public class DaoTestDeNiveau implements IDaoTestDeNiveau {
 	@Override
 	public List<TestDeNiveau> getTestNiveauByNiveau(Niveau niveau) {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = new Query(Criteria.where("niveau").is(niveau));
+		return mongoOps.find(q, TestDeNiveau.class);
 	}
 
 	@Override

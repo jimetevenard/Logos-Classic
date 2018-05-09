@@ -15,11 +15,17 @@ import com.logos.entity.reponse.ReponseQcmEleve;
 import com.logos.entity.user.Eleve;
 
 import api.com.logos.data.reponseeleve.IDaoReponseEleve;
+import mongo.com.logos.config.NextSequenceService;
 
 public class DaoReponseEleve implements IDaoReponseEleve {
 	
 	@Autowired
 	MongoOperations mongoOps;
+	
+	@Autowired
+	private NextSequenceService sequence;
+	
+	private static final String COLLECTION = "reponseEleve";
 	
 	public DaoReponseEleve(MongoOperations mongoOps) {
 		this.mongoOps = mongoOps;
@@ -28,7 +34,7 @@ public class DaoReponseEleve implements IDaoReponseEleve {
 	@Override
 	public ReponseEleve getReponseById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findById(id, ReponseEleve.class);
 	}
 
 	@Override
@@ -39,8 +45,9 @@ public class DaoReponseEleve implements IDaoReponseEleve {
 
 	@Override
 	public ReponseEleve addReponseEleve(ReponseEleve reponse) {
-		// TODO Auto-generated method stub
-		return null;
+		reponse.setIdReponse(sequence.getNextSequence(COLLECTION));
+		mongoOps.insert(reponse);
+		return reponse;
 	}
 
 	@Override

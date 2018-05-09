@@ -22,13 +22,13 @@ public class DaoNiveau implements IDaoNiveau {
 	@Override
 	public Niveau getNiveauById(Integer Id) {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findById(Id, Niveau.class);
 	}
 
 	@Override
 	public List<Niveau> getAllNiveaux() {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findAll(Niveau.class);
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class NextSequenceService {
 	private MongoOperations mongops;
 	
 	
-	public long getNextSequence(String key) {
+	public Integer getNextSequence(String key) {
 		
 		//get sequence id
 		Query query =  new Query(Criteria.where("name").is(key));

@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
+import com.logos.entity.question.Question;
 import com.logos.entity.user.Eleve;
 
 import api.com.logos.data.eleve.IDaoEleve;
+import mongo.com.logos.config.NextSequenceService;
 
 @Repository
 public class DaoEleve implements IDaoEleve {
@@ -20,26 +22,32 @@ public class DaoEleve implements IDaoEleve {
 	@Autowired
 	MongoOperations mongoOps;
 	
+	@Autowired
+	private NextSequenceService sequence;
+	
+	private static final String COLLECTION = "eleve";
+	
 	public DaoEleve(MongoOperations mongoOps) {
 		this.mongoOps = mongoOps;
 	}
 
 	@Override
 	public Eleve ajouterEleve(Eleve eleve) {
+		eleve.setIdUtilisateur(sequence.getNextSequence(COLLECTION));
 		mongoOps.insert(eleve);
 		return eleve;
 	}
 
 	@Override
 	public Eleve getEleveById(Integer id) {
-		return null;
+		return mongoOps.findById(id, Eleve.class);
 	}
 	
-	public Eleve getEleveById(String id) {
-		Query query = new Query(Criteria.where("_id").is(id));
-		Eleve eleve = (Eleve) mongoOps.findById(id, Eleve.class);
-		return eleve;
-	}
+//	public Eleve getEleveById(String id) {
+//		Query query = new Query(Criteria.where("_id").is(id));
+//		Eleve eleve = (Eleve) mongoOps.findById(id, Eleve.class);
+//		return eleve;
+//	}
 
 	@Override
 	public Eleve updateEleve(Eleve eleve) {
@@ -56,7 +64,7 @@ public class DaoEleve implements IDaoEleve {
 	@Override
 	public List<Eleve> getAllEleve() {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findAll(Eleve.class);
 	}
 
 }

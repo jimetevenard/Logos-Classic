@@ -1,5 +1,6 @@
 package mongo.com.logos.messagerie.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,17 @@ import com.logos.entity.messagerie.Conversation;
 import com.logos.entity.messagerie.Message;
 
 import api.com.logos.data.messagerie.IDaoMessage;
+import mongo.com.logos.config.NextSequenceService;
 
 public class DaoMessage implements IDaoMessage {
 	
 	@Autowired
 	MongoOperations mongoOps;
+	
+	@Autowired
+	private NextSequenceService sequence;
+	
+	private static final String COLLECTION = "message";
 	
 	public DaoMessage(MongoOperations mongoOps) {
 		this.mongoOps = mongoOps;
@@ -21,20 +28,25 @@ public class DaoMessage implements IDaoMessage {
 
 	@Override
 	public Message addMessage(Message message, Conversation conversation) {
-		// TODO Auto-generated method stub
-		return null;
+		message.setIdMessage(sequence.getNextSequence(COLLECTION));
+		conversation = mongoOps.findById(conversation.getIdConversation(), Conversation.class);
+		conversation.getMessages().size();
+		message.setDateEnvoi(new Date());
+		message.setConversation(conversation);
+		mongoOps.insert(message);
+		return message;
 	}
 
 	@Override
 	public List<Message> getAllMessages(Conversation conversation) {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findAll(Message.class);
 	}
 
 	@Override
 	public Message getMessageById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoOps.findById(id, Message.class);
 	}
 
 	@Override
