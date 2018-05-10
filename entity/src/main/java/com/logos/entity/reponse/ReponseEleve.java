@@ -35,6 +35,7 @@ public class ReponseEleve {
 	 * 
 	 */
 	@Id
+	@org.springframework.data.annotation.Id
 	@Column(name = "id_reponse_eleve")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idReponse;

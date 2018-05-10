@@ -24,6 +24,7 @@ import com.logos.entity.evaluation.TestDeNiveau;
 public class Categorie {
 
 	@Id
+	@org.springframework.data.annotation.Id
 	@Column(name="id_categorie")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idCategorie;

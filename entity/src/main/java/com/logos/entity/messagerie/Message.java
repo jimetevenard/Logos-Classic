@@ -32,6 +32,7 @@ public class Message {
      * 
      */
     @Id
+    @org.springframework.data.annotation.Id
     @Column(name = "id_message")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idMessage;

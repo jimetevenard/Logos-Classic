@@ -34,6 +34,7 @@ public class Evaluation {
      * 
      */
 	@Id
+	@org.springframework.data.annotation.Id
     @Column(name = "id_evaluation")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEvaluation;

@@ -32,6 +32,7 @@ public class Correction {
 	 * 
 	 */
 	@Id
+	@org.springframework.data.annotation.Id
 	@Column(name="id_correction")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idCorrection;

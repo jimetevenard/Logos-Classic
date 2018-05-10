@@ -21,6 +21,7 @@ import com.logos.entity.evaluation.Exercice;
 public class Chapitre {
 
     @Id
+    @org.springframework.data.annotation.Id
     @Column(name="id_chapitre")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idChapitre;

@@ -10,7 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
+//import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -21,33 +21,37 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.google.gson.annotations.SerializedName;
 import com.logos.entity.evaluation.TestDeValidation;
 import com.logos.entity.user.Professeur;
 
 @Entity
 @Table(name="cours")
-@Document
+@Document(collection="cours")
 public class Cours {
 
 	@Id
-	@Column(name="id_cours")
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator= "uuid")
+	@javax.persistence.Id
+	@SerializedName("_id")
+	//@Column(name="id_cours")
+	//@GeneratedValue(strategy=GenerationType.IDENTITY, generator= "uuid")
     private Integer idCours;
 
-    @Column(name="titre_cours", nullable=false, length=100)
+   // @Column(name="titre_cours", nullable=false, length=100)
     private String titre;
 
-    @Column(name="introduction_cours", nullable=false, length=1000)
+    //@Column(name="introduction_cours", nullable=false, length=1000)
     private String introduction;
 
-    @Column(name="dateCreation_cours", nullable=false)
-    @Temporal(TemporalType.TIMESTAMP)
+   // @Column(name="dateCreation_cours", nullable=false)
+    //@Temporal(TemporalType.TIMESTAMP)
     private java.util.Date dateCreation;
 
-    @Column(name="dateMiseAJour_cours", nullable=false)
-    @Temporal(TemporalType.TIMESTAMP)
+   // @Column(name="dateMiseAJour_cours", nullable=false)
+    //@Temporal(TemporalType.TIMESTAMP)
     private java.util.Date dateMiseAJour;
 
     @ManyToOne
@@ -93,6 +97,14 @@ public class Cours {
 	}
 	
 	
+	
+
+	public Cours(Integer idCours, String titre, String introduction) {
+		super();
+		this.idCours = idCours;
+		this.titre = titre;
+		this.introduction = introduction;
+	}
 
 	@Override
 	public int hashCode() {
@@ -214,6 +226,13 @@ public class Cours {
 	public void setSuiviCours(Set<SuiviCours> suiviCours) {
 		this.suiviCours = suiviCours;
 	}
+
+	@Override
+	public String toString() {
+		return "Cours [idCours=" + idCours + ", titre=" + titre + ", introduction=" + introduction + "]";
+	}
+	
+	
 
     
 }

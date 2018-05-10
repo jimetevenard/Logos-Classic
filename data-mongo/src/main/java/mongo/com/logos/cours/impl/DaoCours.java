@@ -69,18 +69,27 @@ public class DaoCours implements IDaoCours {
 		Query q = new Query(Criteria.where("niveau.langue").is(langue));
 		return mongoOps.find(q,Cours.class);
 	}
+	
+	public List<Cours> getCoursByLangue(String langue) {
+		// TODO Auto-generated method stub
+		Query q = new Query(Criteria.where("niveau.langue").is(langue));
+		return mongoOps.find(q,Cours.class);
+	}
 
 	@Override
 	public List<Cours> getCoursByCategorie(Categorie categorie) {
+		//TODO a refaire
 		Query query = new Query(Criteria.where("categories").elemMatch(Criteria.where("_id").is(categorie.getIdCategorie())));
 		return mongoOps.find(query, Cours.class);
 	}
 
 	@Override
 	public List<Cours> getCoursByNiveau(Niveau niveau) {
-		Query q = new Query(Criteria.where("niveau").is(niveau));
+		Query q = new Query(Criteria.where("niveau._id").is(niveau.getIdNiveau()));
 		return mongoOps.find(q,Cours.class);
 	}
+	
+	
 
 	@Override
 	public List<Cours> getCoursByNiveauSuperieur(Niveau niveau) {

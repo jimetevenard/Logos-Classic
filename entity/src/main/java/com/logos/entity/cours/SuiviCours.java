@@ -36,6 +36,7 @@ public class SuiviCours {
      * 
      */
 	@Id
+	@org.springframework.data.annotation.Id
 	@Column(name="id_suivi_cours")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSuiviCours;

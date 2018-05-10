@@ -39,6 +39,7 @@ public class Utilisateur {
      * 
      */
     @Id
+    @org.springframework.data.annotation.Id
 	@Column(name = "id_utilisateur")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUtilisateur;

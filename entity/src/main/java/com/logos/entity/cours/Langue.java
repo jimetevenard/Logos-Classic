@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.google.gson.annotations.SerializedName;
 import com.logos.entity.user.Professeur;
 
 @Entity
@@ -28,8 +29,10 @@ public class Langue {
      * 
      */
 	@Id
+	@org.springframework.data.annotation.Id
 	@Column(name="id_langue")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@SerializedName("_id")
     private Integer idLangue;
 
     /**

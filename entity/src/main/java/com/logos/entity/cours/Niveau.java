@@ -18,6 +18,9 @@ import javax.persistence.Table;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
+import com.google.gson.annotations.SerializedName;
 import com.logos.entity.evaluation.TestDeNiveau;
 import com.logos.entity.user.Eleve;
 
@@ -27,6 +30,8 @@ import com.logos.entity.user.Eleve;
 @Entity
 @Table(name="niveau")
 @Document
+@JsonSerializableSchema
+@JsonSerialize
 public class Niveau {
 
 	public static final int A1 = 10;
@@ -42,6 +47,7 @@ public class Niveau {
 	@Id
 	@Column(name="id_niveau")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@org.springframework.data.annotation.Id
     private Integer idNiveau;
 
     /**

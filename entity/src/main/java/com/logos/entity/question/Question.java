@@ -38,6 +38,7 @@ public class Question {
      * 
      */
     @Id
+    @javax.persistence.Id
    // @Column(name = "id_question")
    // @GeneratedValue(generator= "uuid")
     private long idQuestion;

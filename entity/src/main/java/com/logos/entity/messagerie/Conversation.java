@@ -29,6 +29,7 @@ public class Conversation {
      * 
      */
     @Id
+    @org.springframework.data.annotation.Id
     @Column(name = "id_conversation")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idConversation;
