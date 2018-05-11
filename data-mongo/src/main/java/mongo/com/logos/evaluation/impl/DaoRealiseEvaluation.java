@@ -26,14 +26,14 @@ public class DaoRealiseEvaluation implements IDaoRealiseEvaluation {
 	@Override
 	public Set<RealiseEvaluation> getRealiseEvaluationByEleve(Eleve eleve) {
 		// TODO Auto-generated method stub
-		Query q = new Query(Criteria.where("eleve").is(eleve));
+		Query q = new Query(Criteria.where("eleve._id").is(eleve.getIdUtilisateur()));
 		return (Set<RealiseEvaluation>) mongoOps.find(q, RealiseEvaluation.class);
 	}
 
 	@Override
 	public RealiseEvaluation addRealiseEvaluation(RealiseEvaluation realiseEvaluation) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 }

@@ -40,19 +40,19 @@ public class DaoCorrection implements IDaoCorrection {
 	@Override
 	public Correction addCorrection(Correction correction) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public Correction updateCorrection(Correction correction) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public boolean deleteCorrection(Correction correction) {
 		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
@@ -66,13 +66,13 @@ public class DaoCorrection implements IDaoCorrection {
 	@Override
 	public List<Correction> getCorrectionByProfesseur(Professeur professeur) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public List<Correction> getCorrectionByEleve(Eleve eleve) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 }

@@ -46,7 +46,7 @@ public class DaoExercice implements IDaoExercice {
 	@Override
 	public List<Exercice> getExerciceByCours(Cours cours) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 }

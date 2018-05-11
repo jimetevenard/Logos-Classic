@@ -27,32 +27,32 @@ public class DaoTestDeNiveau implements IDaoTestDeNiveau {
 	@Override
 	public TestDeNiveau addTestDeNiveau(TestDeNiveau testNiveau) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public TestDeNiveau updateTestDeNiveau(TestDeNiveau testNiveau) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public boolean deleteTestDeNiveau(TestDeNiveau testNiveau) {
 		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public List<TestDeNiveau> getTestNiveauByNiveau(Niveau niveau) {
 		// TODO Auto-generated method stub
-		Query q = new Query(Criteria.where("niveau").is(niveau));
+		Query q = new Query(Criteria.where("niveau._id").is(niveau.getIdNiveau()));
 		return mongoOps.find(q, TestDeNiveau.class);
 	}
 
 	@Override
 	public List<TestDeNiveau> getTestNiveauByCategorie(Categorie categorie) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 }

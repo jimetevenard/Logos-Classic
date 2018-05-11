@@ -34,19 +34,19 @@ public class DaoNiveau implements IDaoNiveau {
 	@Override
 	public Niveau addNiveau(Niveau niveau) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public Niveau updateNiveau(Cours niveau) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public boolean deleteNiveau(Niveau niveau) {
 		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 }

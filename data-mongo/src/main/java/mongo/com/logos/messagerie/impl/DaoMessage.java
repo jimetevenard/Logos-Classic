@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import com.logos.entity.messagerie.Conversation;
 import com.logos.entity.messagerie.Message;
@@ -40,7 +42,8 @@ public class DaoMessage implements IDaoMessage {
 	@Override
 	public List<Message> getAllMessages(Conversation conversation) {
 		// TODO Auto-generated method stub
-		return mongoOps.findAll(Message.class);
+		Query q = new Query(Criteria.where("conversation._id").is(conversation.getIdConversation()));
+		return mongoOps.find(q,Message.class);
 	}
 
 	@Override
@@ -58,7 +61,9 @@ public class DaoMessage implements IDaoMessage {
 	@Override
 	public Message updateDateLectureMessage(Message message) {
 		// TODO Auto-generated method stub
-		return null;
+		message.setDateLecture(new Date());
+		mongoOps.save(message);
+		return message;
 	}
 
 }

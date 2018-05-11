@@ -46,15 +46,11 @@ public class DaoQuestion implements IDaoQuestion {
 		return question;
 	}
 	
-	public Question getQuestionById(long id) {
-		Question question = mongoTemplate.findById(id, Question.class);
-		return question;
-	}
 
 	@Override
 	public List<Question> getQuestionByEvaluation(Evaluation evaluation) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
@@ -92,7 +88,7 @@ public class DaoQuestion implements IDaoQuestion {
 	@Override
 	public QuestionOuverte getQuestionOuverteById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 	
 	
@@ -105,7 +101,7 @@ public class DaoQuestion implements IDaoQuestion {
 	@Override
 	public QuestionATrous getQuestionATrousById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 	
 	public Question getMongoQuestionATrousById(Integer id) {
@@ -117,7 +113,7 @@ public class DaoQuestion implements IDaoQuestion {
 	@Override
 	public QuestionQcm getQuestionQcmById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 	
 	public Question getMongoQuestionQcmById(Integer id) {
@@ -129,7 +125,7 @@ public class DaoQuestion implements IDaoQuestion {
 	@Override
 	public QuestionDragAndDrop getQuestionDragAndDropById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 	
 	public Question getMongoQuestionDragAndDropById(Integer id) {

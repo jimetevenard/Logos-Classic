@@ -42,13 +42,13 @@ public class DaoProfesseur implements IDaoProfesseur {
 	@Override
 	public Professeur updateProf(Professeur prof) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public boolean deleteProf(Professeur prof) {
 		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override

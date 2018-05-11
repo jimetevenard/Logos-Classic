@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.logos.entity.messagerie.Conversation;
@@ -31,7 +32,8 @@ public class DaoConversation implements IDaoConversation {
 	@Override
 	public List<Conversation> getAllConversation(Utilisateur user) {
 		// TODO Auto-generated method stub
-		return mongoOps.findAll(Conversation.class);
+		Query query = new Query(Criteria.where("utilisateurs").elemMatch(Criteria.where("_id").is(user.getIdUtilisateur())));
+		return mongoOps.find(query, Conversation.class);
 	}
 
 	@Override
@@ -65,13 +67,14 @@ public class DaoConversation implements IDaoConversation {
 	@Override
 	public Boolean deleteConversation(Conversation conversation) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public Conversation updateConversation(Conversation chawa) {
 		// TODO Auto-generated method stub
-		return null;
+		mongoOps.save(chawa);
+		return chawa;
 	}
 
 	@Override

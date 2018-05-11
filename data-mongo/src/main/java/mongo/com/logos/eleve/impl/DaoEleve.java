@@ -43,22 +43,17 @@ public class DaoEleve implements IDaoEleve {
 		return mongoOps.findById(id, Eleve.class);
 	}
 	
-//	public Eleve getEleveById(String id) {
-//		Query query = new Query(Criteria.where("_id").is(id));
-//		Eleve eleve = (Eleve) mongoOps.findById(id, Eleve.class);
-//		return eleve;
-//	}
 
 	@Override
 	public Eleve updateEleve(Eleve eleve) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public boolean deleteEleve(Eleve eleve) {
 		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override

@@ -42,13 +42,13 @@ public class DaoCours implements IDaoCours {
 	@Override
 	public Cours updateCours(Cours cours) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public boolean deleteCours(Cours cours) {
 		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
@@ -66,15 +66,11 @@ public class DaoCours implements IDaoCours {
 	@Override
 	public List<Cours> getCoursByLangue(Langue langue) {
 		// TODO Auto-generated method stub
-		Query q = new Query(Criteria.where("niveau.langue").is(langue));
+		Query q = new Query(Criteria.where("niveau.langue._id").is(langue.getIdLangue()));
 		return mongoOps.find(q,Cours.class);
 	}
 	
-	public List<Cours> getCoursByLangue(String langue) {
-		// TODO Auto-generated method stub
-		Query q = new Query(Criteria.where("niveau.langue").is(langue));
-		return mongoOps.find(q,Cours.class);
-	}
+
 
 	@Override
 	public List<Cours> getCoursByCategorie(Categorie categorie) {

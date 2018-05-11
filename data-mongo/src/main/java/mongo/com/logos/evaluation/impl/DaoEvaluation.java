@@ -2,6 +2,7 @@ package mongo.com.logos.evaluation.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.logos.entity.cours.Chapitre;
 import com.logos.entity.evaluation.Evaluation;
+import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.user.Eleve;
 
 import api.com.logos.data.evaluation.IDaoEvaluation;
@@ -58,14 +60,17 @@ public class DaoEvaluation implements IDaoEvaluation {
 		
 		Query query = new Query(Criteria.where("realiseEvaluations.evaluation").exists(true).andOperator(Criteria.where("_id").is(eleve.getIdUtilisateur())));
 		Eleve eleveFound = mongoOps.findOne(query, Eleve.class);
-		
-		return null;
+		Set<RealiseEvaluation> realise = eleveFound.getRealisationEvaluations();
+		for (RealiseEvaluation realiseEvaluation : realise) {
+			evaluations.add(realiseEvaluation.getEvaluation());
+		}
+		return evaluations;
 	}
 
 	@Override
 	public List<Evaluation> getEvaluationsByChapitre(Chapitre chapitre) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 }

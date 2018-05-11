@@ -36,20 +36,21 @@ public class DaoCategorie implements IDaoCategorie {
 
 	@Override
 	public Categorie addCategory(Categorie category) {
+		throw new RuntimeException("Méthode nom implémentée");
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
 	public Categorie updateCategory(Categorie category) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public Categorie deleteCategory(Categorie category) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 }

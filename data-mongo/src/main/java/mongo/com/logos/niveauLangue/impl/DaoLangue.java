@@ -33,19 +33,19 @@ public class DaoLangue implements IDaoLangues {
 	@Override
 	public Langue addLangue(Langue langue) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public boolean deleteLangue(Langue langue) {
 		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public Langue updateLangue(Langue langue) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 }

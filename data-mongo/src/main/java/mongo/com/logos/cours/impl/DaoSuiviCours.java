@@ -27,7 +27,7 @@ public class DaoSuiviCours implements IDaoSuiviCours{
 	public List<Cours> getCoursInscritsByEleve(Eleve eleve) {
 		// TODO Auto-generated method stub
 		List<Cours> cours = new ArrayList<>();
-		Query q = new Query(Criteria.where("eleve").is(eleve));
+		Query q = new Query(Criteria.where("eleve._id").is(eleve.getIdUtilisateur()));
 		List<SuiviCours> suivis = mongoOps.find(q, SuiviCours.class);
 		for (SuiviCours suiviCours : suivis) {
 			cours.add(suiviCours.getCours());
@@ -38,13 +38,13 @@ public class DaoSuiviCours implements IDaoSuiviCours{
 	@Override
 	public List<SuiviCours> getSuiviByEleve(Eleve eleve) {
 		// TODO Auto-generated method stub
-		Query q = new Query(Criteria.where("eleve").is(eleve));
+		Query q = new Query(Criteria.where("eleve._id").is(eleve.getIdUtilisateur()));
 		return mongoOps.find(q, SuiviCours.class);
 	}
 
 	@Override
 	public List<SuiviCours> getSuiviByEleveEtCours(Eleve eleve, Cours cours) {
-		Query q = new Query(Criteria.where("eleve").is(eleve).andOperator(Criteria.where("cours").is(cours)));
+		Query q = new Query(Criteria.where("eleve._id").is(eleve.getIdUtilisateur()).andOperator(Criteria.where("cours._id").is(cours.getIdCours())));
 		// TODO Auto-generated method stub
 		return mongoOps.find(q, SuiviCours.class);
 	}
@@ -53,19 +53,19 @@ public class DaoSuiviCours implements IDaoSuiviCours{
 	public SuiviCours addSuivi(SuiviCours suivi) {
 		
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public SuiviCours updateSuivi(SuiviCours suivi) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public boolean deleteSuivi(SuiviCours suivi) {
 		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override

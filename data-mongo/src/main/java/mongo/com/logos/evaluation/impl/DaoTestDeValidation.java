@@ -24,25 +24,25 @@ public class DaoTestDeValidation implements IDaoTestDeValidation {
 	@Override
 	public TestDeValidation addTestValidation(TestDeValidation test) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public TestDeValidation updateTestValidation(TestDeValidation test) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public boolean deleteTestValidation(TestDeValidation test) {
 		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public List<TestDeValidation> getTestValidationByCours(Cours cours) {
 		// TODO Auto-generated method stub
-		Query q = new Query(Criteria.where("cours").is(cours));
+		Query q = new Query(Criteria.where("cours._id").is(cours.getIdCours()));
 		return mongoOps.find(q, TestDeValidation.class);
 	}
 

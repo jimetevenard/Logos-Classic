@@ -40,7 +40,7 @@ public class DaoReponseEleve implements IDaoReponseEleve {
 	@Override
 	public List<ReponseEleve> getReponseByEvaluation(Evaluation evaluation) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
@@ -53,49 +53,49 @@ public class DaoReponseEleve implements IDaoReponseEleve {
 	@Override
 	public ReponseEleve updateReponse(ReponseEleve reponse) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public boolean deleteReponse(ReponseEleve reponse) {
 		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public ReponseOuverteEleve getReponseOuverteById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public ReponseQcmEleve getReponseQcmById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public ReponseATrousEleve getReponseATrousById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public ReponseDragAndDropEleve getReponseDragDropById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public List<ReponseEleve> getReponseByEleve(Eleve eleve) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 	@Override
 	public List<ReponseEleve> getReponseByRealiseEvaluation(RealiseEvaluation realiseEval) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Méthode nom implémentée");
 	}
 
 }
