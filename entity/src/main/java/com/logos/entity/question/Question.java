@@ -25,10 +25,10 @@ import com.logos.entity.reponse.ReponseEleve;
 /**
  * 
  */
-//@Entity
-//@Table(name= "question")
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(name = "type_question")
+@Entity
+@Table(name= "question")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type_question")
 
 @Document(collection = "question")
 public class Question {
