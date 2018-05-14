@@ -10,12 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.context.support.UiApplicationContextUtils;
 
 import com.logos.business.messagerie.api.IBusinessMessagerie;
+import com.logos.data.api.messagerie.IDaoConversation;
+import com.logos.data.api.messagerie.IDaoMessage;
 import com.logos.entity.messagerie.Conversation;
 import com.logos.entity.messagerie.Message;
 import com.logos.entity.user.Utilisateur;
-
-import api.com.logos.data.messagerie.IDaoConversation;
-import api.com.logos.data.messagerie.IDaoMessage;
 
 @Service
 public class BusinessMessagerie implements IBusinessMessagerie {

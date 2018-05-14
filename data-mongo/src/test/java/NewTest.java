@@ -7,16 +7,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.logos.data.mongo.cours.impl.DaoCours;
+import com.logos.data.mongo.eleve.impl.DaoEleve;
+import com.logos.data.mongo.professeur.impl.DaoProfesseur;
+import com.logos.data.mongo.question.impl.DaoQuestion;
 import com.logos.entity.cours.Categorie;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Langue;
 import com.logos.entity.cours.Niveau;
 import com.mongodb.util.JSON;
-
-import mongo.com.logos.cours.impl.DaoCours;
-import mongo.com.logos.eleve.impl.DaoEleve;
-import mongo.com.logos.professeur.impl.DaoProfesseur;
-import mongo.com.logos.question.impl.DaoQuestion;
 
 public class NewTest {
 

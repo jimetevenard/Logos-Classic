@@ -9,6 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.logos.business.inscriptionCours.api.IInscriptionCours;
+import com.logos.data.api.cours.IDaoCategorie;
+import com.logos.data.api.cours.IDaoChapitre;
+import com.logos.data.api.cours.IDaoCours;
+import com.logos.data.api.cours.IDaoSuiviCours;
+import com.logos.data.api.niveauLangue.IDaoLangues;
 import com.logos.entity.cours.Categorie;
 import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
@@ -16,12 +21,6 @@ import com.logos.entity.cours.Langue;
 import com.logos.entity.cours.Niveau;
 import com.logos.entity.cours.SuiviCours;
 import com.logos.entity.user.Eleve;
-
-import api.com.logos.data.cours.IDaoCategorie;
-import api.com.logos.data.cours.IDaoChapitre;
-import api.com.logos.data.cours.IDaoCours;
-import api.com.logos.data.cours.IDaoSuiviCours;
-import api.com.logos.data.niveauLangue.IDaoLangues;
 
 @Service
 public class InscriptionCours implements IInscriptionCours{

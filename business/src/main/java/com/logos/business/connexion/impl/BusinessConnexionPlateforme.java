@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.logos.business.connexion.api.IBusinessConnexionPlateforme;
+import com.logos.data.api.connexion.IDaoConnexionUser;
+import com.logos.data.api.eleve.IDaoEleve;
 import com.logos.entity.user.Eleve;
 import com.logos.entity.user.Professeur;
 import com.logos.entity.user.Utilisateur;
-
-import api.com.logos.data.connexion.IDaoConnexionUser;
-import api.com.logos.data.eleve.IDaoEleve;
 
 @Service
 public class BusinessConnexionPlateforme implements IBusinessConnexionPlateforme {

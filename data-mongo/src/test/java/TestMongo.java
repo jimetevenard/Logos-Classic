@@ -7,6 +7,11 @@ import java.util.Set;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.logos.data.api.cours.IDaoCours;
+import com.logos.data.mongo.cours.impl.DaoCours;
+import com.logos.data.mongo.eleve.impl.DaoEleve;
+import com.logos.data.mongo.professeur.impl.DaoProfesseur;
+import com.logos.data.mongo.question.impl.DaoQuestion;
 import com.logos.entity.cours.Categorie;
 import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.Cours;
@@ -16,12 +21,6 @@ import com.logos.entity.question.Question;
 import com.logos.entity.question.QuestionATrous;
 import com.logos.entity.user.Eleve;
 import com.logos.entity.user.Professeur;
-
-import api.com.logos.data.cours.IDaoCours;
-import mongo.com.logos.cours.impl.DaoCours;
-import mongo.com.logos.eleve.impl.DaoEleve;
-import mongo.com.logos.professeur.impl.DaoProfesseur;
-import mongo.com.logos.question.impl.DaoQuestion;
 
 public class TestMongo {
 

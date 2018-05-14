@@ -44,7 +44,7 @@ public class QuestionQcm extends QuestionFermee {
     public QuestionQcm() {
     }
 
-	public QuestionQcm(long idQuestion, String enonce, List<String> propositions, List<Integer> solutions) {
+	public QuestionQcm(Integer idQuestion, String enonce, List<String> propositions, List<Integer> solutions) {
 		super(idQuestion, enonce);
 		this.propositions = propositions;
 		this.solutions = solutions;

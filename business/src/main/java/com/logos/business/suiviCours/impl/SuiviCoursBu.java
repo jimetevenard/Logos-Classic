@@ -9,13 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.logos.business.suiviCours.api.ISuiviCoursBu;
+import com.logos.data.api.cours.IDaoSuiviCours;
+import com.logos.data.api.evaluation.IDaoRealiseEvaluation;
 import com.logos.entity.cours.Chapitre;
 import com.logos.entity.cours.SuiviCours;
 import com.logos.entity.evaluation.RealiseEvaluation;
 import com.logos.entity.user.Eleve;
-
-import api.com.logos.data.cours.IDaoSuiviCours;
-import api.com.logos.data.evaluation.IDaoRealiseEvaluation;
 
 @Service
 public class SuiviCoursBu implements ISuiviCoursBu{

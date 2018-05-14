@@ -19,7 +19,7 @@ public class QuestionOuverte extends Question {
     public QuestionOuverte() {
     }
 
-	public QuestionOuverte(long idQuestion, String enonce) {
+	public QuestionOuverte(Integer idQuestion, String enonce) {
 		super(idQuestion, enonce);
 		// TODO Auto-generated constructor stub
 	}

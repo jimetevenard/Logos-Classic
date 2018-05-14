@@ -41,7 +41,7 @@ public class Question {
     @javax.persistence.Id
    // @Column(name = "id_question")
    // @GeneratedValue(generator= "uuid")
-    private long idQuestion;
+    private Integer idQuestion;
 
     /**
      * 
@@ -70,7 +70,7 @@ public class Question {
     public Question() {
     }
 
-	public Question(long idQuestion, String enonce) {
+	public Question(Integer idQuestion, String enonce) {
 		super();
 		this.idQuestion = idQuestion;
 		this.enonce = enonce;
@@ -83,11 +83,11 @@ public class Question {
 		return "Question [idQuestion=" + idQuestion + ", enonce=" + enonce + "]";
 	}
 
-	public long getIdQuestion() {
+	public Integer getIdQuestion() {
 		return idQuestion;
 	}
 
-	public void setIdQuestion(long idQuestion) {
+	public void setIdQuestion(Integer idQuestion) {
 		this.idQuestion = idQuestion;
 	}
 

@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.logos.business.premium.api.IGestionPremium;
+import com.logos.data.api.eleve.IDaoEleve;
 import com.logos.entity.user.Eleve;
-
-import api.com.logos.data.eleve.IDaoEleve;
 
 
 @Service

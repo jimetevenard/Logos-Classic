@@ -20,7 +20,7 @@ public class QuestionFermee extends Question {
     
     }
 
-	public QuestionFermee(long idQuestion, String enonce) {
+	public QuestionFermee(Integer idQuestion, String enonce) {
 		super(idQuestion, enonce);
 		// TODO Auto-generated constructor stub
 	}

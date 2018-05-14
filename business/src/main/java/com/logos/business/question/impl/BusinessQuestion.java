@@ -5,10 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.logos.business.question.api.IBusinessQuestion;
+import com.logos.data.api.question.IDaoQuestion;
 import com.logos.entity.question.QuestionATrous;
 import com.logos.entity.question.QuestionQcm;
-
-import api.com.logos.data.question.IDaoQuestion;
 
 @Service
 public class BusinessQuestion implements IBusinessQuestion{

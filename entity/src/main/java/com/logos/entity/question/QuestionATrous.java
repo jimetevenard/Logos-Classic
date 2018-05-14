@@ -42,7 +42,7 @@ public class QuestionATrous extends QuestionFermee {
     }
 
 
-	public QuestionATrous(long idQuestion, String enonce, String phraseATrou, List<String> solutions) {
+	public QuestionATrous(Integer idQuestion, String enonce, String phraseATrou, List<String> solutions) {
 		super(idQuestion, enonce);
 		this.phraseATrou = phraseATrou;
 		this.solutions = solutions;
