@@ -8,12 +8,14 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.logos.data.api.messagerie.IDaoConversation;
 import com.logos.data.mongo.config.NextSequenceService;
 import com.logos.entity.messagerie.Conversation;
 import com.logos.entity.user.Utilisateur;
 
+@Repository
 public class DaoConversation implements IDaoConversation {
 	
 	@Autowired

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.stereotype.Repository;
 
 import com.logos.data.api.reponseeleve.IDaoReponseEleve;
 import com.logos.data.mongo.config.NextSequenceService;
@@ -16,6 +17,7 @@ import com.logos.entity.reponse.ReponseOuverteEleve;
 import com.logos.entity.reponse.ReponseQcmEleve;
 import com.logos.entity.user.Eleve;
 
+@Repository
 public class DaoReponseEleve implements IDaoReponseEleve {
 	
 	@Autowired

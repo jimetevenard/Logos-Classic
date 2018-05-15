@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.stereotype.Repository;
 
 import com.logos.data.api.niveauLangue.IDaoNiveau;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.cours.Niveau;
 
+@Repository
 public class DaoNiveau implements IDaoNiveau {
 	
 	@Autowired

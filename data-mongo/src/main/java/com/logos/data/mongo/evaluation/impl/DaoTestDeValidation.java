@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.logos.data.api.evaluation.IDaoTestDeValidation;
 import com.logos.entity.cours.Cours;
 import com.logos.entity.evaluation.TestDeValidation;
 
+@Repository
 public class DaoTestDeValidation implements IDaoTestDeValidation {
 	
 	@Autowired

@@ -16,9 +16,9 @@ public class TestSpringBusinessOk {
 	public void dataOk() {
 		BeanFactory bf = new ClassPathXmlApplicationContext("classpath:springBusiness.xml");
 		
-		IBusinessConnexionPlateforme dao = bf.getBean(IBusinessConnexionPlateforme.class);
+		IBusinessConnexionPlateforme buLogin = bf.getBean(IBusinessConnexionPlateforme.class);
 		
-		assertNotNull(dao);			
+		assertNotNull(buLogin);			
 		
 	}
 }

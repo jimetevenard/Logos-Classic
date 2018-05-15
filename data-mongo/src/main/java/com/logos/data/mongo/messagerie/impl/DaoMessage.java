@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.logos.data.api.messagerie.IDaoMessage;
 import com.logos.data.mongo.config.NextSequenceService;
 import com.logos.entity.messagerie.Conversation;
 import com.logos.entity.messagerie.Message;
 
+@Repository
 public class DaoMessage implements IDaoMessage {
 	
 	@Autowired

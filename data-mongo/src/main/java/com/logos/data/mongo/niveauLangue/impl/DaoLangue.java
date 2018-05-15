@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.stereotype.Repository;
 
 import com.logos.data.api.niveauLangue.IDaoLangues;
 import com.logos.entity.cours.Langue;
 
+@Repository
 public class DaoLangue implements IDaoLangues {
 	
 	@Autowired

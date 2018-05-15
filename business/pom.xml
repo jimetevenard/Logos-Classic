@@ -27,7 +27,7 @@
 		<dependency>
 			<!-- TODO remplacer par business -->
 			<groupId>com.logos</groupId>
-			<artifactId>data-mysql</artifactId>
+			<artifactId>data-mongo</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>
