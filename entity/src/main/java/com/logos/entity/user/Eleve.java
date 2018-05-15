@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,7 +20,8 @@ import com.logos.entity.evaluation.RealiseEvaluation;
  */
 @Entity
 @DiscriminatorValue(value = "Eleve")
-@Document
+@Document(collection = "utilisateur")
+@TypeAlias("eleve")
 public class Eleve extends Utilisateur {
 
     

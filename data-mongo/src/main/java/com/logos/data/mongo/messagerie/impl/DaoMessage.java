@@ -1,5 +1,6 @@
 package com.logos.data.mongo.messagerie.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,9 +43,12 @@ public class DaoMessage implements IDaoMessage {
 
 	@Override
 	public List<Message> getAllMessages(Conversation conversation) {
-		// TODO Auto-generated method stub
+		if(conversation != null) {
 		Query q = new Query(Criteria.where("conversation._id").is(conversation.getIdConversation()));
 		return mongoOps.find(q,Message.class);
+		} else {
+			return new ArrayList<>();
+		}
 	}
 
 	@Override

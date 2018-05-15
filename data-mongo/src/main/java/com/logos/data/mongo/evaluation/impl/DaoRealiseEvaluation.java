@@ -1,5 +1,6 @@
 package com.logos.data.mongo.evaluation.impl;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class DaoRealiseEvaluation implements IDaoRealiseEvaluation {
 	public Set<RealiseEvaluation> getRealiseEvaluationByEleve(Eleve eleve) {
 		// TODO Auto-generated method stub
 		Query q = new Query(Criteria.where("eleve._id").is(eleve.getIdUtilisateur()));
-		return (Set<RealiseEvaluation>) mongoOps.find(q, RealiseEvaluation.class);
+		return new HashSet<>(mongoOps.find(q, RealiseEvaluation.class));
 	}
 
 	@Override

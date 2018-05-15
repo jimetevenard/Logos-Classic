@@ -24,7 +24,7 @@ public class DaoEleve implements IDaoEleve {
 	@Autowired
 	private NextSequenceService sequence;
 	
-	private static final String COLLECTION = "eleve";
+	//private static final String COLLECTION = "eleve";
 	
 	public DaoEleve(MongoOperations mongoOps) {
 		this.mongoOps = mongoOps;
@@ -32,9 +32,10 @@ public class DaoEleve implements IDaoEleve {
 
 	@Override
 	public Eleve ajouterEleve(Eleve eleve) {
-		eleve.setIdUtilisateur(sequence.getNextSequence(COLLECTION));
-		mongoOps.insert(eleve);
-		return eleve;
+		throw new RuntimeException("Méthode nom implémentée");
+//		eleve.setIdUtilisateur(sequence.getNextSequence(COLLECTION));
+//		mongoOps.insert(eleve);
+//		return eleve;
 	}
 
 	@Override

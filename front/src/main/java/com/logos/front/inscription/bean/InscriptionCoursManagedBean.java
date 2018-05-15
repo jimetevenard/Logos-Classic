@@ -56,6 +56,9 @@ public class InscriptionCoursManagedBean {
 		categories =bu.getAllCategorie();
 		coursesR = bu.getCoursRecommandes(eleve);
 		langues = bu.getAllLangue();
+		if(langues.isEmpty()) {
+			langues.add(Langue.ESPERANTO);
+		}
 		changerLangue(langues.get(0));
 		coursEleve = getCoursByEleve();
 	}

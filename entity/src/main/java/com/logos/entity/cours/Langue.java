@@ -25,7 +25,9 @@ public class Langue {
 
     
     
-    /**
+    public static final Langue ESPERANTO = new Langue(666, "Esperanto", "PB");
+
+	/**
      * 
      */
 	@Id
